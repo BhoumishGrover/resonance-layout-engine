@@ -1,13 +1,33 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { Helmet } from "react-helmet-async";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import HeroSection from "@/components/HeroSection";
+import BrandStatement from "@/components/BrandStatement";
+import VerticalSelector from "@/components/VerticalSelector";
 
 const Index = () => {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
+    <>
+      <Helmet>
+        <title>Resonance Digital | VFX & Creative Studio</title>
+        <meta 
+          name="description" 
+          content="Resonance Digital is a premium VFX and creative studio specializing in visual effects, brand content, real estate visualization, and immersive experiences." 
+        />
+        <meta name="keywords" content="VFX, visual effects, animation, creative studio, brand content, real estate visualization" />
+        <link rel="canonical" href="https://resonancedigital.com" />
+      </Helmet>
+
+      <div className="min-h-screen bg-background">
+        <Header />
+        <main>
+          <HeroSection />
+          <BrandStatement />
+          <VerticalSelector />
+        </main>
+        <Footer />
       </div>
-    </div>
+    </>
   );
 };
 
