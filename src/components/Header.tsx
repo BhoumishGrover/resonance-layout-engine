@@ -12,12 +12,9 @@ const Header = () => {
         {/* Logo */}
         <Link 
           to="/" 
-          className="relative z-50 font-display text-xl md:text-2xl font-bold tracking-tight text-foreground"
+          className="relative z-50 font-display text-xl md:text-2xl font-bold tracking-tight text-foreground flex items-center gap-1"
         >
-          <span className="text-primary">R</span>ESONANCE
-          <span className="block text-[10px] md:text-xs tracking-[0.3em] text-muted-foreground font-body font-light">
-            DIGITAL
-          </span>
+          <img src="../../dist/assets/images/RDL_logo.png" alt="Resonance" className="h-32 md:h-32" />
         </Link>
 
         {/* Hamburger Menu Button */}
