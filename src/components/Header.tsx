@@ -14,7 +14,7 @@ const Header = () => {
           to="/" 
           className="relative z-50 font-display text-xl md:text-2xl font-bold tracking-tight text-foreground flex items-center gap-1"
         >
-          <img src="../../dist/assets/images/RDL_logo.png" alt="Resonance" className="h-32 md:h-32" />
+          <img src="/assets/images/RDL_logo.png" alt="Resonance" className="h-32 md:h-32" />
         </Link>
 
         {/* Hamburger Menu Button */}

@@ -14,7 +14,7 @@ const Hero = () => {
           className="w-full h-full object-cover"
         >
           <source
-            src="../dist/assets/videos/placeholder_video.mp4"
+            src="/assets/videos/placeholder_video.mp4"
             type="video/mp4"
           />
         </video>
