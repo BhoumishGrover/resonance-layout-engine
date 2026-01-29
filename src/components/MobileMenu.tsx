@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { X } from "lucide-react";
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -19,10 +20,18 @@ const menuItems = [
 const MobileMenu = ({ isOpen, onClose }: MobileMenuProps) => {
   return (
     <div
-      className={`fixed inset-0 z-40 bg-background transition-all duration-500 ${
+      className={`fixed inset-0 z-[60] bg-background transition-all duration-500 ${
         isOpen ? "opacity-100 visible" : "opacity-0 invisible"
       }`}
     >
+      <button
+        type="button"
+        onClick={onClose}
+        aria-label="Close menu"
+        className="absolute top-6 right-6 w-12 h-12 flex items-center justify-center text-foreground hover:text-primary transition-colors duration-300"
+      >
+        <X className="w-6 h-6" />
+      </button>
       <nav className="h-full flex flex-col items-center justify-center gap-2">
         {menuItems.map((item, index) => (
           <Link

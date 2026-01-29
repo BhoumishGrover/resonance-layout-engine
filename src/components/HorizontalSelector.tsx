@@ -1,0 +1,71 @@
+import { useState } from "react";
+
+const items = [
+  { id: "vfx", title: "VFX", subtitle: "Movies & Ads" },
+  { id: "real-estate", title: "Real Estate", subtitle: "Mar-tech" },
+  { id: "brand", title: "Brand Solutions", subtitle: "" },
+  { id: "motion", title: "Motion Pictures", subtitle: "" },
+];
+
+const HorizontalSelector = () => {
+  const [activeId, setActiveId] = useState(items[0].id);
+
+  return (
+    <section className="w-full bg-[#f6f4ef] py-16">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="mb-10">
+          <h2 className="font-display text-[56px] leading-[1.05] text-gray-400">
+            What<br />we do
+          </h2>
+        </div>
+
+        <div className="border border-gray-300">
+          {items.map((item) => {
+            const isActive = activeId === item.id;
+
+            return (
+              <button
+                key={item.id}
+                type="button"
+                onClick={() => setActiveId(item.id)}
+                onMouseEnter={() => setActiveId(item.id)}
+                className="w-full text-left focus:outline-none"
+              >
+                <div
+                  className={
+                    "relative flex items-center h-[96px] px-8 transition-colors duration-300 border-b border-gray-300 " +
+                    (isActive ? "bg-[#4a97d3]" : "bg-transparent")
+                  }
+                >
+                  <div className="flex items-baseline gap-4">
+                    <span
+                      className={
+                        "font-display text-[28px] transition-colors duration-300 " +
+                        (isActive ? "text-white" : "text-gray-600")
+                      }
+                    >
+                      {item.title}
+                    </span>
+
+                    {item.subtitle && (
+                      <span
+                        className={
+                          "text-[16px] uppercase tracking-wide transition-colors duration-300 " +
+                          (isActive ? "text-white/80" : "text-gray-400")
+                        }
+                      >
+                        {item.subtitle}
+                      </span>
+                    )}
+                  </div>
+                </div>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default HorizontalSelector;
