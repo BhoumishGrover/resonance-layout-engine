@@ -112,11 +112,11 @@ const BrandStatement = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative bg-white min-h-[60vh] w-full flex items-center justify-start px-4 md:px-6 lg:px-8 py-6 md:py-8"
+      className="relative bg-[#f6f5ee] min-h-screen w-full flex items-center px-6 md:px-10 lg:px-16"
     >
-      <div className="w-full max-w-6xl mx-auto flex flex-col items-start">
+      <div className="w-full max-w-[1400px] mx-auto flex flex-col items-start pl-4 md:pl-8 lg:pl-12">
         {/* Verticals line - NEVER animates */}
-        <p className="mb-4 text-[18px] md:text-[20px] lg:text-[22px] font-medium tracking-wide text-left">
+        <p className="mb-8 text-[18px] md:text-[20px] lg:text-[22px] font-medium tracking-wide text-left">
           <span className="text-sky-400">VFX & Animation</span>
           <span className="text-gray-300"> / </span>
           <span className="text-rose-400">Experiential Technology</span>

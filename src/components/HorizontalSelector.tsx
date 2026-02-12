@@ -12,14 +12,14 @@ const HorizontalSelector = () => {
 
   return (
     <section className="w-full bg-[#f6f4ef] py-16">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="mb-10">
+      <div className="w-full">
+        <div className="mb-10 px-16 max-w-7xl mx-auto">
           <h2 className="font-display text-[56px] leading-[1.05] text-gray-400">
             What<br />we do
           </h2>
         </div>
 
-        <div className="border border-gray-300">
+        <div className="border-t border-b border-gray-300 w-full">
           {items.map((item) => {
             const isActive = activeId === item.id;
 
@@ -33,7 +33,7 @@ const HorizontalSelector = () => {
               >
                 <div
                   className={
-                    "relative flex items-center h-[96px] px-8 transition-colors duration-300 border-b border-gray-300 " +
+                    "relative flex items-center h-[96px] px-16 transition-colors duration-300 border-b border-gray-300 " +
                     (isActive ? "bg-[#4a97d3]" : "bg-transparent")
                   }
                 >
