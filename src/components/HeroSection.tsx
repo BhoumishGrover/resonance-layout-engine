@@ -17,7 +17,7 @@ const HeroSection = () => {
         </video>
         {/* Dark Overlay */}
         <div className="hero-overlay absolute inset-0 z-10" />
-
+      </div>
       {/* Content */}
       <div className="absolute left-6 md:left-12 lg:left-24 top-1/2 -translate-y-1/2 z-20">
           {/* Headline */}

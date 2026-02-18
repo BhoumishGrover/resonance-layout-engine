@@ -1,29 +1,55 @@
 import { Link } from "react-router-dom";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 import DynamicText from "./DynamicText";
 
 const Hero = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  
+  // Track scroll progress relative to the hero section
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"],
+  });
+  
+  // Transform values based on scroll - text fades out early to show clean video
+  const contentY = useTransform(scrollYProgress, [0, 0.4], [0, -150]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
+  
   return (
-    <section id="hero" className="relative h-screen w-full overflow-hidden">
-      {/* Video Background */}
-      <div className="absolute inset-0 z-0">
+    <section 
+      ref={containerRef}
+      id="hero" 
+      className="relative h-[200vh] w-full"
+    >
+      {/* Sticky Viewport Container */}
+      <div className="sticky top-0 left-0 w-full h-screen z-0 overflow-hidden">
+        
+        {/* Video Background */}
         <video
           autoPlay
           muted
           loop
           playsInline
-          className="w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full object-cover z-0"
         >
           <source
             src="/assets/videos/placeholder_video.mp4"
             type="video/mp4"
           />
         </video>
-      </div>
-      {/* Dark Overlay */}
-      <div className="hero-overlay absolute inset-0 z-10" />
+        
+        {/* Dark Overlay */}
+        <div className="absolute inset-0 hero-overlay z-10" />
 
-      {/* Content */}
-      <div className="absolute left-6 md:left-12 lg:left-24 top-1/2 -translate-y-1/2 z-20">
+        {/* Content - Animated */}
+        <motion.div 
+          className="absolute left-6 md:left-12 lg:left-24 top-1/2 -translate-y-1/2 z-20"
+          style={{
+            y: contentY,
+            opacity: contentOpacity,
+          }}
+        >
         {/* Headline */}
         <h1
           style={{
@@ -86,6 +112,8 @@ const Hero = () => {
             CONTACT US
           </a>
         </div>
+      </motion.div>
+      
       </div>
     </section>
   );

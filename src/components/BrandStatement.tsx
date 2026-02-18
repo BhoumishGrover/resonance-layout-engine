@@ -112,7 +112,7 @@ const BrandStatement = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative bg-[#f6f5ee] min-h-screen w-full flex items-center px-6 md:px-10 lg:px-16"
+      className="relative bg-[#f6f5ee] min-h-screen w-full flex items-center px-6 md:px-10 lg:px-16 z-30 -mt-[100vh]"
     >
       <div className="w-full max-w-[1400px] mx-auto flex flex-col items-start pl-4 md:pl-8 lg:pl-12">
         {/* Verticals line - NEVER animates */}

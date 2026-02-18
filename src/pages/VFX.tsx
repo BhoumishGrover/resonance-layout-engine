@@ -5,14 +5,17 @@ import { Helmet } from "react-helmet-async";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import gsap from "gsap";
 
 const VFX = () => {
   const [expandedSection, setExpandedSection] = useState<string | null>(null);
-  const [selectedMovieCategory, setSelectedMovieCategory] = useState<string>("Rotoscopy");
+  const [selectedMovieCategory, setSelectedMovieCategory] = useState<string>("Compositing");
   const [selectedAdCategory, setSelectedAdCategory] = useState<string>("Brand Commercials");
   const [currentMovieIndex, setCurrentMovieIndex] = useState<number>(0);
   const [currentAdIndex, setCurrentAdIndex] = useState<number>(0);
+  const [movieDirection, setMovieDirection] = useState<number>(0);
+  const [adDirection, setAdDirection] = useState<number>(0);
   const expandedContentRef = useRef<HTMLDivElement>(null);
   const splitSectionRef = useRef<HTMLDivElement>(null);
 
@@ -20,32 +23,33 @@ const VFX = () => {
 
   const handleMovieNext = () => {
     if (currentMovieIndex + ITEMS_PER_PAGE < moviesShowcase.length) {
+      setMovieDirection(1);
       setCurrentMovieIndex(currentMovieIndex + ITEMS_PER_PAGE);
     }
   };
 
   const handleMoviePrev = () => {
     if (currentMovieIndex > 0) {
+      setMovieDirection(-1);
       setCurrentMovieIndex(Math.max(0, currentMovieIndex - ITEMS_PER_PAGE));
     }
   };
 
   const handleAdNext = () => {
     if (currentAdIndex + ITEMS_PER_PAGE < adsShowcase.length) {
+      setAdDirection(1);
       setCurrentAdIndex(currentAdIndex + ITEMS_PER_PAGE);
     }
   };
 
   const handleAdPrev = () => {
     if (currentAdIndex > 0) {
+      setAdDirection(-1);
       setCurrentAdIndex(Math.max(0, currentAdIndex - ITEMS_PER_PAGE));
     }
   };
 
   const movieCategories = [
-    "Rotoscopy",
-    "Cleanup",
-    "Matchmove",
     "Compositing",
     "Mobile & Monitor Comps",
     "FX & Simulations",
@@ -61,6 +65,49 @@ const VFX = () => {
     "Motion Graphics",
     "Visual Effects"
   ];
+
+  const movieShowreels = {
+    "Compositing": {
+      client: "WARNER BROS STUDIOS",
+      service: "Compositing",
+      year: "2024",
+      description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat",
+      video: "/assets/videos/compositing-showreel.mp4",
+      thumbnail: "/assets/images/movies/movies_02Witches.png"
+    },
+    "Mobile & Monitor Comps": {
+      client: "NETFLIX ORIGINAL",
+      service: "Mobile & Monitor Compositing",
+      year: "2024",
+      description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat",
+      video: "/assets/videos/mobile-comps-showreel.mp4",
+      thumbnail: "/assets/images/movies/movies_01.png"
+    },
+    "FX & Simulations": {
+      client: "DISNEY+ HOTSTAR",
+      service: "FX & Simulations",
+      year: "2025",
+      description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat",
+      video: "/assets/videos/fx-showreel.mp4",
+      thumbnail: "/assets/images/movies/movies_03.png"
+    },
+    "Set Extensions": {
+      client: "WARNER BROS PICTURES",
+      service: "Set Extensions",
+      year: "2026",
+      description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat",
+      video: "/assets/videos/set-extensions-showreel.mp4",
+      thumbnail: "/assets/images/movies/dune.jpeg"
+    },
+    "Environments & Creatures": {
+      client: "20TH CENTURY STUDIOS",
+      service: "Environments & Creatures",
+      year: "2025",
+      description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat",
+      video: "/assets/videos/environments-showreel.mp4",
+      thumbnail: "/assets/images/movies/avatar.jpeg"
+    }
+  };
 
   const moviesShowcase = [
     {
@@ -93,28 +140,28 @@ const VFX = () => {
     },
     {
       title: "The Flash",
-      image: "/assets/images/movies/movies_01.png",
+      image: "/assets/images/movies/flash.jpg",
       platform: "Warner Bros",
       year: "2023",
       category: "Rotoscopy"
     },
     {
       title: "Stranger Things",
-      image: "/assets/images/movies/movies_02Witches.png",
+      image: "/assets/images/movies/strangerThings.jpg",
       platform: "Netflix",
       year: "2024",
       category: "Cleanup"
     },
     {
       title: "Avatar 3",
-      image: "/assets/images/movies/movies_03.png",
+      image: "/assets/images/movies/avatar.jpeg",
       platform: "20th Century Studios",
       year: "2025",
       category: "Environments & Creatures"
     },
     {
       title: "Dune: Part Three",
-      image: "/assets/images/movies/batman.png",
+      image: "/assets/images/movies/dune.jpeg",
       platform: "Warner Bros",
       year: "2026",
       category: "Set Extensions"
@@ -382,12 +429,22 @@ const VFX = () => {
                   <ChevronLeft className="w-6 h-6" />
                 </button>
                 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                  {moviesShowcase.slice(currentMovieIndex, currentMovieIndex + ITEMS_PER_PAGE).map((movie, index) => (
-                    <div
-                      key={currentMovieIndex + index}
-                      className="group relative aspect-[2/3] rounded-lg overflow-hidden cursor-pointer transform transition-all duration-500 hover:scale-105 hover:z-10"
+                <div className="relative overflow-hidden">
+                  <AnimatePresence initial={false} custom={movieDirection}>
+                    <motion.div
+                      key={currentMovieIndex}
+                      custom={movieDirection}
+                      initial={{ x: movieDirection > 0 ? '100%' : '-100%' }}
+                      animate={{ x: 0 }}
+                      exit={{ x: movieDirection > 0 ? '-100%' : '100%' }}
+                      transition={{ duration: 0.5, ease: "easeInOut" }}
+                      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 absolute inset-0"
                     >
+                      {moviesShowcase.slice(currentMovieIndex, currentMovieIndex + ITEMS_PER_PAGE).map((movie, index) => (
+                        <div
+                          key={currentMovieIndex + index}
+                          className="group relative aspect-[2/3] rounded-lg overflow-hidden cursor-pointer transform transition-all duration-500 hover:scale-105 hover:z-10"
+                        >
                       {/* Movie Poster */}
                       <img
                         src={movie.image}
@@ -406,7 +463,15 @@ const VFX = () => {
                         </div>
                       </div>
                     </div>
-                  ))}
+                      ))}
+                    </motion.div>
+                  </AnimatePresence>
+                  {/* Spacer to maintain height */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 invisible">
+                    {Array(ITEMS_PER_PAGE).fill(0).map((_, i) => (
+                      <div key={i} className="aspect-[2/3]"></div>
+                    ))}
+                  </div>
                 </div>
 
                 <button
@@ -423,7 +488,7 @@ const VFX = () => {
               </div>
 
               {/* Additional Content */}
-              <div className="mt-24 grid grid-cols-1 lg:grid-cols-2 gap-12">
+              {/* <div className="mt-24 grid grid-cols-1 lg:grid-cols-2 gap-12">
                 <div>
                   <h3 className="font-display text-4xl font-bold text-white mb-6">
                     Cinematic Excellence
@@ -447,7 +512,7 @@ const VFX = () => {
                     </ul>
                   </div>
                 </div>
-              </div>
+              </div> */}
 
               {/* Areas of Expertise Section */}
               <div className="mt-32">
@@ -478,42 +543,73 @@ const VFX = () => {
                   </div>
                 </div>
 
-                {/* Filtered Movies Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                  {moviesShowcase
-                    .filter((movie) => movie.category === selectedMovieCategory)
-                    .map((movie, index) => (
-                      <div
-                        key={index}
-                        className="group relative aspect-[16/9] rounded-lg overflow-hidden cursor-pointer transform transition-all duration-500 hover:scale-105"
-                      >
-                        {/* Movie Image */}
-                        <img
-                          src={movie.image}
-                          alt={movie.title}
-                          className="absolute inset-0 w-full h-full object-cover"
-                        />
-                        
-                        {/* Gradient Overlay */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
-                        
-                        {/* Movie Info */}
-                        <div className="absolute bottom-0 left-0 right-0 p-6">
-                          <p className="text-white/80 text-sm font-medium mb-1">
-                            {movie.title.toUpperCase()} | {movie.year}
+                {/* Showreel Display */}
+                {movieShowreels[selectedMovieCategory as keyof typeof movieShowreels] && (
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+                    {/* Left Side - Details */}
+                    <div className="space-y-8">
+                      {/* Client Info */}
+                      <div className="space-y-6 border-l-2 border-white/20 pl-6">
+                        <div>
+                          <p className="text-white/50 text-sm mb-1">Client</p>
+                          <p className="text-white font-bold text-xl">
+                            {movieShowreels[selectedMovieCategory as keyof typeof movieShowreels].client}
                           </p>
                         </div>
-
-                        {/* Hover Effect */}
-                        <div className="absolute inset-0 bg-sky-400/0 group-hover:bg-sky-400/20 transition-all duration-500" />
+                        
+                        <div className="h-px bg-white/10" />
+                        
+                        <div>
+                          <p className="text-white/50 text-sm mb-1">Service</p>
+                          <p className="text-white font-bold text-xl">
+                            {movieShowreels[selectedMovieCategory as keyof typeof movieShowreels].service}
+                          </p>
+                        </div>
+                        
+                        <div className="h-px bg-white/10" />
+                        
+                        <div>
+                          <p className="text-white/50 text-sm mb-1">Year</p>
+                          <p className="text-white font-bold text-xl">
+                            {movieShowreels[selectedMovieCategory as keyof typeof movieShowreels].year}
+                          </p>
+                        </div>
                       </div>
-                    ))}
-                </div>
 
-                {/* No results message */}
-                {moviesShowcase.filter((movie) => movie.category === selectedMovieCategory).length === 0 && (
-                  <div className="text-center py-12">
-                    <p className="text-white/60 text-lg">No projects available in this category yet.</p>
+                      {/* Description */}
+                      <p className="text-white/60 text-base leading-relaxed">
+                        {movieShowreels[selectedMovieCategory as keyof typeof movieShowreels].description}
+                      </p>
+
+                      {/* Thumbnail */}
+                      <div className="w-full max-w-sm">
+                        <img
+                          src={movieShowreels[selectedMovieCategory as keyof typeof movieShowreels].thumbnail}
+                          alt={selectedMovieCategory}
+                          className="w-full h-auto rounded-lg shadow-2xl"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Right Side - Video Player */}
+                    <div className="relative aspect-video bg-black rounded-lg overflow-hidden shadow-2xl">
+                      <video
+                        key={selectedMovieCategory}
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        className="w-full h-full object-cover"
+                      >
+                        <source
+                          src={movieShowreels[selectedMovieCategory as keyof typeof movieShowreels].video}
+                          type="video/mp4"
+                        />
+                      </video>
+                      
+                      {/* Video Overlay Effect */}
+                      <div className="absolute inset-0 pointer-events-none ring-1 ring-inset ring-white/10 rounded-lg" />
+                    </div>
                   </div>
                 )}
 
@@ -596,12 +692,22 @@ const VFX = () => {
                   <ChevronLeft className="w-6 h-6" />
                 </button>
                 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                  {adsShowcase.slice(currentAdIndex, currentAdIndex + ITEMS_PER_PAGE).map((ad, index) => (
-                    <div
-                      key={currentAdIndex + index}
-                      className="group relative aspect-[2/3] rounded-lg overflow-hidden cursor-pointer transform transition-all duration-500 hover:scale-105 hover:z-10"
+                <div className="relative overflow-hidden">
+                  <AnimatePresence initial={false} custom={adDirection}>
+                    <motion.div
+                      key={currentAdIndex}
+                      custom={adDirection}
+                      initial={{ x: adDirection > 0 ? '100%' : '-100%' }}
+                      animate={{ x: 0 }}
+                      exit={{ x: adDirection > 0 ? '-100%' : '100%' }}
+                      transition={{ duration: 0.5, ease: "easeInOut" }}
+                      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 absolute inset-0"
                     >
+                      {adsShowcase.slice(currentAdIndex, currentAdIndex + ITEMS_PER_PAGE).map((ad, index) => (
+                        <div
+                          key={currentAdIndex + index}
+                          className="group relative aspect-[2/3] rounded-lg overflow-hidden cursor-pointer transform transition-all duration-500 hover:scale-105 hover:z-10"
+                        >
                       {/* Ad Creative */}
                       <img
                         src={ad.image}
@@ -620,7 +726,15 @@ const VFX = () => {
                         </div>
                       </div>
                     </div>
-                  ))}
+                      ))}
+                    </motion.div>
+                  </AnimatePresence>
+                  {/* Spacer to maintain height */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 invisible">
+                    {Array(ITEMS_PER_PAGE).fill(0).map((_, i) => (
+                      <div key={i} className="aspect-[2/3]"></div>
+                    ))}
+                  </div>
                 </div>
 
                 <button
