@@ -1,14 +1,16 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const items = [
-  { id: "vfx", title: "VFX", subtitle: "Movies & Ads" },
-  { id: "real-estate", title: "Real Estate", subtitle: "Mar-tech" },
-  { id: "brand", title: "Brand Solutions", subtitle: "" },
-  { id: "motion", title: "Motion Pictures", subtitle: "" },
+  { id: "vfx", title: "VFX", subtitle: "Movies & Ads", href: "/vfx" },
+  { id: "real-estate", title: "Real Estate", subtitle: "Mar-tech", href: "/real-estate" },
+  { id: "brand", title: "Brand Solutions", subtitle: "", href: "/brandSolutions" },
+  { id: "motion", title: "Motion Pictures", subtitle: "", href: "/motion-pictures" },
 ];
 
 const HorizontalSelector = () => {
   const [activeId, setActiveId] = useState(items[0].id);
+  const navigate = useNavigate();
 
   return (
     <section className="w-full bg-[#f6f4ef] py-16">
@@ -27,7 +29,10 @@ const HorizontalSelector = () => {
               <button
                 key={item.id}
                 type="button"
-                onClick={() => setActiveId(item.id)}
+                onClick={() => {
+                  setActiveId(item.id);
+                  if (item.href) navigate(item.href);
+                }}
                 onMouseEnter={() => setActiveId(item.id)}
                 className="w-full text-left focus:outline-none"
               >

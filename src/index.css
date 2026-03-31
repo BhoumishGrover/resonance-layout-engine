@@ -1,6 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap');
-
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -53,28 +50,67 @@
 
   html {
     scroll-behavior: smooth;
+    /* Enable smooth scrolling with momentum on iOS */
+    -webkit-overflow-scrolling: touch;
   }
 
   body {
     @apply bg-background text-foreground antialiased;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: -0.05em;
+    line-height: 1.1;
+    
+    /* Optimize rendering performance */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    
+    /* Prevent janky scrolling */
+    overflow-x: hidden;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Syne', sans-serif;
-    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.075em;
+    line-height: 1;
+    
+    /* GPU acceleration for smoother animations */
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+
+  p {
+    letter-spacing: -0.03em;
+    line-height: 1.4;
+  }
+  
+  /* Smooth all transitions globally */
+  * {
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  /* Optimize images and media */
+  img, video {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
   }
 }
 
 @layer components {
   .text-display {
-    font-family: 'Syne', sans-serif;
-    @apply text-foreground tracking-tight leading-none;
+    font-family: 'Montserrat', sans-serif;
+    @apply text-foreground;
+    font-weight: 700;
+    letter-spacing: -0.075em;
+    line-height: 1;
   }
 
   .text-body {
-    font-family: 'Inter', sans-serif;
-    @apply text-muted-foreground leading-relaxed;
+    font-family: 'Montserrat', sans-serif;
+    @apply text-muted-foreground;
+    letter-spacing: -0.03em;
+    line-height: 1.4;
   }
 
   .hero-overlay {
@@ -88,14 +124,18 @@
 
   .vertical-card {
     @apply relative overflow-hidden cursor-pointer;
-    transition: var(--transition-smooth);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform, background-color;
+    transform: translateZ(0);
+    backface-visibility: hidden;
   }
 
   .vertical-card::before {
     content: '';
     @apply absolute inset-0 opacity-0;
     background: linear-gradient(135deg, hsl(var(--primary) / 0.1), transparent);
-    transition: opacity 0.5s ease;
+    transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: opacity;
   }
 
   .vertical-card:hover::before {
@@ -110,7 +150,8 @@
   .btn-minimal {
     @apply px-8 py-4 text-sm uppercase tracking-widest font-medium;
     @apply border border-foreground/20 text-foreground bg-transparent;
-    @apply transition-all duration-500 ease-out;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: background-color, color, border-color;
   }
 
   .btn-minimal:hover {
@@ -120,37 +161,58 @@
   .btn-primary {
     @apply px-8 py-4 text-sm uppercase tracking-widest font-medium;
     @apply bg-primary text-primary-foreground border border-primary;
-    @apply transition-all duration-500 ease-out;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: background-color, color;
   }
 
   .btn-primary:hover {
     @apply bg-transparent text-primary;
   }
+  
+  /* Smooth scrolling for all scrollable elements */
+  .smooth-scroll {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Hardware acceleration for animated elements */
+  .gpu-accelerated {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+    will-change: transform;
+  }
 }
 
 @layer utilities {
   .animate-fade-up {
-    animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    animation: fadeUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    will-change: opacity, transform;
   }
 
   .animate-fade-in {
-    animation: fadeIn 1s ease forwards;
+    animation: fadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    will-change: opacity;
   }
 
   @keyframes fadeUp {
     from {
       opacity: 0;
-      transform: translateY(40px);
+      transform: translate3d(0, 30px, 0);
     }
     to {
       opacity: 1;
-      transform: translateY(0);
+      transform: translate3d(0, 0, 0);
     }
   }
 
   @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from { 
+      opacity: 0;
+    }
+    to { 
+      opacity: 1;
+    }
   }
 
   .delay-100 { animation-delay: 0.1s; }
@@ -158,6 +220,19 @@
   .delay-300 { animation-delay: 0.3s; }
   .delay-400 { animation-delay: 0.4s; }
   .delay-500 { animation-delay: 0.5s; }
+  
+  /* Performance optimization utilities */
+  .will-change-transform {
+    will-change: transform;
+  }
+  
+  .will-change-opacity {
+    will-change: opacity;
+  }
+  
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
 }
 
 .btn-primary-custom {

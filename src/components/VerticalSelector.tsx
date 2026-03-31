@@ -5,9 +5,30 @@ const verticals = [
   {
     id: "vfx",
     title: "VFX",
-    subtitle: "& Animation",
+    subtitle: "Movies & Ads",
     description: "High-end visual effects and motion design for film, advertising, and digital experiences.",
     href: "/vfx",
+  },
+  {
+    id: "real-estate",
+    title: "Real Estate",
+    subtitle: "Mar-tech",
+    description: "Photorealistic renders and immersive virtual tours for architectural projects.",
+    href: "/real-estate",
+  },
+  {
+    id: "brand-solutions",
+    title: "Brand Solutions",
+    subtitle: "",
+    description: "Strategic brand content and campaigns that resonate with audiences worldwide.",
+    href: "/brandSolutions",
+  },
+  {
+    id: "motion-pictures",
+    title: "Motion Pictures",
+    subtitle: "",
+    description: "Full-service content creation from concept to final delivery for motion pictures.",
+    href: "/motion-pictures",
   },
   {
     id: "brands",
@@ -15,13 +36,6 @@ const verticals = [
     subtitle: "& Content",
     description: "Strategic brand content and campaigns that resonate with audiences worldwide.",
     href: "/brands",
-  },
-  {
-    id: "real-estate",
-    title: "Real Estate",
-    subtitle: "Visualization",
-    description: "Photorealistic renders and immersive virtual tours for architectural projects.",
-    href: "/real-estate",
   },
   {
     id: "content",
@@ -43,7 +57,7 @@ const VerticalSelector = () => {
       </div>
 
       {/* Verticals Grid */}
-      <div className="flex-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+      <div className="flex-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {verticals.map((vertical, index) => (
           <Link
             key={vertical.id}
@@ -57,27 +71,29 @@ const VerticalSelector = () => {
 
             {/* Title */}
             <div className="my-auto">
-              <h3 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground group-hover:text-primary transition-colors duration-500">
+              <h3 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground group-hover:text-primary transition-colors duration-300">
                 {vertical.title}
               </h3>
-              <span className="block font-display text-lg md:text-xl text-muted-foreground mt-1">
-                {vertical.subtitle}
-              </span>
+              {vertical.subtitle && (
+                <span className="block font-display text-lg md:text-xl text-muted-foreground mt-1 transition-colors duration-300">
+                  {vertical.subtitle}
+                </span>
+              )}
             </div>
 
             {/* Description & Arrow */}
             <div className="mt-auto">
-              <p className="text-sm text-muted-foreground mb-6 max-w-xs opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+              <p className="text-sm text-muted-foreground mb-6 max-w-xs opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 {vertical.description}
               </p>
-              <div className="flex items-center gap-2 text-sm text-foreground group-hover:text-primary transition-colors duration-300">
+              <div className="flex items-center gap-2 text-sm text-foreground group-hover:text-primary transition-colors duration-200">
                 <span className="uppercase tracking-widest text-xs">Explore</span>
-                <ArrowUpRight className="w-4 h-4 transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
+                <ArrowUpRight className="w-4 h-4 transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-200" />
               </div>
             </div>
 
             {/* Hover Line */}
-            <span className="absolute bottom-0 left-0 w-full h-px bg-primary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+            <span className="absolute bottom-0 left-0 w-full h-px bg-primary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
           </Link>
         ))}
       </div>

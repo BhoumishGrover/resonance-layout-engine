@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import BrandStatement from "@/components/BrandStatement";
 import VerticalSelector from "@/components/VerticalSelector";
-import HorizontalSelector from "@/components/HorizontalSelector";
+// import HorizontalSelector from "@/components/HorizontalSelector";
 
 const Index = () => {
   return (
@@ -24,7 +24,7 @@ const Index = () => {
         <main>
           <Hero />
           <BrandStatement />
-          <HorizontalSelector />
+          {/* <HorizontalSelector /> */}
           <VerticalSelector />
         </main>
         <Footer />

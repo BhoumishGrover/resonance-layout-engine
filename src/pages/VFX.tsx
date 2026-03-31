@@ -6,6 +6,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import AnimatedColorText from "../components/AnimatedColorText";
 import gsap from "gsap";
 
 const VFX = () => {
@@ -72,7 +73,7 @@ const VFX = () => {
       service: "Compositing",
       year: "2024",
       description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat",
-      video: "/assets/videos/compositing-showreel.mp4",
+      video: "/assets/videos/placeholder_video.mp4",
       thumbnail: "/assets/images/movies/movies_02Witches.png"
     },
     "Mobile & Monitor Comps": {
@@ -106,6 +107,57 @@ const VFX = () => {
       description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat",
       video: "/assets/videos/environments-showreel.mp4",
       thumbnail: "/assets/images/movies/avatar.jpeg"
+    }
+  };
+
+  const adShowreels = {
+    "Brand Commercials": {
+      client: "NIKE INC.",
+      service: "Brand Commercials",
+      year: "2024",
+      description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat",
+      video: "/assets/videos/brand-commercials.mp4",
+      thumbnail: "/assets/images/ads/nike.jpg"
+    },
+    "Product Visualization": {
+      client: "APPLE INC.",
+      service: "Product Visualization",
+      year: "2024",
+      description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat",
+      video: "/assets/videos/product-viz.mp4",
+      thumbnail: "/assets/images/ads/apple.jpg"
+    },
+    "Social Media Content": {
+      client: "SAMSUNG ELECTRONICS",
+      service: "Social Media Content",
+      year: "2024",
+      description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat",
+      video: "/assets/videos/social-media.mp4",
+      thumbnail: "/assets/images/ads/nike.jpg"
+    },
+    "Broadcast Advertising": {
+      client: "COCA-COLA COMPANY",
+      service: "Broadcast Advertising",
+      year: "2024",
+      description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat",
+      video: "/assets/videos/broadcast-ads.mp4",
+      thumbnail: "/assets/images/ads/cocacola.jpg"
+    },
+    "Motion Graphics": {
+      client: "SAMSUNG GALAXY",
+      service: "Motion Graphics",
+      year: "2024",
+      description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat",
+      video: "/assets/videos/motion-graphics.mp4",
+      thumbnail: "/assets/images/ads/nike.jpg"
+    },
+    "Visual Effects": {
+      client: "PEPSI CO.",
+      service: "Visual Effects",
+      year: "2024",
+      description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat",
+      video: "/assets/videos/vfx-ads.mp4",
+      thumbnail: "/assets/images/ads/cocacola.jpg"
     }
   };
 
@@ -299,14 +351,10 @@ const VFX = () => {
             </h1>
 
             {/* Description */}
-            <p className="font-display text-[32px] md:text-[36px] lg:text-[40px] leading-[1.3] max-w-[1200px] font-bold">
-              <span className="text-white">
-                A leading digital Creative Technology Company, which focuses on delivering rememberable web designs that are searchable,{" "}
-              </span>
-              <span className="text-sky-400/60">
-                alongside other online promotion solutions in Coventry. We provide our clients with striking, practical, and intuitive sites that attract clientele and yield revenue.
-              </span>
-            </p>
+            <AnimatedColorText
+              whiteText="A leading digital Creative Technology Company, which focuses on delivering rememberable web designs that are searchable,"
+              blueText="alongside other online promotion solutions in Coventry. We provide our clients with striking, practical, and intuitive sites that attract clientele and yield revenue."
+            />
           </div>
         </section>
       )}
@@ -374,14 +422,10 @@ const VFX = () => {
               </h1>
 
               {/* Description */}
-              <p className="font-display text-[32px] md:text-[36px] lg:text-[40px] leading-[1.3] max-w-[1200px] font-bold">
-                <span className="text-white">
-                  We bring stories to life with cutting-edge visual effects that captivate audiences worldwide.{" "}
-                </span>
-                <span className="text-sky-400/60">
-                  Our team has contributed to major productions across streaming platforms and theatrical releases, creating immersive worlds and unforgettable moments.
-                </span>
-              </p>
+              <AnimatedColorText
+                whiteText="We bring stories to life with cutting-edge visual effects that captivate audiences worldwide."
+                blueText="Our team has contributed to major productions across streaming platforms and theatrical releases, creating immersive worlds and unforgettable moments."
+              />
             </div>
           </section>
 
@@ -545,70 +589,63 @@ const VFX = () => {
 
                 {/* Showreel Display */}
                 {movieShowreels[selectedMovieCategory as keyof typeof movieShowreels] && (
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+                  <div className="flex flex-col lg:flex-row gap-6 lg:items-end">
                     {/* Left Side - Details */}
-                    <div className="space-y-8">
-                      {/* Client Info */}
-                      <div className="space-y-6 border-l-2 border-white/20 pl-6">
-                        <div>
-                          <p className="text-white/50 text-sm mb-1">Client</p>
-                          <p className="text-white font-bold text-xl">
-                            {movieShowreels[selectedMovieCategory as keyof typeof movieShowreels].client}
-                          </p>
-                        </div>
-                        
-                        <div className="h-px bg-white/10" />
-                        
-                        <div>
-                          <p className="text-white/50 text-sm mb-1">Service</p>
-                          <p className="text-white font-bold text-xl">
-                            {movieShowreels[selectedMovieCategory as keyof typeof movieShowreels].service}
-                          </p>
-                        </div>
-                        
-                        <div className="h-px bg-white/10" />
-                        
-                        <div>
-                          <p className="text-white/50 text-sm mb-1">Year</p>
-                          <p className="text-white font-bold text-xl">
-                            {movieShowreels[selectedMovieCategory as keyof typeof movieShowreels].year}
-                          </p>
-                        </div>
+                    <div className="w-full lg:w-[300px] lg:flex-shrink-0 flex flex-col">
+                      {/* Client */}
+                      <div className="grid grid-cols-[70px_1fr] gap-3 items-start">
+                        <p className="text-white/40 text-sm">Client</p>
+                        <h3 className="text-white font-bold text-lg uppercase leading-tight">
+                          {movieShowreels[selectedMovieCategory as keyof typeof movieShowreels].client}
+                        </h3>
+                      </div>
+
+                      <div className="h-px bg-white/10 my-5" />
+
+                      {/* Service & Year */}
+                      <div className="grid grid-cols-[70px_1fr] gap-x-3 gap-y-2">
+                        <p className="text-white/40 text-sm">Service</p>
+                        <p className="text-white font-semibold text-base">
+                          {movieShowreels[selectedMovieCategory as keyof typeof movieShowreels].service}
+                        </p>
+                        <p className="text-white/40 text-sm">Year</p>
+                        <p className="text-white font-semibold text-base">
+                          {movieShowreels[selectedMovieCategory as keyof typeof movieShowreels].year}
+                        </p>
                       </div>
 
                       {/* Description */}
-                      <p className="text-white/60 text-base leading-relaxed">
+                      <p className="text-white/50 text-sm leading-relaxed mt-6">
                         {movieShowreels[selectedMovieCategory as keyof typeof movieShowreels].description}
                       </p>
 
                       {/* Thumbnail */}
-                      <div className="w-full max-w-sm">
+                      <div className="mt-3">
                         <img
                           src={movieShowreels[selectedMovieCategory as keyof typeof movieShowreels].thumbnail}
                           alt={selectedMovieCategory}
-                          className="w-full h-auto rounded-lg shadow-2xl"
+                          className="w-full h-44 object-cover object-top rounded-lg shadow-xl"
                         />
                       </div>
                     </div>
 
                     {/* Right Side - Video Player */}
-                    <div className="relative aspect-video bg-black rounded-lg overflow-hidden shadow-2xl">
-                      <video
-                        key={selectedMovieCategory}
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                        className="w-full h-full object-cover"
-                      >
-                        <source
-                          src={movieShowreels[selectedMovieCategory as keyof typeof movieShowreels].video}
-                          type="video/mp4"
-                        />
-                      </video>
-                      
-                      {/* Video Overlay Effect */}
-                      <div className="absolute inset-0 pointer-events-none ring-1 ring-inset ring-white/10 rounded-lg" />
+                    <div className="flex-1 min-w-0">
+                      <div className="relative aspect-video bg-black rounded-lg overflow-hidden shadow-2xl">
+                        <video
+                          key={selectedMovieCategory}
+                          autoPlay
+                          loop
+                          muted
+                          playsInline
+                          className="w-full h-full object-cover"
+                        >
+                          <source
+                            src={movieShowreels[selectedMovieCategory as keyof typeof movieShowreels].video}
+                            type="video/mp4"
+                          />
+                        </video>
+                      </div>
                     </div>
                   </div>
                 )}
@@ -637,14 +674,10 @@ const VFX = () => {
               </h1>
 
               {/* Description */}
-              <p className="font-display text-[32px] md:text-[36px] lg:text-[40px] leading-[1.3] max-w-[1200px] font-bold">
-                <span className="text-white">
-                  Crafting compelling commercial content that resonates with audiences and drives results.{" "}
-                </span>
-                <span className="text-sky-400/60">
-                  From concept to final delivery, we blend creativity with strategic thinking to produce commercials that make an impact across all platforms.
-                </span>
-              </p>
+              <AnimatedColorText
+                whiteText="Crafting compelling commercial content that resonates with audiences and drives results."
+                blueText="From concept to final delivery, we blend creativity with strategic thinking to produce commercials that make an impact across all platforms."
+              />
             </div>
           </section>
 
@@ -806,42 +839,66 @@ const VFX = () => {
                   </div>
                 </div>
 
-                {/* Filtered Ads Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                  {adsShowcase
-                    .filter((ad) => ad.category === selectedAdCategory)
-                    .map((ad, index) => (
-                      <div
-                        key={index}
-                        className="group relative aspect-[16/9] rounded-lg overflow-hidden cursor-pointer transform transition-all duration-500 hover:scale-105"
-                      >
-                        {/* Ad Image */}
-                        <img
-                          src={ad.image}
-                          alt={ad.title}
-                          className="absolute inset-0 w-full h-full object-cover"
-                        />
-                        
-                        {/* Gradient Overlay */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
-                        
-                        {/* Ad Info */}
-                        <div className="absolute bottom-0 left-0 right-0 p-6">
-                          <p className="text-white/80 text-sm font-medium mb-1">
-                            {ad.title.toUpperCase()} | {ad.year}
-                          </p>
-                        </div>
-
-                        {/* Hover Effect */}
-                        <div className="absolute inset-0 bg-sky-400/0 group-hover:bg-sky-400/20 transition-all duration-500" />
+                {/* Showreel Display */}
+                {adShowreels[selectedAdCategory as keyof typeof adShowreels] && (
+                  <div className="flex flex-col lg:flex-row gap-6 lg:items-end">
+                    {/* Left Side - Details */}
+                    <div className="w-full lg:w-[300px] lg:flex-shrink-0 flex flex-col">
+                      {/* Client */}
+                      <div className="grid grid-cols-[70px_1fr] gap-3 items-start">
+                        <p className="text-white/40 text-sm">Client</p>
+                        <h3 className="text-white font-bold text-lg uppercase leading-tight">
+                          {adShowreels[selectedAdCategory as keyof typeof adShowreels].client}
+                        </h3>
                       </div>
-                    ))}
-                </div>
 
-                {/* No results message */}
-                {adsShowcase.filter((ad) => ad.category === selectedAdCategory).length === 0 && (
-                  <div className="text-center py-12">
-                    <p className="text-white/60 text-lg">No projects available in this category yet.</p>
+                      <div className="h-px bg-white/10 my-5" />
+
+                      {/* Service & Year */}
+                      <div className="grid grid-cols-[70px_1fr] gap-x-3 gap-y-2">
+                        <p className="text-white/40 text-sm">Service</p>
+                        <p className="text-white font-semibold text-base">
+                          {adShowreels[selectedAdCategory as keyof typeof adShowreels].service}
+                        </p>
+                        <p className="text-white/40 text-sm">Year</p>
+                        <p className="text-white font-semibold text-base">
+                          {adShowreels[selectedAdCategory as keyof typeof adShowreels].year}
+                        </p>
+                      </div>
+
+                      {/* Description */}
+                      <p className="text-white/50 text-sm leading-relaxed mt-6">
+                        {adShowreels[selectedAdCategory as keyof typeof adShowreels].description}
+                      </p>
+
+                      {/* Thumbnail */}
+                      <div className="mt-3">
+                        <img
+                          src={adShowreels[selectedAdCategory as keyof typeof adShowreels].thumbnail}
+                          alt={selectedAdCategory}
+                          className="w-full h-44 object-cover object-top rounded-lg shadow-xl"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Right Side - Video Player */}
+                    <div className="flex-1 min-w-0">
+                      <div className="relative aspect-video bg-black rounded-lg overflow-hidden shadow-2xl">
+                        <video
+                          key={selectedAdCategory}
+                          autoPlay
+                          loop
+                          muted
+                          playsInline
+                          className="w-full h-full object-cover"
+                        >
+                          <source
+                            src={adShowreels[selectedAdCategory as keyof typeof adShowreels].video}
+                            type="video/mp4"
+                          />
+                        </video>
+                      </div>
+                    </div>
                   </div>
                 )}
 

@@ -15,8 +15,16 @@ export default {
     },
     extend: {
       fontFamily: {
-        display: ['Syne', 'sans-serif'],
-        body: ['Inter', 'sans-serif'],
+        display: ['Montserrat', 'sans-serif'],
+        body: ['Montserrat', 'sans-serif'],
+      },
+      letterSpacing: {
+        tighter: '-0.075em',
+        tight: '-0.05em',
+      },
+      lineHeight: {
+        'extra-tight': '1',
+        'tight': '1.1',
       },
       colors: {
         border: "hsl(var(--border))",

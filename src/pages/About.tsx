@@ -1,33 +1,7 @@
 import { Helmet } from "react-helmet-async";
-import PageLayout from "@/components/PageLayout";
-import PageHero from "@/components/PageHero";
-import SectionHeader from "@/components/SectionHeader";
-
-const values = [
-  {
-    title: "Craft",
-    description: "Every pixel, every frame, every detail matters. We obsess over quality.",
-  },
-  {
-    title: "Innovation",
-    description: "Pushing boundaries with emerging technologies and creative approaches.",
-  },
-  {
-    title: "Collaboration",
-    description: "Great work happens when talented people come together with shared purpose.",
-  },
-  {
-    title: "Impact",
-    description: "We create work that moves audiences and delivers measurable results.",
-  },
-];
-
-const leadership = [
-  { name: "Creative Director", role: "Vision & Strategy" },
-  { name: "Technical Director", role: "Innovation & Pipeline" },
-  { name: "Executive Producer", role: "Client Relations" },
-  { name: "Head of Production", role: "Operations" },
-];
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import AnimatedColorText from "@/components/AnimatedColorText";
 
 const About = () => {
   return (
@@ -40,101 +14,147 @@ const About = () => {
         />
       </Helmet>
 
-      <PageLayout>
-        <PageHero
-          subtitle="About Us"
-          title="The Story of Resonance"
-          description="We are a collective of artists, technologists, and storytellers united by a passion for visual excellence."
-        />
+      <Header />
 
-        {/* Company Story */}
-        <section className="px-6 md:px-12 lg:px-24 py-16 md:py-24 border-t border-border">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-24">
-            <div>
-              <span className="text-xs text-primary uppercase tracking-widest">Our Story</span>
-              <h2 className="mt-4 font-display text-3xl md:text-4xl font-semibold text-foreground">
-                Born from a passion for visual storytelling
-              </h2>
+      {/* Hero Section with Animated Text */}
+      <section className="relative w-full min-h-screen bg-[#1a3a52] flex flex-col justify-center px-6 md:px-12 lg:px-24 py-24">
+        <div className="max-w-7xl w-full mt-20">
+          <h1 className="font-display text-[65px] md:text-[85px] lg:text-[105px] font-bold text-sky-400 mb-16 leading-tight">
+            About us
+          </h1>
+
+          <div className="max-w-[1400px]">
+            <AnimatedColorText
+              whiteText="From concept to execution, Resonance Digital delivers end-to-end creative, tech, production, and post-production solutions tailored for world-class"
+              blueText="brands. With a global footprint spanning countries like the United States, Canada, Europe, and APAC, we bring bold ideas to life across screens. We don't merely support brand ambition, we accelerate it."
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Stats Section */}
+      <section className="w-full bg-[#f6f4ef] py-20 px-10 md:px-16">
+        {/* Stats Row */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-20">
+          {/* Stat 1 */}
+          <div className="text-center">
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <span className="text-[80px] md:text-[100px] font-display font-bold text-gray-300 leading-none">
+                250
+              </span>
+              <span className="text-[50px] md:text-[60px] font-display font-light text-gray-300 leading-none">
+                +
+              </span>
             </div>
-            <div className="space-y-6 text-muted-foreground">
-              <p>
-                Resonance Digital was founded on a simple belief: that visual storytelling has the power to move people, change perspectives, and create lasting impact.
-              </p>
-              <p>
-                What began as a small team of VFX artists has evolved into a full-service creative studio, partnering with leading brands, filmmakers, and developers worldwide.
-              </p>
-              <p>
-                Today, we continue to push the boundaries of what's possible, combining artistic vision with technical innovation to create work that resonates.
-              </p>
+            <p className="text-gray-400 text-sm md:text-base tracking-wide">
+              Experts in our team
+            </p>
+          </div>
+
+          {/* Stat 2 */}
+          <div className="text-center">
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <span className="text-[80px] md:text-[100px] font-display font-bold text-gray-300 leading-none">
+                20
+              </span>
+              <span className="text-[50px] md:text-[60px] font-display font-light text-gray-300 leading-none">
+                +
+              </span>
             </div>
+            <p className="text-gray-400 text-sm md:text-base tracking-wide">
+              Countries served
+            </p>
           </div>
-        </section>
 
-        {/* Philosophy */}
-        <section className="px-6 md:px-12 lg:px-24 py-16 md:py-24 border-t border-border bg-secondary/10">
-          <SectionHeader
-            label="Philosophy"
-            title="What We Believe"
-            align="center"
-          />
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-12">
-            {values.map((value, index) => (
-              <div key={index} className="text-center">
-                <span className="text-6xl font-display font-bold text-primary/20">
-                  {String(index + 1).padStart(2, '0')}
-                </span>
-                <h3 className="mt-4 font-display text-xl font-semibold text-foreground">
-                  {value.title}
-                </h3>
-                <p className="mt-3 text-sm text-muted-foreground">
-                  {value.description}
-                </p>
-              </div>
-            ))}
+          {/* Stat 3 */}
+          <div className="text-center">
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <span className="text-[80px] md:text-[100px] font-display font-bold text-gray-300 leading-none">
+                10
+              </span>
+              <span className="text-[50px] md:text-[60px] font-display font-light text-gray-300 leading-none">
+                +
+              </span>
+            </div>
+            <p className="text-gray-400 text-sm md:text-base tracking-wide">
+              Years of lagecy
+            </p>
           </div>
-        </section>
+        </div>
 
-        {/* Leadership */}
-        <section className="px-6 md:px-12 lg:px-24 py-16 md:py-24 border-t border-border">
-          <SectionHeader
-            label="Leadership"
-            title="The Team"
-            description="Industry veterans driving creative excellence and innovation."
-          />
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {leadership.map((person, index) => (
-              <div key={index} className="group">
-                <div className="aspect-[3/4] bg-secondary/50 mb-4 overflow-hidden">
-                  <div className="w-full h-full bg-gradient-to-br from-primary/5 to-transparent" />
-                </div>
-                <h4 className="font-display text-lg text-foreground">{person.name}</h4>
-                <p className="text-sm text-muted-foreground">{person.role}</p>
-              </div>
-            ))}
+        {/* Services Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 max-w-7xl mx-auto">
+          {/* VFX: Movies & Ads */}
+          <div>
+            <h3 className="font-display text-xl md:text-2xl font-normal text-gray-400 mb-4">
+              VFX: Movies & Ads
+            </h3>
+            <p className="text-gray-400 text-sm leading-relaxed mb-4">
+              Successfully delivered visual effects for more than 200 Hollywood projects & 50 Bollywood projects.
+            </p>
+            <p className="text-gray-400 text-sm leading-relaxed">
+              Films, Episodic, Commercials, Automobiles, Architectural & more.
+            </p>
           </div>
-        </section>
 
-        {/* Stats */}
-        <section className="px-6 md:px-12 lg:px-24 py-16 md:py-24 border-t border-border">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            {[
-              { value: "10+", label: "Years Experience" },
-              { value: "200+", label: "Projects Delivered" },
-              { value: "50+", label: "Team Members" },
-              { value: "15+", label: "Industry Awards" },
-            ].map((stat, index) => (
-              <div key={index}>
-                <span className="font-display text-4xl md:text-6xl font-bold text-primary">
-                  {stat.value}
-                </span>
-                <p className="mt-2 text-sm text-muted-foreground uppercase tracking-widest">
-                  {stat.label}
-                </p>
-              </div>
-            ))}
+          {/* Brand Solutions */}
+          <div>
+            <h3 className="font-display text-xl md:text-2xl font-normal text-gray-400 mb-4">
+              Brand Solutions
+            </h3>
+            <p className="text-gray-400 text-sm leading-relaxed mb-4">
+              Multiple campaigns for more than 50 brands/corporates in varied mediums.
+            </p>
+            <p className="text-gray-400 text-sm leading-relaxed">
+              Branding, Digital Marketing, Mainline advertising, Product photography, TVC production, Audio Visual films and Content creation.
+            </p>
           </div>
-        </section>
-      </PageLayout>
+
+          {/* Real Estate Mar-tech */}
+          <div>
+            <h3 className="font-display text-xl md:text-2xl font-normal text-gray-400 mb-4">
+              Real Estate Mar-tech
+            </h3>
+            <p className="text-gray-400 text-sm leading-relaxed mb-4">
+              Ideated and designed technology campaigns for large scale brands and corporates across India.
+            </p>
+            <p className="text-gray-400 text-sm leading-relaxed">
+              AR, VR, MR, Projection Mapping, Interactive Media, Custom Web & App development.
+            </p>
+          </div>
+
+          {/* Motion Pictures */}
+          <div>
+            <h3 className="font-display text-xl md:text-2xl font-normal text-gray-400 mb-4">
+              Motion Pictures
+            </h3>
+            <p className="text-gray-400 text-sm leading-relaxed mb-4">
+              Produced IP's ranging from web series, documentaries to short films.
+            </p>
+            <p className="text-gray-400 text-sm leading-relaxed">
+              Series, documentaries & short films.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Meet Our Team Section */}
+      <section className="w-full bg-[#1a3a52] py-20 px-10 md:px-16">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="font-display text-[60px] md:text-[80px] lg:text-[100px] font-bold text-sky-400 mb-12 leading-tight">
+            Meet our team
+          </h2>
+
+          <div className="max-w-[1200px]">
+            <AnimatedColorText
+              whiteText="Guided by strong vision and thoughtful, Resonance is proud to be a reliable"
+              blueText="partner for major creative initiatives"
+            />
+          </div>
+        </div>
+      </section>
+
+      <Footer />
     </>
   );
 };
