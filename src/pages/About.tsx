@@ -17,9 +17,9 @@ const About = () => {
       <Header />
 
       {/* Hero Section with Animated Text */}
-      <section className="relative w-full min-h-screen bg-[#1a3a52] flex flex-col justify-center px-6 md:px-12 lg:px-24 py-24">
+      <section className="relative w-full min-h-screen bg-[#040031] flex flex-col justify-center px-6 md:px-12 lg:px-24 py-24">
         <div className="max-w-7xl w-full mt-20">
-          <h1 className="font-display text-[65px] md:text-[85px] lg:text-[105px] font-bold text-sky-400 mb-16 leading-tight">
+          <h1 className="font-display text-[65px] md:text-[85px] lg:text-[105px] font-bold text-[#3F488D] mb-16 leading-tight">
             About us
           </h1>
 
@@ -139,7 +139,7 @@ const About = () => {
       </section>
 
       {/* Meet Our Team Section */}
-      <section className="w-full bg-[#1a3a52] py-20 px-10 md:px-16">
+      <section className="w-full bg-[#3F488D] py-20 px-10 md:px-16">
         <div className="max-w-7xl mx-auto">
           <h2 className="font-display text-[60px] md:text-[80px] lg:text-[100px] font-bold text-sky-400 mb-12 leading-tight">
             Meet our team

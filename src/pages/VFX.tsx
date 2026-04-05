@@ -565,7 +565,7 @@ const VFX = () => {
                 </h2>
 
                 {/* Category Filter */}
-                <div className="mt-8 mb-12">
+                <div className="mt-8 mb-6">
                   <div className="flex flex-wrap gap-4 text-xl md:text-2xl font-semibold">
                     {movieCategories.map((category, index) => (
                       <div key={category} className="flex items-center">
@@ -587,68 +587,55 @@ const VFX = () => {
                   </div>
                 </div>
 
-                {/* Showreel Display */}
-                {movieShowreels[selectedMovieCategory as keyof typeof movieShowreels] && (
-                  <div className="flex flex-col lg:flex-row gap-6 lg:items-end">
-                    {/* Left Side - Details */}
-                    <div className="w-full lg:w-[300px] lg:flex-shrink-0 flex flex-col">
-                      {/* Client */}
-                      <div className="grid grid-cols-[70px_1fr] gap-3 items-start">
-                        <p className="text-white/40 text-sm">Client</p>
-                        <h3 className="text-white font-bold text-lg uppercase leading-tight">
-                          {movieShowreels[selectedMovieCategory as keyof typeof movieShowreels].client}
-                        </h3>
-                      </div>
+                {/* Immersive Video Player */}
+                <div className="w-full max-w-5xl mx-auto">
+                  <div className="relative aspect-video bg-black rounded-2xl overflow-hidden shadow-2xl">
+                    <video
+                      key={selectedMovieCategory}
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      className="w-full h-full object-cover"
+                    >
+                      <source
+                        src={movieShowreels[selectedMovieCategory as keyof typeof movieShowreels]?.video || "https://res.cloudinary.com/dgn7kshim/video/upload/v1736779453/resonance/movies/placeholder.mp4"}
+                        type="video/mp4"
+                      />
+                    </video>
+                    
+                    {/* Optional: Gradient overlay for better text readability if needed */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent pointer-events-none" />
+                  </div>
+                </div>
+              </div>
 
-                      <div className="h-px bg-white/10 my-5" />
-
-                      {/* Service & Year */}
-                      <div className="grid grid-cols-[70px_1fr] gap-x-3 gap-y-2">
-                        <p className="text-white/40 text-sm">Service</p>
-                        <p className="text-white font-semibold text-base">
-                          {movieShowreels[selectedMovieCategory as keyof typeof movieShowreels].service}
-                        </p>
-                        <p className="text-white/40 text-sm">Year</p>
-                        <p className="text-white font-semibold text-base">
-                          {movieShowreels[selectedMovieCategory as keyof typeof movieShowreels].year}
-                        </p>
-                      </div>
-
-                      {/* Description */}
-                      <p className="text-white/50 text-sm leading-relaxed mt-6">
-                        {movieShowreels[selectedMovieCategory as keyof typeof movieShowreels].description}
+              {/* Security Certifications Section */}
+              <div className="mt-24 mb-16">
+                  <div className="flex flex-col lg:flex-row gap-12 items-center">
+                    {/* Left Side - Text Content */}
+                    <div className="flex-1">
+                      <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-sky-400 mb-8 leading-tight">
+                        Security<br />Certifications
+                      </h2>
+                      
+                      <p className="text-white text-lg md:text-xl leading-relaxed">
+                        <span className="font-semibold">TPN Gold Shield Certification</span> and security compliance with{" "}
+                        <span className="font-semibold">Warner Bros, Lionsgate, Universal Pictures, Paramount,</span>{" "}
+                        <span className="text-white/60">Amazon Studios, Netflix and ABC</span> validate our commitment to safeguarding client content and IP.
                       </p>
-
-                      {/* Thumbnail */}
-                      <div className="mt-3">
-                        <img
-                          src={movieShowreels[selectedMovieCategory as keyof typeof movieShowreels].thumbnail}
-                          alt={selectedMovieCategory}
-                          className="w-full h-44 object-cover object-top rounded-lg shadow-xl"
-                        />
-                      </div>
                     </div>
 
-                    {/* Right Side - Video Player */}
+                    {/* Right Side - Company Logos Image */}
                     <div className="flex-1 min-w-0">
-                      <div className="relative aspect-video bg-black rounded-lg overflow-hidden shadow-2xl">
-                        <video
-                          key={selectedMovieCategory}
-                          autoPlay
-                          loop
-                          muted
-                          playsInline
-                          className="w-full h-full object-cover"
-                        >
-                          <source
-                            src={movieShowreels[selectedMovieCategory as keyof typeof movieShowreels].video}
-                            type="video/mp4"
-                          />
-                        </video>
-                      </div>
+                      <img
+                        src="/assets/images/RDL_logo.png"
+                        alt="Company Logos - TPN, Warner Bros, Amazon Studios, Lionsgate, Netflix, Universal"
+                        className="w-full h-auto rounded-2xl"
+                      />
                     </div>
                   </div>
-                )}
+                </div>
 
                 {/* Lorem Ipsum Text */}
                 <div className="mt-16">
@@ -656,7 +643,6 @@ const VFX = () => {
                     Lorem ipsum dolor sit amet, consectet uer adipi scing elit. Lorem ipsum dolor sit am et, consectetuer adipi scing elit. Lorem ipsum dolor sit amet, consectet uer adipi scing elit. Lorem ipsum dolor sit am.
                   </p>
                 </div>
-              </div>
             </div>
           </section>
         </div>
@@ -839,6 +825,7 @@ const VFX = () => {
                   </div>
                 </div>
 
+
                 {/* Showreel Display */}
                 {adShowreels[selectedAdCategory as keyof typeof adShowreels] && (
                   <div className="flex flex-col lg:flex-row gap-6 lg:items-end">
@@ -922,7 +909,6 @@ const VFX = () => {
           </div>
         </section>
       )}
-
 
       <Footer />
     </>

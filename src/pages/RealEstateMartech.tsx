@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronDown, ChevronLeft, ChevronRight, Play, X } from "lucide-react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import AnimatedColorText from "../components/AnimatedColorText";
@@ -69,6 +69,7 @@ type ExpertiseShowcaseItem = {
 	subtitle: string;
 	image: string;
 	category: string;
+	youtubeUrl?: string; // Optional YouTube embed URL
 };
 
 const expertiseShowcase: ExpertiseShowcaseItem[] = [
@@ -77,36 +78,42 @@ const expertiseShowcase: ExpertiseShowcaseItem[] = [
 		subtitle: "Lorem ipsum",
 		image: "/assets/images/movies/movies_01.png",
 		category: "3D Walkthroughs",
+		youtubeUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
 	},
 	{
 		title: "Vraj Group",
 		subtitle: "Lorem ipsum",
 		image: "/assets/images/movies/dune.jpeg",
 		category: "3D Walkthroughs",
+		youtubeUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
 	},
 	{
 		title: "DA Group",
 		subtitle: "Lorem ipsum",
 		image: "/assets/images/movies/flash.jpg",
 		category: "3D Walkthroughs",
+		youtubeUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
 	},
 	{
 		title: "Sattva",
 		subtitle: "Lorem ipsum",
 		image: "/assets/images/movies/avatar.jpeg",
 		category: "3D Renders",
+		// No youtubeUrl - this is an image
 	},
 	{
 		title: "Brigade",
 		subtitle: "Lorem ipsum",
 		image: "/assets/images/movies/batman.png",
 		category: "Drone Shoots",
+		youtubeUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
 	},
 	{
 		title: "Atmos",
 		subtitle: "Lorem ipsum",
 		image: "/assets/images/movies/movies_03.png",
 		category: "Films",
+		youtubeUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
 	},
 ];
 
@@ -134,11 +141,23 @@ const RealEstateMartech = () => {
 	const [currentExpertisePage, setCurrentExpertisePage] = useState<number>(0);
 	const [expertiseDirection, setExpertiseDirection] = useState<number>(0);
 	const [activeIsometricId, setActiveIsometricId] = useState<string | null>(null);
+	const [videoModalOpen, setVideoModalOpen] = useState<boolean>(false);
+	const [currentVideoUrl, setCurrentVideoUrl] = useState<string>("");
 
 	const EXPERTISE_PER_PAGE = 3;
 	const AUTO_ROTATE_MS = 4000;
 
 	const toggle = (i: number) => setOpenIndex(openIndex === i ? null : i);
+
+	const openVideoModal = (youtubeUrl: string) => {
+		setCurrentVideoUrl(youtubeUrl);
+		setVideoModalOpen(true);
+	};
+
+	const closeVideoModal = () => {
+		setVideoModalOpen(false);
+		setCurrentVideoUrl("");
+	};
 
 	const filteredExpertiseItems = expertiseShowcase.filter(
 		(item) => item.category === selectedExpertiseCategory,
@@ -353,22 +372,32 @@ const RealEstateMartech = () => {
 									<div
 										key={`${item.title}-${item.subtitle}-${expertiseStartIndex + index}`}
 										className="group relative h-[210px] md:h-[240px] lg:h-[280px] rounded-lg overflow-hidden cursor-pointer transform transition-all duration-500 hover:scale-105 hover:z-10"
+										onClick={() => item.youtubeUrl && openVideoModal(item.youtubeUrl)}
 									>
-											<img
-												src={item.image}
-												alt={item.title}
-												className="absolute inset-0 w-full h-full object-cover"
-											/>
+										<img
+											src={item.image}
+											alt={item.title}
+											className="absolute inset-0 w-full h-full object-cover"
+										/>
 
-											<div className="absolute inset-0 bg-sky-400/0 group-hover:bg-sky-400/20 transition-all duration-500" />
-
-											<div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-4">
-												<div>
-													<p className="text-white font-bold text-lg">{item.title}</p>
-													<p className="text-sky-400 text-sm">{item.subtitle}</p>
+										{/* Play Button Overlay - Only for items with youtubeUrl */}
+										{item.youtubeUrl && (
+											<div className="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/50 transition-all duration-300">
+												<div className="w-16 h-16 rounded-full bg-sky-400/90 group-hover:bg-sky-400 flex items-center justify-center transform group-hover:scale-110 transition-all duration-300 shadow-2xl">
+													<Play className="w-8 h-8 text-white fill-white ml-1" />
 												</div>
 											</div>
+										)}
+
+										<div className="absolute inset-0 bg-sky-400/0 group-hover:bg-sky-400/20 transition-all duration-500" />
+
+										<div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-4">
+											<div>
+												<p className="text-white font-bold text-lg">{item.title}</p>
+												<p className="text-sky-400 text-sm">{item.subtitle}</p>
+											</div>
 										</div>
+									</div>
 								))}
 
 								{Array.from({
@@ -405,43 +434,6 @@ const RealEstateMartech = () => {
 					dolor sit am et, consectetuer adipiscing elit, Lor em ipsum do lor sit
 					amet, con sectetuer adipiscing elit,
 				</p>
-			</section>
-
-			<section className="w-full bg-[#132c3b] pb-20 px-10 md:px-16">
-				<div className="max-w-6xl mx-auto">
-					<div className="relative">
-						<button
-							type="button"
-							aria-label="Previous video"
-							className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-10 md:-translate-x-14 z-10 w-9 h-9 rounded-full flex items-center justify-center text-white/55 hover:text-white transition-colors"
-						>
-							<ChevronLeft className="w-6 h-6" />
-						</button>
-
-						<div className="relative w-full aspect-[16/9] overflow-hidden border border-white/10">
-							<video
-								src="/assets/videos/placeholder_video.mp4"
-								autoPlay
-								loop
-								muted
-								playsInline
-								className="w-full h-full object-cover"
-							/>
-						</div>
-
-						<button
-							type="button"
-							aria-label="Next video"
-							className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-10 md:translate-x-14 z-10 w-9 h-9 rounded-full flex items-center justify-center text-white/55 hover:text-white transition-colors"
-						>
-							<ChevronRight className="w-6 h-6" />
-						</button>
-					</div>
-
-					<p className="mt-2 text-white/45 text-[18px] md:text-[30px] leading-none font-display">
-						Client : LOREM IPSUM | Service : 3D WALKTHROUGHS | Year : 2023
-					</p>
-				</div>
 			</section>
 
 			<section className="w-full bg-[#132c3b] pb-24 px-10 md:px-16">
@@ -543,6 +535,46 @@ const RealEstateMartech = () => {
 								</div>
 							</div>
 						</div>
+					</motion.div>
+				)}
+			</AnimatePresence>
+
+			{/* Video Modal */}
+			<AnimatePresence>
+				{videoModalOpen && (
+					<motion.div
+						initial={{ opacity: 0 }}
+						animate={{ opacity: 1 }}
+						exit={{ opacity: 0 }}
+						onClick={closeVideoModal}
+						className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-4 md:p-8"
+					>
+						{/* Close Button */}
+						<button
+							onClick={closeVideoModal}
+							className="absolute top-6 right-6 z-[110] w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-all duration-300"
+							aria-label="Close video"
+						>
+							<X className="w-6 h-6" />
+						</button>
+
+						{/* Video Container */}
+						<motion.div
+							initial={{ scale: 0.9, opacity: 0 }}
+							animate={{ scale: 1, opacity: 1 }}
+							exit={{ scale: 0.9, opacity: 0 }}
+							transition={{ duration: 0.3 }}
+							onClick={(e) => e.stopPropagation()}
+							className="w-full max-w-6xl aspect-video bg-black rounded-2xl overflow-hidden shadow-2xl"
+						>
+							<iframe
+								src={currentVideoUrl}
+								title="Video Player"
+								allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+								allowFullScreen
+								className="w-full h-full"
+							/>
+						</motion.div>
 					</motion.div>
 				)}
 			</AnimatePresence>
