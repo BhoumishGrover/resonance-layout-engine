@@ -21,7 +21,7 @@ const Awards = () => {
         <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-0">
           {/* Left Side - Content */}
           <div className="flex flex-col justify-center px-10 md:px-16 lg:px-24 py-24 lg:py-32">
-            <h1 className="font-display text-[60px] md:text-[75px] lg:text-[90px] font-bold text-sky-400 mb-12 leading-tight">
+            <h1 className="font-display text-[60px] md:text-[75px] lg:text-[90px] font-bold text-[#4ab6ff] mb-12 leading-tight">
               Awards &<br />Achievements
             </h1>
 
@@ -58,7 +58,7 @@ const Awards = () => {
             </div>
             <div className="space-y-8">
               <div>
-                <h3 className="text-sky-400 text-3xl md:text-4xl font-bold mb-2">24 FPS</h3>
+                <h3 className="text-[#4ab6ff] text-3xl md:text-4xl font-bold mb-2">24 FPS</h3>
                 <p className="text-white/60 text-lg">BEST VFX</p>
                 <p className="text-white text-xl">Web Series 2022</p>
               </div>
@@ -73,7 +73,7 @@ const Awards = () => {
           <div className="relative grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-24 border-t border-white/10 pt-12">
             <div className="space-y-8 order-2 md:order-1">
               <div>
-                <h3 className="text-sky-400 text-3xl md:text-4xl font-bold mb-2">FILMFARE</h3>
+                <h3 className="text-[#4ab6ff] text-3xl md:text-4xl font-bold mb-2">FILMFARE</h3>
                 <p className="text-white/60 text-lg">BEST VFX</p>
                 <p className="text-white text-xl">Web Series 2022</p>
               </div>
@@ -94,7 +94,7 @@ const Awards = () => {
             </div>
             <div className="space-y-8">
               <div>
-                <h3 className="text-sky-400 text-3xl md:text-4xl font-bold mb-2">KYOORIUS</h3>
+                <h3 className="text-[#4ab6ff] text-3xl md:text-4xl font-bold mb-2">KYOORIUS</h3>
                 <p className="text-white/60 text-lg">BEST VFX</p>
                 <p className="text-white text-xl">Web Series 2022</p>
               </div>
@@ -105,7 +105,7 @@ const Awards = () => {
           <div className="relative grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-24 border-t border-white/10 pt-12">
             <div className="space-y-8 order-2 md:order-1">
               <div>
-                <h3 className="text-sky-400 text-3xl md:text-4xl font-bold mb-2">ITA</h3>
+                <h3 className="text-[#4ab6ff] text-3xl md:text-4xl font-bold mb-2">ITA</h3>
                 <p className="text-white/60 text-lg">BEST VFX</p>
                 <p className="text-white text-xl">Web Series 2022</p>
               </div>

@@ -33,7 +33,7 @@ const HeroSection = () => {
             </span>
           </h1>
 
-          {/* CTA Buttons */}
+          {/* CTA Buttons
           <div className="mt-12 md:mt-16 flex flex-col sm:flex-row gap-4">
             <Link to="/vfx" className="btn-primary">
               SHOWCASE
@@ -41,7 +41,7 @@ const HeroSection = () => {
             <Link to="/contact" className="btn-minimal">
               CONTACT US
             </Link>
-          </div>
+          </div> */}
       </div>
     </section>
   );

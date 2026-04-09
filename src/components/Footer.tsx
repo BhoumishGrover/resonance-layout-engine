@@ -1,25 +1,43 @@
 import { Link } from "react-router-dom";
 
-const Footer = () => {
+type FooterTheme = "light" | "dark";
+
+interface FooterProps {
+  theme?: FooterTheme;
+}
+
+const Footer = ({ theme = "light" }: FooterProps) => {
+  const isDark = theme === "dark";
+  const backgroundClass = isDark ? "bg-[#080032]" : "bg-[#f6f5ee]";
+  const textClass = isDark ? "text-[#f2eee2]" : "text-black";
+  const mutedTextClass = isDark ? "text-[#f2eee2]/70" : "text-black/70";
+  const subtleTextClass = isDark ? "text-[#f2eee2]/50" : "text-black/50";
+  const bodyTextClass = isDark ? "text-[#f2eee2]/90" : "text-black/90";
+  const borderClass = isDark ? "border-[#f2eee2]/20" : "border-black/20";
+  const topCtaClass = isDark
+    ? "bg-[#f2eee2]/20 hover:bg-[#f2eee2]/30"
+    : "bg-[#080032] hover:bg-[#080032]/90";
+  const topCtaTextClass = isDark ? "text-[#f2eee2]" : "text-white";
+
   return (
-    <footer className="bg-white text-black">
+    <footer className={`${backgroundClass} ${textClass}`}>
       <div className="max-w-[1400px] mx-auto px-16 pt-24 pb-20 grid grid-cols-1 lg:grid-cols-2 gap-28 items-start">
 
         {/* LEFT COLUMN */}
         <div className="flex flex-col items-start">
 
           <h2 className="text-3xl font-semibold mb-3">Art Comes First</h2>
-          <p className="text-sm text-black/70 max-w-md mb-8">
+          <p className={`text-sm max-w-md mb-8 ${mutedTextClass}`}>
             We shape distinctive success stories with breakthrough ideas and
             creative mastery, elevating you ahead of the competition.
           </p>
 
           <div className="w-full max-w-xl">
-            <div className="bg-white/35 hover:bg-white/40 flex items-center justify-between px-8 py-6 w-full mb-10 cursor-pointer transition">
-              <span className="font-semibold text-base text-white">
+            <div className={`${topCtaClass} flex items-center justify-between px-8 py-6 w-full mb-10 cursor-pointer transition`}>
+              <span className={`font-semibold text-base ${topCtaTextClass}`}>
                 Got A Project? let’s Talk
               </span>
-              <span className="text-xl text-white">↗</span>
+              <span className={`text-xl ${topCtaTextClass}`}>↗</span>
             </div>
 
             {/* GOOGLE MAP - CLICKABLE */}
@@ -50,14 +68,14 @@ const Footer = () => {
           </div>
 
           {/* ADDRESS + PHONE */}
-          <div className="border-t border-black/20 mt-4 pt-8 grid grid-cols-1 sm:grid-cols-2 gap-16 text-sm">
+          <div className={`border-t mt-4 pt-8 grid grid-cols-1 sm:grid-cols-2 gap-16 text-sm ${borderClass}`}>
             <div>
-              <p className="text-black/50 text-xs uppercase mb-3">Address</p>
+              <p className={`text-xs uppercase mb-3 ${subtleTextClass}`}>Address</p>
               <a
                 href="https://maps.app.goo.gl/mkXCTnNfDQbu8xVHA"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block leading-relaxed text-black/90 hover:text-sky-600 transition-colors duration-300 cursor-pointer group"
+                className={`block leading-relaxed hover:text-sky-600 transition-colors duration-300 cursor-pointer group ${bodyTextClass}`}
               >
                 <span className="group-hover:underline">
                   F-802, Lotus Corporate Park, W.E.H,<br/>
@@ -71,8 +89,8 @@ const Footer = () => {
             </div>
 
             <div>
-              <p className="text-black/50 text-xs uppercase mb-3">Phone Number</p>
-              <p className="text-black/90">+91 9769 39 2002</p>
+              <p className={`text-xs uppercase mb-3 ${subtleTextClass}`}>Phone Number</p>
+              <p className={bodyTextClass}>+91 9769 39 2002</p>
             </div>
           </div>
         </div>
@@ -85,7 +103,7 @@ const Footer = () => {
             {["Works", "Verticals", "About us", "Awards"].map((item) => (
               <div
                 key={item}
-                className="flex items-center justify-between border-b border-black/20 pb-6 text-base cursor-pointer"
+                className={`flex items-center justify-between border-b pb-6 text-base cursor-pointer ${borderClass}`}
               >
                 <span>{item}</span>
                 <span>↗</span>
@@ -98,7 +116,7 @@ const Footer = () => {
             {["🌐", "f", "▶", "◎", "in"].map((icon, i) => (
               <div
                 key={i}
-                className="w-[64px] h-[64px] border border-black/30 flex items-center justify-center rounded-full text-lg"
+                className={`w-[64px] h-[64px] border flex items-center justify-center rounded-full text-lg ${isDark ? "border-[#f2eee2]/40" : "border-black/30"}`}
               >
                 {icon}
               </div>
@@ -106,20 +124,20 @@ const Footer = () => {
           </div>
 
           {/* CONTACT BLOCK */}
-          <div className="border-t border-black/20 pt-8 mt-2">
-            <p className="text-black/50 text-xs uppercase mb-8">Contact with us</p>
+          <div className={`border-t pt-8 mt-2 ${borderClass}`}>
+            <p className={`text-xs uppercase mb-8 ${subtleTextClass}`}>Contact with us</p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-20 text-sm">
               <div>
                 <p className="font-medium mb-3">For Business Enquiries</p>
-                <p className="text-black/90">+91-7800-90-8000</p>
-                <p className="text-black/90">abhyuday@resonancedigital.in</p>
+                <p className={bodyTextClass}>+91-7800-90-8000</p>
+                <p className={bodyTextClass}>abhyuday@resonancedigital.in</p>
               </div>
 
               <div>
                 <p className="font-medium mb-3">For Hiring Enquiries</p>
-                <p className="text-black/90">+91-9769-39-2002</p>
-                <p className="text-black/90">hr@resonancedigital.in</p>
+                <p className={bodyTextClass}>+91-9769-39-2002</p>
+                <p className={bodyTextClass}>hr@resonancedigital.in</p>
               </div>
             </div>
           </div>
@@ -127,7 +145,7 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className="border-t border-black/20 py-8 text-center text-xs text-black/60">
+      <div className={`border-t py-8 text-center text-xs ${borderClass} ${isDark ? "text-[#f2eee2]/60" : "text-black/60"}`}>
         © {new Date().getFullYear()} Resonance Digital LLP. All rights reserved
       </div>
     </footer>

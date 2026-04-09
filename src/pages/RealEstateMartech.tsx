@@ -220,9 +220,9 @@ const RealEstateMartech = () => {
 		<>
 			<Header />
 
-			<section className="relative w-full min-h-screen bg-[#132c3b] flex flex-col justify-center px-6 md:px-12 lg:px-24 py-24">
+			<section className="relative w-full min-h-screen bg-[#080032] flex flex-col justify-center px-6 md:px-12 lg:px-24 py-24">
 				<div className="max-w-6xl w-full mt-20">
-					<h1 className="font-display text-[65px] md:text-[75px] lg:text-[85px] font-bold text-sky-400 mb-10 leading-tight">
+					<h1 className="font-display text-[65px] md:text-[75px] lg:text-[85px] font-bold text-[#4ab6ff] mb-10 leading-tight">
 						Real Estate Mar-Tech
 					</h1>
 
@@ -246,12 +246,12 @@ const RealEstateMartech = () => {
 
 				<div className="absolute inset-0 bg-black/20" />
 
-				<h2 className="absolute top-[24%] left-10 md:left-16 font-display text-5xl md:text-6xl lg:text-7xl font-bold text-sky-400">
+				<h2 className="absolute top-[24%] left-10 md:left-16 font-display text-5xl md:text-6xl lg:text-7xl font-bold text-[#4ab6ff]">
 					Real Estate Mar-Tech
 				</h2>
 			</section>
 
-			<section className="w-full min-h-screen bg-[#132c3b] py-10 md:py-12 px-10 md:px-16 flex flex-col justify-center">
+			<section className="w-full min-h-screen bg-[#100a44] py-10 md:py-12 px-10 md:px-16 flex flex-col justify-center">
 				<h2 className="font-display text-2xl md:text-3xl font-normal text-white/60 mb-8">
 					Real Estate Mar-Tech <span className="text-white/50">|</span>{" "}
 					<span className="font-bold text-white">Clients</span>
@@ -260,9 +260,9 @@ const RealEstateMartech = () => {
 				<div className="flex flex-col lg:flex-row gap-12">
 					<div className="w-full lg:w-1/2 flex justify-center lg:justify-start">
 						<img
-							src="/assets/images/RDL_logo.png"
+							src="https://resonancedigital.in/assets/images/realEstate/Arch-client-logo.png"
 							alt="Real Estate Clients"
-							className="w-full max-w-[520px] h-auto object-contain opacity-85"
+							className="w-full max-w-[750px] h-auto object-contain opacity-85"
 						/>
 					</div>
 
@@ -313,7 +313,7 @@ const RealEstateMartech = () => {
 				</div>
 			</section>
 
-			<section className="w-full bg-[#132c3b] pb-10 md:pb-12 px-10 md:px-16">
+			<section className="w-full bg-[#080032] pb-10 md:pb-12 px-10 md:px-16">
 				<h2 className="font-display text-3xl md:text-4xl font-normal text-white/60 mb-6">
 					Real Estate Mar-Tech <span className="text-white/50">|</span>{" "}
 					<span className="font-bold text-white">Areas of expertise</span>
@@ -330,8 +330,8 @@ const RealEstateMartech = () => {
 									}}
 									className={`transition-colors duration-300 ${
 										selectedExpertiseCategory === category
-											? "text-sky-400"
-											: "text-white/40 hover:text-sky-400"
+											? "text-[#4ab6ff]"
+											: "text-white/40 hover:text-[#4ab6ff]"
 									}`}
 								>
 									{category}
@@ -394,7 +394,7 @@ const RealEstateMartech = () => {
 										<div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-4">
 											<div>
 												<p className="text-white font-bold text-lg">{item.title}</p>
-												<p className="text-sky-400 text-sm">{item.subtitle}</p>
+												<p className="text-[#4ab6ff] text-sm">{item.subtitle}</p>
 											</div>
 										</div>
 									</div>
@@ -436,7 +436,7 @@ const RealEstateMartech = () => {
 				</p>
 			</section>
 
-			<section className="w-full bg-[#132c3b] pb-24 px-10 md:px-16">
+			<section className="w-full bg-[#100a44] pb-24 px-10 md:px-16">
 				<div className="max-w-6xl mx-auto">
 					<h2 className="font-display text-[36px] md:text-[50px] font-normal text-white/60 mb-10">
 						Real Estate Mar-Tech <span className="text-white/50">|</span>{" "}

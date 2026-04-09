@@ -75,7 +75,7 @@ const SplitVideoSection = () => {
           className={`absolute inset-0 transition-colors duration-500 ${highlightOverlay("movies")}`}
         />
         <div className="absolute left-24 md:left-28 top-1/2 -translate-y-1/2">
-          <p className="font-display text-[68px] sm:text-[80px] lg:text-[96px] xl:text-[110px] font-bold text-sky-400 drop-shadow-lg">
+          <p className="font-display text-[68px] sm:text-[80px] lg:text-[96px] xl:text-[110px] font-bold text-[#4ab6ff] drop-shadow-lg">
             Movies
           </p>
         </div>

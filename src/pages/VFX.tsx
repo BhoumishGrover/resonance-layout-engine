@@ -218,6 +218,363 @@ const VFX = () => {
       year: "2026",
       category: "Set Extensions"
     },
+    {
+      title: "12th-Fail",
+      image: "https://resonancedigital.in/assets/images/VFX/movies/12th-Fail.jpg",
+      platform: "xxxxxx",
+      year: "xxxxxx",
+      category: "xxxxxx"
+    },
+    {
+      title: "Anaconda",
+      image: "https://resonancedigital.in/assets/images/VFX/movies/Anaconda.jpg",
+      platform: "xxxxxx",
+      year: "xxxxxx",
+      category: "xxxxxx"
+    },
+    {
+      title: "Antman-Wasp-Quantumania",
+      image: "https://resonancedigital.in/assets/images/VFX/movies/Antman-Wasp-Quantumania.jpg",
+      platform: "xxxxxx",
+      year: "xxxxxx",
+      category: "xxxxxx"
+    },
+    {
+      title: "Baaghi-3",
+      image: "https://resonancedigital.in/assets/images/VFX/movies/Baaghi-3.jpg",
+      platform: "xxxxxx",
+      year: "xxxxxx",
+      category: "xxxxxx"
+    },
+    {
+      title: "Baaghi-4",
+      image: "https://resonancedigital.in/assets/images/VFX/movies/Baaghi-4.jpg",
+      platform: "xxxxxx",
+      year: "xxxxxx",
+      category: "xxxxxx"
+    },
+    {
+      title: "Batman",
+      image: "https://resonancedigital.in/assets/images/VFX/movies/Batman.jpg",
+      platform: "xxxxxx",
+      year: "xxxxxx",
+      category: "xxxxxx"
+    },
+    {
+      title: "Beauty-in-Black 2",
+      image: "https://resonancedigital.in/assets/images/VFX/movies/Beauty-in-Black 2.jpg",
+      platform: "xxxxxx",
+      year: "xxxxxx",
+      category: "xxxxxx"
+    },
+    {
+      title: "Bhediya",
+      image: "https://resonancedigital.in/assets/images/VFX/movies/Bhediya.jpg",
+      platform: "xxxxxx",
+      year: "xxxxxx",
+      category: "xxxxxx"
+    },
+    {
+      title: "Chandigarh-Kare-Aashiqui",
+      image: "https://resonancedigital.in/assets/images/VFX/movies/Chandigarh-Kare-Aashiqui.jpg",
+      platform: "xxxxxx",
+      year: "xxxxxx",
+      category: "xxxxxx"
+    },
+    {
+      title: "Citadel-Honey-Bunny",
+      image: "https://resonancedigital.in/assets/images/VFX/movies/Citadel-Honey-Bunny.jpg",
+      platform: "xxxxxx",
+      year: "xxxxxx",
+      category: "xxxxxx"
+    },
+    {
+      title: "Dept-Q",
+      image: "https://resonancedigital.in/assets/images/VFX/movies/Dept-Q.jpg",
+      platform: "xxxxxx",
+      year: "xxxxxx",
+      category: "xxxxxx"
+    },
+    {
+      title: "Dhurandhar",
+      image: "https://resonancedigital.in/assets/images/VFX/movies/Dhurandhar.jpg",
+      platform: "xxxxxx",
+      year: "xxxxxx",
+      category: "xxxxxx"
+    },
+    {
+      title: "Doctor's-Strang-Multiverse-of-Madness",
+      image: "https://resonancedigital.in/assets/images/VFX/movies/Doctor's-Strang-Multiverse-of-Madness.jpg",
+      platform: "xxxxxx",
+      year: "xxxxxx",
+      category: "xxxxxx"
+    },
+    {
+      title: "Extraction-2",
+      image: "https://resonancedigital.in/assets/images/VFX/movies/Extraction-2.JPG",
+      platform: "xxxxxx",
+      year: "xxxxxx",
+      category: "xxxxxx"
+    },
+    {
+      title: "Family-Man-S3",
+      image: "https://resonancedigital.in/assets/images/VFX/movies/Family-Man-S3.jpg",
+      platform: "xxxxxx",
+      year: "xxxxxx",
+      category: "xxxxxx"
+    },
+    {
+      title: "Fraggle-Rock",
+      image: "https://resonancedigital.in/assets/images/VFX/movies/Fraggle-Rock.jpg",
+      platform: "xxxxxx",
+      year: "xxxxxx",
+      category: "xxxxxx"
+    },
+    {
+      title: "Heropanti-2",
+      image: "https://resonancedigital.in/assets/images/VFX/movies/Heropanti-2.jpg",
+      platform: "xxxxxx",
+      year: "xxxxxx",
+      category: "xxxxxx"
+    },
+    {
+      title: "Karate-Kids-Legends",
+      image: "https://resonancedigital.in/assets/images/VFX/movies/Karate-Kids-Legends.jpg",
+      platform: "xxxxxx",
+      year: "xxxxxx",
+      category: "xxxxxx"
+    },
+    {
+      title: "Kartikeya-2",
+      image: "https://resonancedigital.in/assets/images/VFX/movies/Kartikeya-2.jpg",
+      platform: "xxxxxx",
+      year: "xxxxxx",
+      category: "xxxxxx"
+    },
+    {
+      title: "KGF2",
+      image: "https://resonancedigital.in/assets/images/VFX/movies/KGF2.jpg",
+      platform: "xxxxxx",
+      year: "xxxxxx",
+      category: "xxxxxx"
+    },
+    {
+      title: "Mike",
+      image: "https://resonancedigital.in/assets/images/VFX/movies/Mike.jpg",
+      platform: "xxxxxx",
+      year: "xxxxxx",
+      category: "xxxxxx"
+    },
+    {
+      title: "Mirzapur-S3",
+      image: "https://resonancedigital.in/assets/images/VFX/movies/Mirzapur-S3.jpg",
+      platform: "xxxxxx",
+      year: "xxxxxx",
+      category: "xxxxxx"
+    },
+    {
+      title: "Mission-Impossible-Dead-Reckoning_1",
+      image: "https://resonancedigital.in/assets/images/VFX/movies/Mission-Impossible-Dead-Reckoning_1.jpg",
+      platform: "xxxxxx",
+      year: "xxxxxx",
+      category: "xxxxxx"
+    },
+    {
+      title: "Mumbai-Diaries",
+      image: "https://resonancedigital.in/assets/images/VFX/movies/Mumbai-Diaries.jpg",
+      platform: "xxxxxx",
+      year: "xxxxxx",
+      category: "xxxxxx"
+    },
+    {
+      title: "Orville",
+      image: "https://resonancedigital.in/assets/images/VFX/movies/Orville.jpg",
+      platform: "xxxxxx",
+      year: "xxxxxx",
+      category: "xxxxxx"
+    },
+    {
+      title: "Pathan",
+      image: "https://resonancedigital.in/assets/images/VFX/movies/Pathan.jpg",
+      platform: "xxxxxx",
+      year: "xxxxxx",
+      category: "xxxxxx"
+    },
+    {
+      title: "Red-Notice",
+      image: "https://resonancedigital.in/assets/images/VFX/movies/Red-Notice.jpg",
+      platform: "xxxxxx",
+      year: "xxxxxx",
+      category: "xxxxxx"
+    },
+    {
+      title: "Rocket-Boys",
+      image: "https://resonancedigital.in/assets/images/VFX/movies/Rocket-Boys.jpg",
+      platform: "xxxxxx",
+      year: "xxxxxx",
+      category: "xxxxxx"
+    },
+    {
+      title: "sadak2",
+      image: "https://resonancedigital.in/assets/images/VFX/movies/sadak2.jpg",
+      platform: "xxxxxx",
+      year: "xxxxxx",
+      category: "xxxxxx"
+    },
+    {
+      title: "Sandman-Season 1",
+      image: "https://resonancedigital.in/assets/images/VFX/movies/Sandman-Season 1.jpg",
+      platform: "xxxxxx",
+      year: "xxxxxx",
+      category: "xxxxxx"
+    },
+    {
+      title: "Secret-Invasion",
+      image: "https://resonancedigital.in/assets/images/VFX/movies/Secret-Invasion.jpg",
+      platform: "xxxxxx",
+      year: "xxxxxx",
+      category: "xxxxxx"
+    },
+    {
+      title: "SEE",
+      image: "https://resonancedigital.in/assets/images/VFX/movies/SEE.jpg",
+      platform: "xxxxxx",
+      year: "xxxxxx",
+      category: "xxxxxx"
+    },
+    {
+      title: "Senna",
+      image: "https://resonancedigital.in/assets/images/VFX/movies/Senna.jpg",
+      platform: "xxxxxx",
+      year: "xxxxxx",
+      category: "xxxxxx"
+    },
+    {
+      title: "Soorarai-Pottru",
+      image: "https://resonancedigital.in/assets/images/VFX/movies/Soorarai-Pottru.jpg",
+      platform: "xxxxxx",
+      year: "xxxxxx",
+      category: "xxxxxx"
+    },
+    {
+      title: "Squid-Games-3",
+      image: "https://resonancedigital.in/assets/images/VFX/movies/Squid-Games-3.jpg",
+      platform: "xxxxxx",
+      year: "xxxxxx",
+      category: "xxxxxx"
+    },
+    {
+      title: "Stargirl",
+      image: "https://resonancedigital.in/assets/images/VFX/movies/Stargirl.jpg",
+      platform: "xxxxxx",
+      year: "xxxxxx",
+      category: "xxxxxx"
+    },
+    {
+      title: "TED",
+      image: "https://resonancedigital.in/assets/images/VFX/movies/TED.jpg",
+      platform: "xxxxxx",
+      year: "xxxxxx",
+      category: "xxxxxx"
+    },
+    {
+      title: "The-Empire",
+      image: "https://resonancedigital.in/assets/images/VFX/movies/The-Empire.jpg",
+      platform: "xxxxxx",
+      year: "xxxxxx",
+      category: "xxxxxx"
+    },
+    {
+      title: "The-Flash 8",
+      image: "https://resonancedigital.in/assets/images/VFX/movies/The-Flash 8.jpg",
+      platform: "xxxxxx",
+      year: "xxxxxx",
+      category: "xxxxxx"
+    },
+    {
+      title: "The-Flash",
+      image: "https://resonancedigital.in/assets/images/VFX/movies/The-Flash.JPG",
+      platform: "xxxxxx",
+      year: "xxxxxx",
+      category: "xxxxxx"
+    },
+    {
+      title: "The-Last of Us",
+      image: "https://resonancedigital.in/assets/images/VFX/movies/The-Last of Us.JPG",
+      platform: "xxxxxx",
+      year: "xxxxxx",
+      category: "xxxxxx"
+    },
+    {
+      title: "Tu-Meri-Main-Tera-Main-Tera-Tu-Meri-01",
+      image: "https://resonancedigital.in/assets/images/VFX/movies/Tu-Meri-Main-Tera-Main-Tera-Tu-Meri-01.jpg",
+      platform: "xxxxxx",
+      year: "xxxxxx",
+      category: "xxxxxx"
+    },
+    {
+      title: "Tulsa-King",
+      image: "https://resonancedigital.in/assets/images/VFX/movies/Tulsa-King.jpg",
+      platform: "xxxxxx",
+      year: "xxxxxx",
+      category: "xxxxxx"
+    },
+    {
+      title: "Umbrella-Academy S3",
+      image: "https://resonancedigital.in/assets/images/VFX/movies/Umbrella-Academy S3.jpg",
+      platform: "xxxxxx",
+      year: "xxxxxx",
+      category: "xxxxxx"
+    },
+    {
+      title: "Unconfirmed-237953",
+      image: "https://resonancedigital.in/assets/images/VFX/movies/Unconfirmed-237953.JPG",
+      platform: "xxxxxx",
+      year: "xxxxxx",
+      category: "xxxxxx"
+    },
+    {
+      title: "Unconfirmed-520721",
+      image: "https://resonancedigital.in/assets/images/VFX/movies/Unconfirmed-520721.JPG",
+      platform: "xxxxxx",
+      year: "xxxxxx",
+      category: "xxxxxx"
+    },
+    {
+      title: "Unconfirmed-945243",
+      image: "https://resonancedigital.in/assets/images/VFX/movies/Unconfirmed-945243.jpg",
+      platform: "xxxxxx",
+      year: "xxxxxx",
+      category: "xxxxxx"
+    },
+    {
+      title: "Unconfirmed-977985",
+      image: "https://resonancedigital.in/assets/images/VFX/movies/Unconfirmed-977985.JPG",
+      platform: "xxxxxx",
+      year: "xxxxxx",
+      category: "xxxxxx"
+    },
+    {
+      title: "Upload",
+      image: "https://resonancedigital.in/assets/images/VFX/movies/Upload.jpg",
+      platform: "xxxxxx",
+      year: "xxxxxx",
+      category: "xxxxxx"
+    },
+    {
+      title: "Wendel-and-Wild",
+      image: "https://resonancedigital.in/assets/images/VFX/movies/Wendel-and-Wild.jpg",
+      platform: "xxxxxx",
+      year: "xxxxxx",
+      category: "xxxxxx"
+    },
+    {
+      title: "Witcher",
+      image: "https://resonancedigital.in/assets/images/VFX/movies/Witcher.jpg",
+      platform: "xxxxxx",
+      year: "xxxxxx",
+      category: "xxxxxx"
+    },
   ];
 
   const adsShowcase = [
@@ -343,10 +700,10 @@ const VFX = () => {
 
       {/* Hero Section */}
       {!expandedSection && (
-        <section className="relative w-full min-h-screen bg-[#132c3b] flex flex-col justify-center px-6 md:px-12 lg:px-24 py-24">
+        <section className="relative w-full min-h-screen bg-[#080032] flex flex-col justify-center px-6 md:px-12 lg:px-24 py-24">
           {/* Main Title */}
           <div className="max-w-6xl w-full mt-20">
-            <h1 className="font-display text-[85px] md:text-[95px] lg:text-[105px] font-bold text-sky-400 mb-10 leading-tight">
+            <h1 className="font-display text-[85px] md:text-[95px] lg:text-[105px] font-bold text-[#4ab6ff] mb-10 leading-tight">
               VFX: Movies & Ads
             </h1>
 
@@ -380,7 +737,7 @@ const VFX = () => {
             />
             <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all duration-500" />
 
-            <h2 className="absolute left-20 top-1/2 -translate-y-1/2 font-display text-[88px] font-bold text-white group-hover:text-sky-400 transition-all duration-500 group-hover:scale-110">
+            <h2 className="absolute left-20 top-1/2 -translate-y-1/2 font-display text-[88px] font-bold text-white group-hover:text-[#4ab6ff] transition-all duration-500 group-hover:scale-110">
               Movies
             </h2>
           </div>
@@ -403,7 +760,7 @@ const VFX = () => {
             />
             <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-all duration-500" />
 
-            <h2 className="absolute right-20 top-1/2 -translate-y-1/2 font-display text-[88px] font-bold text-white group-hover:text-sky-400 transition-all duration-500 group-hover:scale-110">
+            <h2 className="absolute right-20 top-1/2 -translate-y-1/2 font-display text-[88px] font-bold text-white group-hover:text-[#4ab6ff] transition-all duration-500 group-hover:scale-110">
               Ads
             </h2>
           </div>
@@ -412,12 +769,12 @@ const VFX = () => {
 
       {/* Expanded Movies Section */}
       {expandedSection === "movies" && (
-        <div ref={expandedContentRef} className="w-full bg-[#0f2733]">
+        <div ref={expandedContentRef} className="w-full bg-[#100a44]">
           {/* Hero Section */}
-          <section className="relative w-full min-h-screen bg-[#132c3b] flex flex-col justify-center px-6 md:px-12 lg:px-24 py-24">
+          <section className="relative w-full min-h-screen bg-[#080032] flex flex-col justify-center px-6 md:px-12 lg:px-24 py-24">
             {/* Main Title */}
             <div className="max-w-6xl w-full mt-20">
-              <h1 className="font-display text-[85px] md:text-[95px] lg:text-[105px] font-bold text-sky-400 mb-10 leading-tight">
+              <h1 className="font-display text-[85px] md:text-[95px] lg:text-[105px] font-bold text-[#4ab6ff] mb-10 leading-tight">
                 VFX: Movies
               </h1>
 
@@ -447,17 +804,28 @@ const VFX = () => {
               playsInline
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-[#0f2733]" />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-[#100a44]" />
 
             <div className="absolute left-12 md:left-24 top-1/2 -translate-y-1/2">
               <h1 className="font-display text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-4">
-                VFX: Movie <span className="text-sky-400">|</span> <span className="text-white/60">Showcase</span>
+                VFX: Movie <span className="text-[#4ab6ff]">|</span> <span className="text-white/60">Showcase</span>
               </h1>
             </div>
           </section>
 
+
+          {/* featured projects section */}
+          <div className="mt-32 px-12 md:px-24">
+            <div className="max-w-7xl mx-auto">
+              <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-4">
+                VFX: Featured Projects <span className="text-[#4ab6ff]">|</span>{" "}
+                <span className="text-white/60">xxxxx</span>
+              </h2>
+            </div>
+          </div>
+
           {/* Movies Showcase Carousel */}
-          <section className="relative w-full bg-[#0f2733] py-24 px-12 md:px-24">
+          <section className="relative w-full bg-[#100a44] py-24 px-12 md:px-24">
             <div className="max-w-7xl mx-auto">
               <div className="relative">
                 {/* Carousel Navigation */}
@@ -503,7 +871,7 @@ const VFX = () => {
                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-4">
                         <div>
                           <p className="text-white font-bold text-lg">{movie.title}</p>
-                          <p className="text-sky-400 text-sm">{movie.platform}</p>
+                          <p className="text-[#4ab6ff] text-sm">{movie.platform}</p>
                         </div>
                       </div>
                     </div>
@@ -547,7 +915,7 @@ const VFX = () => {
                 
                 <div className="space-y-6">
                   <div className="bg-white/5 p-6 rounded-lg border border-white/10">
-                    <h4 className="text-sky-400 font-semibold text-xl mb-2">Our Expertise</h4>
+                    <h4 className="text-[#4ab6ff] font-semibold text-xl mb-2">Our Expertise</h4>
                     <ul className="text-white/70 space-y-2">
                       <li>• CGI & Digital Animation</li>
                       <li>• Motion Capture & Performance</li>
@@ -561,11 +929,11 @@ const VFX = () => {
               {/* Areas of Expertise Section */}
               <div className="mt-32">
                 <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-4">
-                  VFX: Movie <span className="text-sky-400">|</span> <span className="text-white/60">Areas of expertise</span>
+                  VFX: Movie <span className="text-[#4ab6ff]">|</span> <span className="text-white/60">Areas of expertise</span>
                 </h2>
 
                 {/* Category Filter */}
-                <div className="mt-8 mb-6">
+                <div className="mt-8 mb-12">
                   <div className="flex flex-wrap gap-4 text-xl md:text-2xl font-semibold">
                     {movieCategories.map((category, index) => (
                       <div key={category} className="flex items-center">
@@ -573,8 +941,8 @@ const VFX = () => {
                           onClick={() => setSelectedMovieCategory(category)}
                           className={`transition-colors duration-300 ${
                             selectedMovieCategory === category
-                              ? "text-sky-400"
-                              : "text-white/40 hover:text-sky-400"
+                              ? "text-[#4ab6ff]"
+                              : "text-white/40 hover:text-[#4ab6ff]"
                           }`}
                         >
                           {category}
@@ -587,27 +955,68 @@ const VFX = () => {
                   </div>
                 </div>
 
-                {/* Immersive Video Player */}
-                <div className="w-full max-w-5xl mx-auto">
-                  <div className="relative aspect-video bg-black rounded-2xl overflow-hidden shadow-2xl">
-                    <video
-                      key={selectedMovieCategory}
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                      className="w-full h-full object-cover"
-                    >
-                      <source
-                        src={movieShowreels[selectedMovieCategory as keyof typeof movieShowreels]?.video || "https://res.cloudinary.com/dgn7kshim/video/upload/v1736779453/resonance/movies/placeholder.mp4"}
-                        type="video/mp4"
-                      />
-                    </video>
-                    
-                    {/* Optional: Gradient overlay for better text readability if needed */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent pointer-events-none" />
+                {/* Showreel Display */}
+                {movieShowreels[selectedMovieCategory as keyof typeof movieShowreels] && (
+                  <div className="flex flex-col lg:flex-row gap-6 lg:items-end">
+                    {/* Left Side - Details */}
+                    <div className="w-full lg:w-[300px] lg:flex-shrink-0 flex flex-col">
+                      {/* Client */}
+                      <div className="grid grid-cols-[70px_1fr] gap-3 items-start">
+                        <p className="text-white/40 text-sm">Client</p>
+                        <h3 className="text-white font-bold text-lg uppercase leading-tight">
+                          {movieShowreels[selectedMovieCategory as keyof typeof movieShowreels].client}
+                        </h3>
+                      </div>
+
+                      <div className="h-px bg-white/10 my-5" />
+
+                      {/* Service & Year */}
+                      <div className="grid grid-cols-[70px_1fr] gap-x-3 gap-y-2">
+                        <p className="text-white/40 text-sm">Service</p>
+                        <p className="text-white font-semibold text-base">
+                          {movieShowreels[selectedMovieCategory as keyof typeof movieShowreels].service}
+                        </p>
+                        <p className="text-white/40 text-sm">Year</p>
+                        <p className="text-white font-semibold text-base">
+                          {movieShowreels[selectedMovieCategory as keyof typeof movieShowreels].year}
+                        </p>
+                      </div>
+
+                      {/* Description */}
+                      <p className="text-white/50 text-sm leading-relaxed mt-6">
+                        {movieShowreels[selectedMovieCategory as keyof typeof movieShowreels].description}
+                      </p>
+
+                      {/* Thumbnail */}
+                      <div className="mt-3">
+                        <img
+                          src={movieShowreels[selectedMovieCategory as keyof typeof movieShowreels].thumbnail}
+                          alt={selectedMovieCategory}
+                          className="w-full h-44 object-cover object-top rounded-lg shadow-xl"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Right Side - Video Player */}
+                    <div className="flex-1 min-w-0">
+                      <div className="relative aspect-video bg-black rounded-lg overflow-hidden shadow-2xl">
+                        <video
+                          key={selectedMovieCategory}
+                          autoPlay
+                          loop
+                          muted
+                          playsInline
+                          className="w-full h-full object-cover"
+                        >
+                          <source
+                            src={movieShowreels[selectedMovieCategory as keyof typeof movieShowreels].video}
+                            type="video/mp4"
+                          />
+                        </video>
+                      </div>
+                    </div>
                   </div>
-                </div>
+                )}
               </div>
 
               {/* Security Certifications Section */}
@@ -615,7 +1024,7 @@ const VFX = () => {
                   <div className="flex flex-col lg:flex-row gap-12 items-center">
                     {/* Left Side - Text Content */}
                     <div className="flex-1">
-                      <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-sky-400 mb-8 leading-tight">
+                      <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-[#4ab6ff] mb-8 leading-tight">
                         Security<br />Certifications
                       </h2>
                       
@@ -629,7 +1038,7 @@ const VFX = () => {
                     {/* Right Side - Company Logos Image */}
                     <div className="flex-1 min-w-0">
                       <img
-                        src="/assets/images/RDL_logo.png"
+                        src="https://resonancedigital.in/assets/images/VFX/movies/securityCertifications/Security-Certification.png"
                         alt="Company Logos - TPN, Warner Bros, Amazon Studios, Lionsgate, Netflix, Universal"
                         className="w-full h-auto rounded-2xl"
                       />
@@ -643,6 +1052,27 @@ const VFX = () => {
                     Lorem ipsum dolor sit amet, consectet uer adipi scing elit. Lorem ipsum dolor sit am et, consectetuer adipi scing elit. Lorem ipsum dolor sit amet, consectet uer adipi scing elit. Lorem ipsum dolor sit am.
                   </p>
                 </div>
+
+                {/* Films & Episodic Clients Section */}
+                <div className="mt-24 mb-16">
+                  <div className="flex flex-col lg:flex-row gap-12 items-start">
+                    {/* Left Side - Title */}
+                    <div className="lg:w-[45%]">
+                      <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-[#4ab6ff] leading-tight">
+                        Films & Episodic <br />Clients
+                      </h2>
+                    </div>
+
+                    {/* Right Side - Client Logos */}
+                    <div className="flex-1 min-w-0">
+                      <img
+                        src="https://resonancedigital.in/assets/images/VFX/Films-and-episodic-client.png"
+                        alt="Films & Episodic Clients Logos"
+                        className="w-full h-auto rounded-2xl"
+                      />
+                    </div>
+                  </div>
+                </div>
             </div>
           </section>
         </div>
@@ -650,12 +1080,12 @@ const VFX = () => {
 
       {/* Expanded Ads Section */}
       {expandedSection === "ads" && (
-        <div ref={expandedContentRef} className="w-full bg-[#0f2733]">
+        <div ref={expandedContentRef} className="w-full bg-[#100a44]">
           {/* Hero Section */}
-          <section className="relative w-full min-h-screen bg-[#132c3b] flex flex-col justify-center px-6 md:px-12 lg:px-24 py-24">
+          <section className="relative w-full min-h-screen bg-[#080032] flex flex-col justify-center px-6 md:px-12 lg:px-24 py-24">
             {/* Main Title */}
             <div className="max-w-6xl w-full mt-20">
-              <h1 className="font-display text-[85px] md:text-[95px] lg:text-[105px] font-bold text-sky-400 mb-10 leading-tight">
+              <h1 className="font-display text-[85px] md:text-[95px] lg:text-[105px] font-bold text-[#4ab6ff] mb-10 leading-tight">
                 VFX: Ads
               </h1>
 
@@ -685,17 +1115,17 @@ const VFX = () => {
               playsInline
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-[#0f2733]" />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-[#100a44]" />
 
             <div className="absolute left-12 md:left-24 top-1/2 -translate-y-1/2">
               <h1 className="font-display text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-4">
-                VFX: Ads <span className="text-sky-400">|</span> <span className="text-white/60">Showcase</span>
+                VFX: Ads <span className="text-[#4ab6ff]">|</span> <span className="text-white/60">Showcase</span>
               </h1>
             </div>
           </section>
 
           {/* Ads Showcase Carousel */}
-          <section className="relative w-full bg-[#0f2733] py-24 px-12 md:px-24">
+          <section className="relative w-full bg-[#100a44] py-24 px-12 md:px-24">
             <div className="max-w-7xl mx-auto">
               <div className="relative">
                 {/* Carousel Navigation */}
@@ -741,7 +1171,7 @@ const VFX = () => {
                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-4">
                         <div>
                           <p className="text-white font-bold text-lg">{ad.title}</p>
-                          <p className="text-sky-400 text-sm">{ad.client}</p>
+                          <p className="text-[#4ab6ff] text-sm">{ad.client}</p>
                         </div>
                       </div>
                     </div>
@@ -785,7 +1215,7 @@ const VFX = () => {
                 
                 <div className="space-y-6">
                   <div className="bg-white/5 p-6 rounded-lg border border-white/10">
-                    <h4 className="text-sky-400 font-semibold text-xl mb-2">Our Services</h4>
+                    <h4 className="text-[#4ab6ff] font-semibold text-xl mb-2">Our Services</h4>
                     <ul className="text-white/70 space-y-2">
                       <li>• Brand Commercials</li>
                       <li>• Product Visualization</li>
@@ -799,7 +1229,7 @@ const VFX = () => {
               {/* Areas of Expertise Section */}
               <div className="mt-32">
                 <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-4">
-                  VFX: Ads <span className="text-sky-400">|</span> <span className="text-white/60">Areas of expertise</span>
+                  VFX: Ads <span className="text-[#4ab6ff]">|</span> <span className="text-white/60">Areas of expertise</span>
                 </h2>
 
                 {/* Category Filter */}
@@ -811,8 +1241,8 @@ const VFX = () => {
                           onClick={() => setSelectedAdCategory(category)}
                           className={`transition-colors duration-300 ${
                             selectedAdCategory === category
-                              ? "text-sky-400"
-                              : "text-white/40 hover:text-sky-400"
+                              ? "text-[#4ab6ff]"
+                              : "text-white/40 hover:text-[#4ab6ff]"
                           }`}
                         >
                           {category}
@@ -903,7 +1333,7 @@ const VFX = () => {
 
       {/* Original Expandable Items Section - Only show when nothing is expanded */}
       {!expandedSection && (
-        <section className="w-full bg-[#132c3b]">
+        <section className="w-full bg-[#080032]">
           <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12 py-12 space-y-4">
             {/* You can add additional content here if needed */}
           </div>

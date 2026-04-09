@@ -218,7 +218,7 @@ const BrandSolutions = () => {
       {/* Hero Section */}
       <section className="relative w-full min-h-screen bg-[#132c3b] flex flex-col justify-center px-6 md:px-12 lg:px-24 py-24">
         <div className="max-w-6xl w-full mt-20">
-          <h1 className="font-display text-[85px] md:text-[95px] lg:text-[105px] font-bold text-sky-400 mb-10 leading-tight">
+          <h1 className="font-display text-[85px] md:text-[95px] lg:text-[105px] font-bold text-[#4ab6ff] mb-10 leading-tight">
             Brand Solutions
           </h1>
 
@@ -243,7 +243,7 @@ const BrandSolutions = () => {
         <div className="absolute inset-0 bg-black/20" />
 
         {/* Top-left label */}
-        <h2 className="absolute top-[35%] left-10 md:left-16 font-display text-5xl md:text-6xl lg:text-7xl font-bold text-sky-400">
+        <h2 className="absolute top-[35%] left-10 md:left-16 font-display text-5xl md:text-6xl lg:text-7xl font-bold text-[#4ab6ff]">
           Brand Solutions
         </h2>
       </section>
@@ -261,7 +261,7 @@ const BrandSolutions = () => {
           {/* Left — clients grid image */}
           <div className="w-full lg:w-1/2">
             <img
-              src="/assets/images/RDL_logo.png"
+              src="https://resonancedigital.in/assets/images/brandSolutions/Brand-solution-logo.png"
               alt="Brand Solutions Clients"
               className="w-full h-full object-contain"
             />

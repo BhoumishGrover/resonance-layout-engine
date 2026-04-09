@@ -141,7 +141,7 @@ const About = () => {
       {/* Meet Our Team Section */}
       <section className="w-full bg-[#3F488D] py-20 px-10 md:px-16">
         <div className="max-w-7xl mx-auto">
-          <h2 className="font-display text-[60px] md:text-[80px] lg:text-[100px] font-bold text-sky-400 mb-12 leading-tight">
+          <h2 className="font-display text-[60px] md:text-[80px] lg:text-[100px] font-bold text-[#4ab6ff] mb-12 leading-tight">
             Meet our team
           </h2>
 

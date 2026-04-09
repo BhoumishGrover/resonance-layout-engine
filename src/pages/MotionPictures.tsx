@@ -131,7 +131,7 @@ const MotionPictures = () => {
 			{/* intro text Section */}
 			<section className="relative w-full min-h-screen bg-[#132c3b] flex flex-col justify-center px-6 md:px-12 lg:px-24 py-24">
 				<div className="max-w-6xl w-full mt-20">
-					<h1 className="font-display text-[65px] md:text-[75px] lg:text-[85px] font-bold text-sky-400 mb-10 leading-tight">
+					<h1 className="font-display text-[65px] md:text-[75px] lg:text-[85px] font-bold text-[#4ab6ff] mb-10 leading-tight">
 						Motion Pictures
 					</h1>
 

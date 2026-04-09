@@ -160,7 +160,7 @@ const Contact = () => {
           <div>
             <p className="text-white/50 text-sm md:text-base mb-6">Contact Us</p>
             
-            <h1 className="font-display text-[80px] md:text-[100px] lg:text-[120px] font-bold text-sky-400 leading-none mb-8">
+            <h1 className="font-display text-[80px] md:text-[100px] lg:text-[120px] font-bold text-[#4ab6ff] leading-none mb-8">
               Let's Talk
             </h1>
 

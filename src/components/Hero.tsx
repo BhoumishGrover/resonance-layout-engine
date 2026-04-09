@@ -34,7 +34,7 @@ const Hero = () => {
           className="absolute inset-0 w-full h-full object-cover z-0"
         >
           <source
-            src="/assets/videos/placeholder_video.mp4"
+            src="https://resonancedigital.in/assets/videos/Resonance-VFX-Showreel_MP4.mp4"
             type="video/mp4"
           />
         </video>
@@ -44,7 +44,7 @@ const Hero = () => {
 
         {/* Content - Animated */}
         <motion.div 
-          className="absolute left-6 md:left-12 lg:left-24 top-1/2 -translate-y-1/2 z-20"
+          className="absolute left-6 md:left-12 lg:left-24 bottom-10 md:bottom-14 lg:bottom-16 z-20"
           style={{
             y: contentY,
             opacity: contentOpacity,
@@ -56,8 +56,8 @@ const Hero = () => {
             fontFamily: '"Gotham-Bold", "Gotham", sans-serif',
             fontWeight: 700,
 
-            /* Illustrator 105pt ≈ ~88–92pt on web due to line-gap + metrics */
-            fontSize: "75pt",
+            /* Reduced hero headline size */
+            fontSize: "55pt",
 
             /* Kill browser-added line gap */
             lineHeight: "0.88",
@@ -103,7 +103,7 @@ const Hero = () => {
           </span>
         </h1>
 
-        {/* CTA Buttons */}
+        {/* CTA Buttons
         <div className="mt-12 flex flex-row items-center gap-4">
           <a href="/vfx" className="btn-primary-custom">
             SHOWCASE
@@ -111,7 +111,7 @@ const Hero = () => {
           <a href="/contact" className="btn-minimal">
             CONTACT US
           </a>
-        </div>
+        </div> */}
       </motion.div>
       
       </div>

@@ -9,7 +9,7 @@ const verticals = [
     subtitle: "Movies & Ads",
     description: "High-end visual effects and motion design for film, advertising, and digital experiences.",
     href: "/vfx",
-    bgImage: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=2000",
+    bgImage: "https://resonancedigital.in/assets/images/VFX/Sandman-vfx.webp",
   },
   {
     id: "real-estate",
@@ -17,7 +17,7 @@ const verticals = [
     subtitle: "Mar-tech",
     description: "Photorealistic renders and immersive virtual tours for architectural projects.",
     href: "/real-estate",
-    bgImage: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2000",
+    bgImage: "https://resonancedigital.in/assets/images/realEstate/verticalSelectorImg.png",
   },
   {
     id: "brand-solutions",
@@ -25,7 +25,7 @@ const verticals = [
     subtitle: "",
     description: "Strategic brand content and campaigns that resonate with audiences worldwide.",
     href: "/brandSolutions",
-    bgImage: "https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=2000",
+    bgImage: "https://resonancedigital.in/assets/images/brandSolutions/black_dog-copy.jpg",
   },
   {
     id: "motion-pictures",
@@ -52,7 +52,7 @@ const verticals = [
 ];
 
 const VerticalSelector = () => {
-  const [hoveredVertical, setHoveredVertical] = useState<string | null>("vfx");
+  const [activeVertical, setActiveVertical] = useState<string>("vfx");
 
   return (
     <section className="h-screen w-full flex flex-col relative overflow-hidden" id="verticals">
@@ -62,11 +62,11 @@ const VerticalSelector = () => {
           <div
             key={`bg-${vertical.id}`}
             className="absolute inset-0 bg-cover bg-center transition-opacity duration-700"
-            style={{
-              backgroundImage: `url(${vertical.bgImage})`,
-              opacity: hoveredVertical === vertical.id ? 1 : 0,
-            }}
-          >
+              style={{
+                backgroundImage: `url(${vertical.bgImage})`,
+                opacity: activeVertical === vertical.id ? 1 : 0,
+              }}
+            >
             {/* Dark overlay for text readability */}
             <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
           </div>
@@ -83,14 +83,13 @@ const VerticalSelector = () => {
         </div>
 
         {/* Verticals Grid */}
-        <div className="flex-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 p-16 items-center content-center">
+        <div className="flex-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 px-16 pt-2 pb-28 items-start content-start">
           {verticals.map((vertical, index) => (
             <Link
               key={vertical.id}
               to={vertical.href}
-              onMouseEnter={() => setHoveredVertical(vertical.id)}
-              onMouseLeave={() => setHoveredVertical("vfx")}
-              className="vertical-card group relative flex flex-col justify-between p-6 md:p-8 overflow-hidden transition-all duration-300 rounded-lg hover:scale-110 hover:shadow-2xl h-[400px] max-w-[280px] mx-auto w-full"
+              onMouseEnter={() => setActiveVertical(vertical.id)}
+              className="vertical-card group relative flex flex-col justify-between p-6 md:p-8 overflow-hidden transition-all duration-300 rounded-lg hover:scale-110 hover:shadow-2xl h-[600px] max-w-[280px] mx-auto w-full"
               style={{
                 backgroundImage: `url(${vertical.bgImage})`,
                 backgroundSize: 'cover',
