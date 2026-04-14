@@ -1,15 +1,17 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import AnimatedColorText from "../components/AnimatedColorText";
-import { ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronDown, ChevronLeft, ChevronRight, X } from "lucide-react";
 
 type BrandShowcaseItem = {
   title: string;
   image: string;
   client: string;
   year: string;
+  service: string;
+  objective?: string;
   videoSrc?: string;
   videoTitle?: string;
   videoSubtitle?: string;
@@ -23,6 +25,8 @@ const brandShowcase: BrandShowcaseItem[] = [
     image: "/assets/images/BrandStatements/ICICI-Lombard.jpg",
     client: "ICICI Lombard",
     year: "2018",
+    service: "Film Production & Campaign",
+    objective: "Digital content to drive engagement and brand recall across insurance touchpoints — concept to final delivery.",
     videoSrc: "/assets/videos/ads.mp4",
     videoTitle: "ICICI LOMBARD",
     videoSubtitle: "Insurance for Every Moment",
@@ -34,12 +38,16 @@ const brandShowcase: BrandShowcaseItem[] = [
     image: "/assets/images/BrandStatements/images.jpeg",
     client: "ICICI Lombard",
     year: "2018",
+    service: "Social Media Management",
+    objective: "Sustained social media presence and content calendar management for quarterly campaigns.",
   },
   {
     title: "Bharti AXA",
     image: "/assets/images/BrandStatements/bhartiAXA.jpg",
     client: "Bharti AXA",
     year: "2024",
+    service: "Pre to Post Production",
+    objective: "End-to-end production of a branded film across digital platforms to drive emotional brand connection.",
     videoSrc: "/assets/videos/movies.mp4",
     videoTitle: "BHARTI AXA",
     videoSubtitle: "Hum Kaise Maan Le",
@@ -51,18 +59,24 @@ const brandShowcase: BrandShowcaseItem[] = [
     image: "/assets/images/BrandStatements/morde.jpg",
     client: "Morde",
     year: "2024",
+    service: "Launch New Packaging",
+    objective: "Digital content to drive engagement and increase footfalls for the brand at Bakery Business South, Hyderabad.",
   },
   {
     title: "Travel + Leisure",
     image: "/assets/images/BrandStatements/T+L.jpg",
     client: "Travel + Leisure",
     year: "2024",
+    service: "Original Content & Copywriting",
+    objective: "Crafting destination-led editorial content and visual storytelling for the Travel + Leisure India brand.",
   },
   {
     title: "Oppo",
     image: "/assets/images/BrandStatements/oppo.png",
     client: "Oppo",
     year: "2024",
+    service: "Video Editing & Animation",
+    objective: "Product launch video editing and motion graphics for digital-first distribution across platforms.",
     videoSrc: "/assets/videos/placeholder_video.mp4",
     videoTitle: "OPPO",
     videoSubtitle: "Future Tech Stories",
@@ -74,18 +88,24 @@ const brandShowcase: BrandShowcaseItem[] = [
     image: "/assets/images/BrandStatements/ICICI-Lombard.jpg",
     client: "ICICI Lombard",
     year: "2019",
+    service: "Campaign Planning",
+    objective: "Campus-focused insurance awareness campaign targeting young professionals and graduates.",
   },
   {
     title: "ICICI Lombard - Elevate",
     image: "/assets/images/BrandStatements/images.jpeg",
     client: "ICICI Lombard",
     year: "2020",
+    service: "Graphic Design & Illustration",
+    objective: "A refreshed design language for the Elevate product line across digital and print touchpoints.",
   },
   {
     title: "Bharti AXA - Secure Living",
     image: "/assets/images/BrandStatements/bhartiAXA.jpg",
     client: "Bharti AXA",
     year: "2023",
+    service: "Script to Post",
+    objective: "Full campaign production from scripting to post — driving 4M+ views across digital platforms.",
     videoSrc: "/assets/videos/movies.mp4",
     videoTitle: "BHARTI AXA",
     videoSubtitle: "Secure Living Campaign",
@@ -97,23 +117,37 @@ const brandShowcase: BrandShowcaseItem[] = [
     image: "/assets/images/BrandStatements/morde.jpg",
     client: "Morde",
     year: "2025",
+    service: "Print, OOH & Mainline Advertising",
+    objective: "Festive packaging campaign designed for in-store visibility and regional distribution across bakery trade shows.",
   },
   {
     title: "Travel + Leisure - Goa Edit",
     image: "/assets/images/BrandStatements/T+L.jpg",
     client: "Travel + Leisure",
     year: "2025",
+    service: "Original Content & Copywriting",
+    objective: "A special destination edit on Goa — photo essays, reels, and editorial copy for digital and print.",
   },
   {
     title: "Oppo - Future Assistant",
     image: "/assets/images/BrandStatements/oppo.png",
     client: "Oppo",
     year: "2023",
+    service: "Pre to Post Production",
+    objective: "Campaign production for Oppo's AI assistant feature — scripted, shot, and delivered for digital platforms.",
     videoSrc: "/assets/videos/ads.mp4",
     videoTitle: "OPPO",
     videoSubtitle: "Future Assistant",
     videoHighlight: "5M+ Reached",
     videoFooter: "Pre to Post Production",
+  },
+  {
+    title: "ICICI Lombard - Digital Drive",
+    image: "/assets/images/BrandStatements/ICICI-Lombard.jpg",
+    client: "ICICI Lombard",
+    year: "2025",
+    service: "Social Media Management",
+    objective: "Sustained digital-first campaign to drive insurance policy renewals and brand affinity across social platforms.",
   },
 ];
 
@@ -154,69 +188,55 @@ const brandStatements = [
 
 const BrandSolutions = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
-  const [currentShowcasePage, setCurrentShowcasePage] = useState(0);
-  const [showcaseDirection, setShowcaseDirection] = useState(0);
   const defaultVideoIndex = Math.max(
     0,
     brandShowcase.findIndex((item) => Boolean(item.videoSrc)),
   );
   const [activeVideoCardIndex, setActiveVideoCardIndex] =
     useState(defaultVideoIndex);
+  const [activeCaseStudyIndex, setActiveCaseStudyIndex] = useState<number | null>(null);
 
-  const SHOWCASE_COLUMNS = 3;
-  const SHOWCASE_ROWS = 2;
-  const SHOWCASE_PER_PAGE = SHOWCASE_COLUMNS * SHOWCASE_ROWS;
-  const AUTO_ROTATE_MS = 4000;
-  const totalShowcasePages = Math.ceil(
-    brandShowcase.length / SHOWCASE_PER_PAGE,
-  );
+  const activeVideoCard = brandShowcase[activeVideoCardIndex];
+  const activeCaseStudy =
+    activeCaseStudyIndex !== null ? brandShowcase[activeCaseStudyIndex] : null;
 
-  const handleShowcaseNext = () => {
-    if (totalShowcasePages <= 1) return;
-    setShowcaseDirection(1);
-    setCurrentShowcasePage((prev) => (prev + 1) % totalShowcasePages);
+  const openCaseStudy = (index: number) => {
+    setActiveCaseStudyIndex(index);
+    // Also update the video section if the card has a video
+    if (brandShowcase[index]?.videoSrc) {
+      setActiveVideoCardIndex(index);
+    }
   };
 
-  const handleShowcasePrev = () => {
-    if (totalShowcasePages <= 1) return;
-    setShowcaseDirection(-1);
-    setCurrentShowcasePage(
-      (prev) => (prev - 1 + totalShowcasePages) % totalShowcasePages,
+  const closeCaseStudy = () => setActiveCaseStudyIndex(null);
+
+  const prevCaseStudy = () => {
+    if (activeCaseStudyIndex === null) return;
+    setActiveCaseStudyIndex(
+      (activeCaseStudyIndex - 1 + brandShowcase.length) % brandShowcase.length,
     );
   };
 
-  useEffect(() => {
-    if (totalShowcasePages <= 1) return;
-
-    const timer = window.setInterval(() => {
-      setShowcaseDirection(1);
-      setCurrentShowcasePage((prev) => (prev + 1) % totalShowcasePages);
-    }, AUTO_ROTATE_MS);
-
-    return () => window.clearInterval(timer);
-  }, [totalShowcasePages]);
-
-  const showcaseStartIndex = currentShowcasePage * SHOWCASE_PER_PAGE;
-  const showcaseItems = brandShowcase.slice(
-    showcaseStartIndex,
-    showcaseStartIndex + SHOWCASE_PER_PAGE,
-  );
-  const activeVideoCard = brandShowcase[activeVideoCardIndex];
-
-  const handleShowcaseCardClick = (cardIndex: number) => {
-    const selectedCard = brandShowcase[cardIndex];
-    if (!selectedCard?.videoSrc) return;
-    setActiveVideoCardIndex(cardIndex);
+  const nextCaseStudy = () => {
+    if (activeCaseStudyIndex === null) return;
+    setActiveCaseStudyIndex(
+      (activeCaseStudyIndex + 1) % brandShowcase.length,
+    );
   };
 
   const toggle = (i: number) => setOpenIndex(openIndex === i ? null : i);
+
+  // Total cards and grid geometry
+  const SHOWCASE_COLS = 3;
+  const fullRows = Math.floor(brandShowcase.length / SHOWCASE_COLS); // 4
+  const remainder = brandShowcase.length % SHOWCASE_COLS; // 1
 
   return (
     <>
       <Header />
 
       {/* Hero Section */}
-      <section className="relative w-full min-h-screen bg-[#132c3b] flex flex-col justify-center px-6 md:px-12 lg:px-24 py-24">
+      <section className="relative w-full min-h-screen bg-[#080032] flex flex-col justify-center px-6 md:px-12 lg:px-24 py-24">
         <div className="max-w-6xl w-full mt-20">
           <h1 className="font-display text-[85px] md:text-[95px] lg:text-[105px] font-bold text-[#4ab6ff] mb-10 leading-tight">
             Brand Solutions
@@ -312,95 +332,79 @@ const BrandSolutions = () => {
         </div>
       </section>
 
-      {/* Brand Solutions Showcase Carousel */}
+      {/* Brand Solutions Showcase — Vertical Scrollable Grid */}
       <section className="w-full bg-[#f6f4ef] pb-24 px-10 md:px-16">
         <h2 className="font-display text-3xl md:text-4xl font-normal text-gray-400 mb-12">
           Brand Solutions <span className="text-gray-400">|</span>{" "}
           <span className="font-bold text-gray-700">Showcase</span>
         </h2>
 
-        <div className="relative">
-          {/* Prev */}
-          <button
-            onClick={handleShowcasePrev}
-            disabled={totalShowcasePages <= 1}
-            className={`absolute left-0 top-1/2 -translate-y-1/2 -translate-x-10 z-10 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${
-              totalShowcasePages <= 1
-                ? "bg-gray-200 cursor-not-allowed opacity-40"
-                : "bg-gray-300 hover:bg-gray-400 cursor-pointer"
-            }`}
-          >
-            <ChevronLeft className="w-5 h-5 text-gray-600" />
-          </button>
-
-          <div className="relative overflow-hidden">
-            <AnimatePresence initial={false} custom={showcaseDirection}>
-              <motion.div
-                key={currentShowcasePage}
-                custom={showcaseDirection}
-                initial={{ x: showcaseDirection > 0 ? "100%" : "-100%" }}
-                animate={{ x: 0 }}
-                exit={{ x: showcaseDirection > 0 ? "-100%" : "100%" }}
-                transition={{ duration: 0.8, ease: "easeInOut" }}
-                className="grid grid-cols-1 md:grid-cols-3 gap-6 absolute inset-0"
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Full rows (first 12 cards) */}
+            {brandShowcase.slice(0, fullRows * SHOWCASE_COLS).map((item, index) => (
+              <div
+                key={`${item.title}-${item.year}-${index}`}
+                className="flex flex-col cursor-pointer group"
+                onClick={() => openCaseStudy(index)}
               >
-                {showcaseItems.map((item, index) => (
-                  <div
-                    key={`${item.title}-${item.year}-${showcaseStartIndex + index}`}
-                    className={`flex flex-col ${item.videoSrc ? "cursor-pointer" : "cursor-default"}`}
-                    onClick={() =>
-                      handleShowcaseCardClick(showcaseStartIndex + index)
-                    }
-                  >
-                    <div className="relative aspect-video overflow-hidden rounded-sm">
-                      <img
-                        src={item.image}
-                        alt={item.title}
-                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-                      />
-                    </div>
-                    <p className="mt-3 text-sm text-gray-500 uppercase tracking-wide">
-                      {item.client} <span className="text-gray-400">|</span>{" "}
-                      {item.year}
-                    </p>
+                <div className="relative aspect-video overflow-hidden rounded-sm">
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  {/* Hover overlay */}
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
+                    <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white text-xs uppercase tracking-widest font-semibold border border-white/60 px-4 py-2">
+                      View Case Study
+                    </span>
                   </div>
-                ))}
+                </div>
+                <p className="mt-3 text-sm text-gray-500 uppercase tracking-wide">
+                  {item.client} <span className="text-gray-400">|</span>{" "}
+                  {item.year}
+                </p>
+              </div>
+            ))}
 
-                {Array.from({
-                  length: SHOWCASE_PER_PAGE - showcaseItems.length,
-                }).map((_, index) => (
-                  <div key={`placeholder-${index}`} className="flex flex-col">
-                    <div className="aspect-video" />
-                    <div className="h-6 mt-3" />
-                  </div>
-                ))}
-              </motion.div>
-            </AnimatePresence>
-            {/* Spacer */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 invisible">
-              {Array(SHOWCASE_PER_PAGE)
-                .fill(0)
-                .map((_, i) => (
-                  <div key={i} className="flex flex-col">
-                    <div className="aspect-video" />
-                    <div className="h-6 mt-3" />
-                  </div>
-                ))}
-            </div>
-          </div>
+            {/* Remainder row — last card(s) centered in middle column */}
+            {remainder > 0 && (
+              <>
+                {/* Empty first column */}
+                <div className="hidden md:block" />
 
-          {/* Next */}
-          <button
-            onClick={handleShowcaseNext}
-            disabled={totalShowcasePages <= 1}
-            className={`absolute right-0 top-1/2 -translate-y-1/2 translate-x-10 z-10 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${
-              totalShowcasePages <= 1
-                ? "bg-gray-200 cursor-not-allowed opacity-40"
-                : "bg-gray-300 hover:bg-gray-400 cursor-pointer"
-            }`}
-          >
-            <ChevronRight className="w-5 h-5 text-gray-600" />
-          </button>
+                {brandShowcase
+                  .slice(fullRows * SHOWCASE_COLS)
+                  .map((item, index) => {
+                    const globalIndex = fullRows * SHOWCASE_COLS + index;
+                    return (
+                      <div
+                        key={`${item.title}-${item.year}-${globalIndex}`}
+                        className="flex flex-col cursor-pointer group"
+                        onClick={() => openCaseStudy(globalIndex)}
+                      >
+                        <div className="relative aspect-video overflow-hidden rounded-sm">
+                          <img
+                            src={item.image}
+                            alt={item.title}
+                            className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                          />
+                          {/* Hover overlay */}
+                          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
+                            <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white text-xs uppercase tracking-widest font-semibold border border-white/60 px-4 py-2">
+                              View Case Study
+                            </span>
+                          </div>
+                        </div>
+                        <p className="mt-3 text-sm text-gray-500 uppercase tracking-wide">
+                          {item.client}{" "}
+                          <span className="text-gray-400">|</span> {item.year}
+                        </p>
+                      </div>
+                    );
+                  })}
+              </>
+            )}
         </div>
       </section>
 
@@ -511,7 +515,131 @@ const BrandSolutions = () => {
         </div>
       </section>
 
-      <Footer />
+      {/* Case Study Full-Screen Overlay */}
+      <AnimatePresence>
+        {activeCaseStudy && (
+          <motion.div
+            className="fixed inset-0 z-50 bg-[#f0ede6] overflow-y-auto"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
+          >
+            {/* Close button */}
+            <button
+              type="button"
+              aria-label="Close case study"
+              onClick={closeCaseStudy}
+              className="fixed top-6 right-6 z-[60] w-11 h-11 rounded-full bg-gray-200 hover:bg-gray-300 flex items-center justify-center transition-colors duration-200"
+            >
+              <X className="w-5 h-5 text-gray-600" />
+            </button>
+
+            {/* Prev */}
+            <button
+              type="button"
+              aria-label="Previous case study"
+              onClick={prevCaseStudy}
+              className="fixed left-4 top-1/2 -translate-y-1/2 z-[60] w-11 h-11 rounded-full bg-gray-200 hover:bg-gray-300 flex items-center justify-center transition-colors duration-200"
+            >
+              <ChevronLeft className="w-5 h-5 text-gray-600" />
+            </button>
+
+            {/* Next */}
+            <button
+              type="button"
+              aria-label="Next case study"
+              onClick={nextCaseStudy}
+              className="fixed right-4 top-1/2 -translate-y-1/2 z-[60] w-11 h-11 rounded-full bg-gray-200 hover:bg-gray-300 flex items-center justify-center transition-colors duration-200"
+            >
+              <ChevronRight className="w-5 h-5 text-gray-600" />
+            </button>
+
+            {/* Content */}
+            <div className="min-h-screen flex flex-col lg:flex-row">
+              {/* Left — full-height image */}
+              <motion.div
+                key={activeCaseStudy.image + activeCaseStudyIndex}
+                initial={{ opacity: 0, x: -24 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+                className="w-full lg:w-[55%] relative min-h-[40vh] lg:min-h-screen"
+              >
+                <img
+                  src={activeCaseStudy.image}
+                  alt={activeCaseStudy.title}
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+                {/* Counter badge */}
+                <div className="absolute bottom-6 left-6 bg-white/80 backdrop-blur-sm px-3 py-1 text-xs text-gray-500 uppercase tracking-widest">
+                  {(activeCaseStudyIndex ?? 0) + 1} / {brandShowcase.length}
+                </div>
+              </motion.div>
+
+              {/* Right — metadata */}
+              <motion.div
+                key={activeCaseStudyIndex}
+                initial={{ opacity: 0, x: 24 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+                className="w-full lg:w-[45%] flex flex-col justify-center px-10 md:px-16 py-24 lg:py-32"
+              >
+                {/* Section label */}
+                <p className="text-xs uppercase tracking-widest text-gray-400 mb-8">
+                  Brand Solutions | Case Study
+                </p>
+
+                {/* Title */}
+                <h2 className="font-display text-[36px] md:text-[52px] font-bold text-gray-800 leading-none mb-10">
+                  {activeCaseStudy.title}
+                </h2>
+
+                {/* Metadata rows */}
+                <div className="space-y-0 mb-8">
+                  <div className="grid grid-cols-[110px_1fr] items-baseline border-b border-gray-300 py-3">
+                    <span className="text-gray-400 text-sm uppercase tracking-wide">Client</span>
+                    <span className="text-gray-800 font-bold uppercase tracking-wide text-sm">{activeCaseStudy.client}</span>
+                  </div>
+                  <div className="grid grid-cols-[110px_1fr] items-baseline border-b border-gray-300 py-3">
+                    <span className="text-gray-400 text-sm uppercase tracking-wide">Service</span>
+                    <span className="text-gray-800 font-bold uppercase tracking-wide text-sm">{activeCaseStudy.service}</span>
+                  </div>
+                  <div className="grid grid-cols-[110px_1fr] items-baseline border-b border-gray-300 py-3">
+                    <span className="text-gray-400 text-sm uppercase tracking-wide">Year</span>
+                    <span className="text-gray-800 font-bold text-sm">{activeCaseStudy.year}</span>
+                  </div>
+                  {activeCaseStudy.videoHighlight && (
+                    <div className="grid grid-cols-[110px_1fr] items-baseline border-b border-gray-300 py-3">
+                      <span className="text-gray-400 text-sm uppercase tracking-wide">Reach</span>
+                      <span className="text-[#1498e1] font-bold text-sm">{activeCaseStudy.videoHighlight}</span>
+                    </div>
+                  )}
+                </div>
+
+                {/* Objective */}
+                {activeCaseStudy.objective && (
+                  <div className="mb-10">
+                    <p className="text-gray-400 text-xs uppercase tracking-widest mb-2">Objective</p>
+                    <p className="text-gray-600 text-[15px] leading-relaxed">
+                      {activeCaseStudy.objective}
+                    </p>
+                  </div>
+                )}
+
+                {/* Dismiss hint */}
+                <button
+                  onClick={closeCaseStudy}
+                  className="self-start text-xs uppercase tracking-widest text-gray-400 hover:text-gray-700 transition-colors duration-200 border-b border-gray-300 hover:border-gray-600 pb-0.5"
+                >
+                  ← Back to Showcase
+                </button>
+              </motion.div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <Footer theme="dark" />
     </>
   );
 };

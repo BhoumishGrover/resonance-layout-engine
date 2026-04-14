@@ -622,7 +622,81 @@ const VFX = () => {
     },
   ];
 
+  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  // ADS VIDEO FEED — ADD / EDIT VIDEOS HERE
+  // Each entry needs `src` (path to the video file) and `label` (client name).
+  //
+  // ► To add a new video: push a new { src, label } object to this array.
+  // ► The layout pattern cycles automatically — no other code changes needed.
+  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  const adsVideoFeed = [
+    { src: "/assets/videos/ads.mp4",              label: "ICICI Lombard" },
+    { src: "/assets/videos/movies.mp4",            label: "Bharti AXA" },
+    { src: "/assets/videos/placeholder_video.mp4", label: "Oppo" },
+    { src: "/assets/videos/ads.mp4",              label: "Morde" },
+    { src: "/assets/videos/movies.mp4",            label: "Travel + Leisure" },
+    { src: "/assets/videos/placeholder_video.mp4", label: "ICICI Lombard" },
+    { src: "/assets/videos/ads.mp4",              label: "Bharti AXA" },
+    { src: "/assets/videos/movies.mp4",            label: "Oppo" },
+    { src: "/assets/videos/ads.mp4",              label: "Morde" },
+    { src: "/assets/videos/placeholder_video.mp4", label: "ICICI Lombard" },
+    { src: "/assets/videos/movies.mp4",            label: "Travel + Leisure" },
+    { src: "/assets/videos/ads.mp4",              label: "Bharti AXA" },
+    { src: "/assets/videos/movies.mp4",            label: "Oppo" },
+    { src: "/assets/videos/placeholder_video.mp4", label: "Morde" },
+    { src: "/assets/videos/ads.mp4",              label: "Travel + Leisure" },
+    { src: "/assets/videos/movies.mp4",            label: "ICICI Lombard" },
+  ];
+
+  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  // LAYOUT PATTERN — controls the visual rhythm. Modify the order to taste.
+  //   "full"       → 1 video  (edge-to-edge, 100vh)
+  //   "split"      → 2 videos (side by side, 100vh)
+  //   "T"          → 3 videos (1 wide on top, 2 below, 100vh)
+  //   "grid2x2"    → 4 videos (2×2 equal grid, 100vh)
+  //   "invertedT"  → 3 videos (2 above, 1 wide below, 100vh)
+  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  const LAYOUT_PATTERN = [
+    "full", "split", "full", "T", "grid2x2", "full", "invertedT", "full",
+  ] as const;
+
+  type AdLayoutType = typeof LAYOUT_PATTERN[number];
+  type AdBlock = { type: AdLayoutType; videos: typeof adsVideoFeed };
+
+  const videoCounts: Record<AdLayoutType, number> = {
+    full: 1, split: 2, T: 3, grid2x2: 4, invertedT: 3,
+  };
+
+  // Slice videos into blocks — walks through LAYOUT_PATTERN first, then
+  // appends any leftover videos as individual full-viewport blocks so every
+  // video in adsVideoFeed is always shown, no matter how many there are.
+  const adBlocks: AdBlock[] = [];
+  let _adCursor = 0;
+  for (const type of LAYOUT_PATTERN) {
+    const count = videoCounts[type];
+    const videos = Array.from({ length: count }, (_, i) =>
+      adsVideoFeed[(_adCursor + i) % adsVideoFeed.length]
+    );
+    _adCursor += count;
+    adBlocks.push({ type, videos } as AdBlock);
+  }
+  // Any remaining videos get their own full-viewport block
+  while (_adCursor < adsVideoFeed.length) {
+    adBlocks.push({ type: "full", videos: [adsVideoFeed[_adCursor]] } as AdBlock);
+    _adCursor++;
+  }
+
+  // Reusable floating video card
+  const AdCard = ({ src, label, className = "" }: { src: string; label: string; className?: string }) => (
+    <div className={`relative overflow-hidden rounded-sm ${className}`}>
+      <video src={src} autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover" />
+      <div className="absolute inset-0 bg-black/15" />
+      <p className="absolute bottom-6 left-6 text-white font-display text-xl font-bold">{label}</p>
+    </div>
+  );
+
   useEffect(() => {
+
     if (expandedSection && expandedContentRef.current) {
       // Animate expansion
       gsap.fromTo(
@@ -1124,210 +1198,73 @@ const VFX = () => {
             </div>
           </section>
 
-          {/* Ads Showcase Carousel */}
-          <section className="relative w-full bg-[#100a44] py-24 px-12 md:px-24">
-            <div className="max-w-7xl mx-auto">
-              <div className="relative">
-                {/* Carousel Navigation */}
-                <button
-                  onClick={handleAdPrev}
-                  disabled={currentAdIndex === 0}
-                  className={`absolute left-0 top-1/2 -translate-y-1/2 -translate-x-16 z-10 w-12 h-12 rounded-full flex items-center justify-center text-white transition-all duration-300 ${
-                    currentAdIndex === 0
-                      ? "bg-sky-400/10 cursor-not-allowed opacity-50"
-                      : "bg-sky-400/20 hover:bg-sky-400/40 cursor-pointer"
-                  }`}
-                >
-                  <ChevronLeft className="w-6 h-6" />
-                </button>
-                
-                <div className="relative overflow-hidden">
-                  <AnimatePresence initial={false} custom={adDirection}>
-                    <motion.div
-                      key={currentAdIndex}
-                      custom={adDirection}
-                      initial={{ x: adDirection > 0 ? '100%' : '-100%' }}
-                      animate={{ x: 0 }}
-                      exit={{ x: adDirection > 0 ? '-100%' : '100%' }}
-                      transition={{ duration: 0.5, ease: "easeInOut" }}
-                      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 absolute inset-0"
-                    >
-                      {adsShowcase.slice(currentAdIndex, currentAdIndex + ITEMS_PER_PAGE).map((ad, index) => (
-                        <div
-                          key={currentAdIndex + index}
-                          className="group relative aspect-[2/3] rounded-lg overflow-hidden cursor-pointer transform transition-all duration-500 hover:scale-105 hover:z-10"
-                        >
-                      {/* Ad Creative */}
-                      <img
-                        src={ad.image}
-                        alt={ad.title}
-                        className="absolute inset-0 w-full h-full object-cover"
-                      />
-                      
-                      {/* Hover Overlay */}
-                      <div className="absolute inset-0 bg-sky-400/0 group-hover:bg-sky-400/20 transition-all duration-500" />
-                      
-                      {/* Title overlay on hover */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-4">
-                        <div>
-                          <p className="text-white font-bold text-lg">{ad.title}</p>
-                          <p className="text-[#4ab6ff] text-sm">{ad.client}</p>
-                        </div>
-                      </div>
-                    </div>
-                      ))}
-                    </motion.div>
-                  </AnimatePresence>
-                  {/* Spacer to maintain height */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 invisible">
-                    {Array(ITEMS_PER_PAGE).fill(0).map((_, i) => (
-                      <div key={i} className="aspect-[2/3]"></div>
-                    ))}
+          {/* ── Ads Video Feed ─────────────────────────────────────────────────── */}
+          {/* The section is a continuous edge-to-edge dark canvas.              */}
+          {/* Videos are separated by a 1 px divider and alternate between       */}
+          {/* full-viewport singles, 2-col splits, T-shapes, and 2×2 grids.     */}
+        </div>
+      )}
+
+      {/* Ads immersive video feed — dynamic, driven by adsVideoFeed + LAYOUT_PATTERN */}
+      {expandedSection === "ads" && (
+        <div className="w-full bg-black p-3 flex flex-col gap-3">
+          {adBlocks.map((block, blockIdx) => {
+            const [v0, v1, v2, v3] = block.videos;
+            switch (block.type) {
+
+              case "full":
+                return (
+                  <div key={blockIdx} className="relative w-full overflow-hidden rounded-sm" style={{ height: "100vh" }}>
+                    <video src={v0.src} autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover" />
+                    <div className="absolute inset-0 bg-black/20" />
+                    <p className="absolute bottom-8 left-8 text-white font-display text-2xl font-bold tracking-wide">{v0.label}</p>
                   </div>
-                </div>
+                );
 
-                <button
-                  onClick={handleAdNext}
-                  disabled={currentAdIndex + ITEMS_PER_PAGE >= adsShowcase.length}
-                  className={`absolute right-0 top-1/2 -translate-y-1/2 translate-x-16 z-10 w-12 h-12 rounded-full flex items-center justify-center text-white transition-all duration-300 ${
-                    currentAdIndex + ITEMS_PER_PAGE >= adsShowcase.length
-                      ? "bg-sky-400/10 cursor-not-allowed opacity-50"
-                      : "bg-sky-400/20 hover:bg-sky-400/40 cursor-pointer"
-                  }`}
-                >
-                  <ChevronRight className="w-6 h-6" />
-                </button>
-              </div>
-
-              {/* Additional Content */}
-              <div className="mt-24 grid grid-cols-1 lg:grid-cols-2 gap-12">
-                <div>
-                  <h3 className="font-display text-4xl font-bold text-white mb-6">
-                    Commercial Impact
-                  </h3>
-                  <p className="text-white/80 text-lg leading-relaxed mb-4">
-                    Crafting compelling commercial content that resonates with audiences and drives results. We create ads that don't just look stunning—they convert.
-                  </p>
-                  <p className="text-white/60 text-base leading-relaxed">
-                    From concept to final delivery, we blend creativity with strategic thinking to produce commercials that make an impact across all platforms.
-                  </p>
-                </div>
-                
-                <div className="space-y-6">
-                  <div className="bg-white/5 p-6 rounded-lg border border-white/10">
-                    <h4 className="text-[#4ab6ff] font-semibold text-xl mb-2">Our Services</h4>
-                    <ul className="text-white/70 space-y-2">
-                      <li>• Brand Commercials</li>
-                      <li>• Product Visualization</li>
-                      <li>• Social Media Content</li>
-                      <li>• Broadcast Advertising</li>
-                    </ul>
+              case "split":
+                return (
+                  <div key={blockIdx} className="flex gap-3 w-full" style={{ height: "100vh" }}>
+                    <AdCard src={v0.src} label={v0.label} className="flex-1" />
+                    <AdCard src={v1.src} label={v1.label} className="flex-1" />
                   </div>
-                </div>
-              </div>
+                );
 
-              {/* Areas of Expertise Section */}
-              <div className="mt-32">
-                <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-4">
-                  VFX: Ads <span className="text-[#4ab6ff]">|</span> <span className="text-white/60">Areas of expertise</span>
-                </h2>
-
-                {/* Category Filter */}
-                <div className="mt-8 mb-12">
-                  <div className="flex flex-wrap gap-4 text-xl md:text-2xl font-semibold">
-                    {adCategories.map((category, index) => (
-                      <div key={category} className="flex items-center">
-                        <button
-                          onClick={() => setSelectedAdCategory(category)}
-                          className={`transition-colors duration-300 ${
-                            selectedAdCategory === category
-                              ? "text-[#4ab6ff]"
-                              : "text-white/40 hover:text-[#4ab6ff]"
-                          }`}
-                        >
-                          {category}
-                        </button>
-                        {index < adCategories.length - 1 && (
-                          <span className="text-white/30 mx-3">|</span>
-                        )}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-
-                {/* Showreel Display */}
-                {adShowreels[selectedAdCategory as keyof typeof adShowreels] && (
-                  <div className="flex flex-col lg:flex-row gap-6 lg:items-end">
-                    {/* Left Side - Details */}
-                    <div className="w-full lg:w-[300px] lg:flex-shrink-0 flex flex-col">
-                      {/* Client */}
-                      <div className="grid grid-cols-[70px_1fr] gap-3 items-start">
-                        <p className="text-white/40 text-sm">Client</p>
-                        <h3 className="text-white font-bold text-lg uppercase leading-tight">
-                          {adShowreels[selectedAdCategory as keyof typeof adShowreels].client}
-                        </h3>
-                      </div>
-
-                      <div className="h-px bg-white/10 my-5" />
-
-                      {/* Service & Year */}
-                      <div className="grid grid-cols-[70px_1fr] gap-x-3 gap-y-2">
-                        <p className="text-white/40 text-sm">Service</p>
-                        <p className="text-white font-semibold text-base">
-                          {adShowreels[selectedAdCategory as keyof typeof adShowreels].service}
-                        </p>
-                        <p className="text-white/40 text-sm">Year</p>
-                        <p className="text-white font-semibold text-base">
-                          {adShowreels[selectedAdCategory as keyof typeof adShowreels].year}
-                        </p>
-                      </div>
-
-                      {/* Description */}
-                      <p className="text-white/50 text-sm leading-relaxed mt-6">
-                        {adShowreels[selectedAdCategory as keyof typeof adShowreels].description}
-                      </p>
-
-                      {/* Thumbnail */}
-                      <div className="mt-3">
-                        <img
-                          src={adShowreels[selectedAdCategory as keyof typeof adShowreels].thumbnail}
-                          alt={selectedAdCategory}
-                          className="w-full h-44 object-cover object-top rounded-lg shadow-xl"
-                        />
-                      </div>
-                    </div>
-
-                    {/* Right Side - Video Player */}
-                    <div className="flex-1 min-w-0">
-                      <div className="relative aspect-video bg-black rounded-lg overflow-hidden shadow-2xl">
-                        <video
-                          key={selectedAdCategory}
-                          autoPlay
-                          loop
-                          muted
-                          playsInline
-                          className="w-full h-full object-cover"
-                        >
-                          <source
-                            src={adShowreels[selectedAdCategory as keyof typeof adShowreels].video}
-                            type="video/mp4"
-                          />
-                        </video>
-                      </div>
+              case "T":
+                return (
+                  <div key={blockIdx} className="flex flex-col gap-3 w-full" style={{ height: "100vh" }}>
+                    <AdCard src={v0.src} label={v0.label} className="flex-1" />
+                    <div className="flex gap-3 flex-1">
+                      <AdCard src={v1.src} label={v1.label} className="flex-1" />
+                      <AdCard src={v2.src} label={v2.label} className="flex-1" />
                     </div>
                   </div>
-                )}
+                );
 
-                {/* Lorem Ipsum Text */}
-                <div className="mt-16">
-                  <p className="text-white/50 text-lg leading-relaxed">
-                    Lorem ipsum dolor sit amet, consectet uer adipi scing elit. Lorem ipsum dolor sit am et, consectetuer adipi scing elit. Lorem ipsum dolor sit amet, consectet uer adipi scing elit. Lorem ipsum dolor sit am.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </section>
+              case "grid2x2":
+                return (
+                  <div key={blockIdx} className="grid grid-cols-2 gap-3 w-full" style={{ height: "100vh" }}>
+                    <AdCard src={v0.src} label={v0.label} />
+                    <AdCard src={v1.src} label={v1.label} />
+                    <AdCard src={v2.src} label={v2.label} />
+                    <AdCard src={v3.src} label={v3.label} />
+                  </div>
+                );
+
+              case "invertedT":
+                return (
+                  <div key={blockIdx} className="flex flex-col gap-3 w-full" style={{ height: "100vh" }}>
+                    <div className="flex gap-3 flex-1">
+                      <AdCard src={v0.src} label={v0.label} className="flex-1" />
+                      <AdCard src={v1.src} label={v1.label} className="flex-1" />
+                    </div>
+                    <AdCard src={v2.src} label={v2.label} className="flex-1" />
+                  </div>
+                );
+
+              default:
+                return null;
+            }
+          })}
         </div>
       )}
 
@@ -1340,7 +1277,7 @@ const VFX = () => {
         </section>
       )}
 
-      <Footer />
+      <Footer theme="dark" />
     </>
   );
 };

@@ -17,7 +17,7 @@ const Awards = () => {
       <Header />
 
       {/* Hero Section - Split Layout */}
-      <section className="relative w-full min-h-screen bg-[#1a3a52] flex items-center overflow-hidden">
+      <section className="relative w-full min-h-screen bg-[#080032] flex items-center overflow-hidden">
         <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-0">
           {/* Left Side - Content */}
           <div className="flex flex-col justify-center px-10 md:px-16 lg:px-24 py-24 lg:py-32">
@@ -47,7 +47,7 @@ const Awards = () => {
       </section>
 
       {/* Awards Showcase Section */}
-      <section className="relative w-full bg-[#1a4a5a] py-24">
+      <section className="relative w-full bg-[#100a44] py-24">
         <div className="max-w-7xl mx-auto px-8">
           {/* Row 1 */}
           <div className="relative grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-24 border-t border-white/10 pt-12">

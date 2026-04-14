@@ -579,7 +579,7 @@ const RealEstateMartech = () => {
 				)}
 			</AnimatePresence>
 
-			<Footer />
+			<Footer theme="dark" />
 		</>
 	);
 };

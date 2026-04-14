@@ -153,7 +153,7 @@ const Contact = () => {
     <>
       <Header />
 
-      <section className="relative w-full min-h-screen bg-[#132c3b] flex items-center px-6 md:px-12 lg:px-24 py-32">
+      <section className="relative w-full min-h-screen bg-[#080032] flex items-center px-6 md:px-12 lg:px-24 py-32">
         <div className="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
           
           {/* LEFT SIDE - Heading */}
@@ -300,7 +300,7 @@ const Contact = () => {
         </div>
       </section>
 
-      <Footer />
+      <Footer theme="dark" />
     </>
   );
 };
