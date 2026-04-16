@@ -52,6 +52,8 @@
     scroll-behavior: smooth;
     /* Enable smooth scrolling with momentum on iOS */
     -webkit-overflow-scrolling: touch;
+    /* Prevent horizontal scroll caused by any overflowing element */
+    overflow-x: hidden;
   }
 
   body {
