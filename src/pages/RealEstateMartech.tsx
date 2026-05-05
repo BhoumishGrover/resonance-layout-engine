@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, ChevronLeft, ChevronRight, Play, X } from "lucide-react";
 import Header from "../components/Header";
@@ -57,11 +57,7 @@ const expertiseCategories = [
 	"3D Walkthroughs",
 	"Drone Shoots",
 	"Films",
-	"Interactive Sales Tour",
-	"Digital Twin",
-	"3D Anamorphic Experience Center",
-	"Virtual Reality",
-	"Augmented Reality",
+	"2D & 3D Isometrics",
 ];
 
 type ExpertiseShowcaseItem = {
@@ -69,7 +65,7 @@ type ExpertiseShowcaseItem = {
 	subtitle: string;
 	image: string;
 	category: string;
-	youtubeUrl?: string; // Optional YouTube embed URL
+	youtubeUrl?: string;
 };
 
 const expertiseShowcase: ExpertiseShowcaseItem[] = [
@@ -99,7 +95,6 @@ const expertiseShowcase: ExpertiseShowcaseItem[] = [
 		subtitle: "Lorem ipsum",
 		image: "/assets/images/movies/avatar.jpeg",
 		category: "3D Renders",
-		// No youtubeUrl - this is an image
 	},
 	{
 		title: "Brigade",
@@ -115,22 +110,268 @@ const expertiseShowcase: ExpertiseShowcaseItem[] = [
 		category: "Films",
 		youtubeUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
 	},
-];
-
-const isometricItems = [
 	{
-		id: "iso-1",
+		title: "LOREM IPSUM",
+		subtitle: "2D Isometrics",
 		image: "/assets/images/movies/movies_01.png",
-		client: "LOREM IPSUM",
-		location: "Lorem Ipsum",
-		service: "2D Isometrics",
+		category: "2D & 3D Isometrics",
 	},
 	{
-		id: "iso-2",
+		title: "LOREM IPSUM",
+		subtitle: "2D Isometrics",
 		image: "/assets/images/movies/movies_03.png",
-		client: "LOREM IPSUM",
-		location: "Lorem Ipsum",
-		service: "2D Isometrics",
+		category: "2D & 3D Isometrics",
+	},
+];
+
+// ─────────────────────────────────────────────────────────────────────────────
+// IMMERSIVE TECHNOLOGY SOLUTIONS — VIDEO SEGMENT DATA
+//
+// Each tab has a `videoSrc` and a list of `segments`.
+// To update a timestamp, find the tab and segment by label and change
+// `start` and `end` (both in SECONDS from the beginning of the video).
+//
+// Example: to make "Views" play from 2:15 to 2:50 set  start: 135, end: 170
+// ─────────────────────────────────────────────────────────────────────────────
+type FeatureSegment = {
+	label: string;
+	title: string;
+	description: string;
+	start: number; // seconds from video start
+	end: number; // seconds from video start
+};
+
+type ImmersiveTabData = {
+	id: string;
+	label: string;
+	videoSrc: string;
+	segments: FeatureSegment[];
+};
+
+const immersiveTabs: ImmersiveTabData[] = [
+	{
+		id: "interactive-sales-tour",
+		label: "Interactive Sales Tour",
+		videoSrc: "/assets/videos/placeholder_video.mp4",
+		// ── EDIT TIMESTAMPS HERE for Interactive Sales Tour ──────────────────
+		segments: [
+			{
+				label: "Architectural",
+				title: "Architectural",
+				description:
+					"Explore the architectural language of the project — form, facades, and structural intent brought to life.",
+				start: 0,
+				end: 28,
+			},
+			{
+				label: "Weather Control",
+				title: "Weather Control",
+				description:
+					"Simulate real-world weather conditions across the site to understand sunlight, wind, and seasonal experience.",
+				start: 29,
+				end: 58,
+			},
+			{
+				label: "Interior Design",
+				title: "Interior Design",
+				description:
+					"Step inside curated interiors — material palettes, spatial proportions, and finish quality showcased in full detail.",
+				start: 59,
+				end: 88,
+			},
+			{
+				label: "Amenities",
+				title: "Amenities",
+				description:
+					"Discover the full range of amenities and community spaces that enhance the living experience.",
+				start: 89,
+				end: 118,
+			},
+			{
+				label: "Views",
+				title: "Views",
+				description:
+					"Experience panoramic views from every tower, floor, and vantage point across the development.",
+				start: 135,
+				end: 170,
+			},
+			{
+				label: "Surrounding",
+				title: "Surrounding",
+				description:
+					"Understand the neighborhood context — connectivity, landmarks, and the urban fabric surrounding the project.",
+				start: 171,
+				end: 180,
+			},
+		],
+	},
+	{
+		id: "digital-twin",
+		label: "Digital Twin",
+		videoSrc: "/assets/videos/placeholder_video.mp4",
+		// ── EDIT TIMESTAMPS HERE for Digital Twin ────────────────────────────
+		segments: [
+			{
+				label: "Architectural",
+				title: "Architectural",
+				description:
+					"A live digital replica of the project's architecture — updated in real-time as the structure evolves.",
+				start: 0,
+				end: 28,
+			},
+			{
+				label: "Weather Control",
+				title: "Weather Control",
+				description:
+					"Dynamic weather simulation integrated with the digital twin for environmental analysis.",
+				start: 29,
+				end: 58,
+			},
+			{
+				label: "Interior Design",
+				title: "Interior Design",
+				description:
+					"Interior layouts mirrored digitally for real-time planning, staging, and customisation.",
+				start: 59,
+				end: 88,
+			},
+			{
+				label: "Amenities",
+				title: "Amenities",
+				description:
+					"Monitor amenity usage, capacity, and condition through a connected digital twin layer.",
+				start: 89,
+				end: 118,
+			},
+			{
+				label: "Views",
+				title: "Views",
+				description:
+					"Real-time view analysis from any point in the digital model.",
+				start: 135,
+				end: 170,
+			},
+			{
+				label: "Surrounding",
+				title: "Surrounding",
+				description:
+					"Geo-anchored surroundings layer for infrastructure and context planning.",
+				start: 171,
+				end: 180,
+			},
+		],
+	},
+	{
+		id: "experience-center",
+		label: "Experience Center",
+		videoSrc: "/assets/videos/placeholder_video.mp4",
+		// ── EDIT TIMESTAMPS HERE for Experience Center ───────────────────────
+		segments: [
+			{
+				label: "Architectural",
+				title: "Architectural",
+				description:
+					"Immersive architectural walkthroughs projected at scale for high-impact sales center presentations.",
+				start: 0,
+				end: 28,
+			},
+			{
+				label: "Weather Control",
+				title: "Weather Control",
+				description:
+					"Real-time weather overlays displayed across large-format projection surfaces.",
+				start: 29,
+				end: 58,
+			},
+			{
+				label: "Interior Design",
+				title: "Interior Design",
+				description:
+					"Life-size interior mock-ups enhanced with digital projection mapping for material and finish exploration.",
+				start: 59,
+				end: 88,
+			},
+			{
+				label: "Amenities",
+				title: "Amenities",
+				description:
+					"Interactive amenity tours delivered through the experience center environment.",
+				start: 89,
+				end: 118,
+			},
+			{
+				label: "Views",
+				title: "Views",
+				description:
+					"Panoramic view simulations projected across multi-screen setups for full spatial immersion.",
+				start: 135,
+				end: 170,
+			},
+			{
+				label: "Surrounding",
+				title: "Surrounding",
+				description:
+					"Neighbourhood and connectivity context visuals for experience-center-led buyer journeys.",
+				start: 171,
+				end: 180,
+			},
+		],
+	},
+	{
+		id: "ar-vr",
+		label: "AR / VR",
+		videoSrc: "/assets/videos/placeholder_video.mp4",
+		// ── EDIT TIMESTAMPS HERE for AR / VR ─────────────────────────────────
+		segments: [
+			{
+				label: "Architectural",
+				title: "Architectural",
+				description:
+					"Walk through architectural spaces in full virtual reality before a single brick is laid.",
+				start: 0,
+				end: 28,
+			},
+			{
+				label: "Weather Control",
+				title: "Weather Control",
+				description:
+					"Switch weather conditions inside the VR environment to experience the project across seasons.",
+				start: 29,
+				end: 58,
+			},
+			{
+				label: "Interior Design",
+				title: "Interior Design",
+				description:
+					"Swap materials, finishes, and furniture in real-time within a fully immersive VR interior.",
+				start: 59,
+				end: 88,
+			},
+			{
+				label: "Amenities",
+				title: "Amenities",
+				description:
+					"Experience every amenity space in immersive VR — pool, gym, clubhouse, and more.",
+				start: 89,
+				end: 118,
+			},
+			{
+				label: "Views",
+				title: "Views",
+				description:
+					"Stand on any balcony or terrace and experience the exact view in VR before purchase.",
+				start: 135,
+				end: 170,
+			},
+			{
+				label: "Surrounding",
+				title: "Surrounding",
+				description:
+					"Explore the surrounding neighbourhood in AR — roads, landmarks, and connectivity overlaid on the real world.",
+				start: 171,
+				end: 180,
+			},
+		],
 	},
 ];
 
@@ -140,9 +381,20 @@ const RealEstateMartech = () => {
 		useState<string>("3D Walkthroughs");
 	const [currentExpertisePage, setCurrentExpertisePage] = useState<number>(0);
 	const [expertiseDirection, setExpertiseDirection] = useState<number>(0);
-	const [activeIsometricId, setActiveIsometricId] = useState<string | null>(null);
 	const [videoModalOpen, setVideoModalOpen] = useState<boolean>(false);
 	const [currentVideoUrl, setCurrentVideoUrl] = useState<string>("");
+
+	// Immersive section state
+	const [activeImmersiveTabId, setActiveImmersiveTabId] = useState<string>(
+		immersiveTabs[0].id,
+	);
+	const [activeSegment, setActiveSegment] = useState<FeatureSegment>(
+		immersiveTabs[0].segments[3], // default: "Amenities"
+	);
+	const immersiveVideoRef = useRef<HTMLVideoElement>(null);
+	const immersiveSectionRef = useRef<HTMLElement>(null);
+	const [isImmersiveInView, setIsImmersiveInView] = useState<boolean>(false);
+	const [isPageVisible, setIsPageVisible] = useState<boolean>(true);
 
 	const EXPERTISE_PER_PAGE = 3;
 	const AUTO_ROTATE_MS = 4000;
@@ -197,23 +449,140 @@ const RealEstateMartech = () => {
 		expertiseStartIndex,
 		expertiseStartIndex + EXPERTISE_PER_PAGE,
 	);
-	const activeIsometricIndex = isometricItems.findIndex(
-		(item) => item.id === activeIsometricId,
-	);
-	const activeIsometric =
-		activeIsometricIndex >= 0 ? isometricItems[activeIsometricIndex] : null;
 
-	const handleActiveIsometricPrev = () => {
-		if (activeIsometricIndex < 0) return;
-		const prevIndex =
-			(activeIsometricIndex - 1 + isometricItems.length) % isometricItems.length;
-		setActiveIsometricId(isometricItems[prevIndex].id);
+	// ── Immersive section helpers ──────────────────────────────────────────
+	const activeImmersiveTab =
+		immersiveTabs.find((t) => t.id === activeImmersiveTabId) ?? immersiveTabs[0];
+
+	const handleTabSwitch = (tab: ImmersiveTabData) => {
+		setActiveImmersiveTabId(tab.id);
+		const defaultSegment = tab.segments[3] ?? tab.segments[0];
+		setActiveSegment(defaultSegment);
 	};
 
-	const handleActiveIsometricNext = () => {
-		if (activeIsometricIndex < 0) return;
-		const nextIndex = (activeIsometricIndex + 1) % isometricItems.length;
-		setActiveIsometricId(isometricItems[nextIndex].id);
+	const handleSegmentClick = (segment: FeatureSegment) => {
+		setActiveSegment(segment);
+	};
+
+	const getValidSegmentWindow = (
+		video: HTMLVideoElement,
+		segment: FeatureSegment,
+	) => {
+		const duration = video.duration;
+		if (!Number.isFinite(duration) || duration <= 0) return null;
+
+		// Fallback safely to full video if configured segment is invalid/out-of-range.
+		if (segment.start >= duration || segment.end <= segment.start) {
+			return { start: 0, end: duration };
+		}
+
+		const start = Math.max(0, Math.min(segment.start, duration - 0.1));
+		const end = Math.min(segment.end, duration);
+
+		// Avoid microscopic loop windows near EOF that can thrash seeks.
+		if (end - start < 0.25) {
+			return { start: 0, end: duration };
+		}
+
+		return { start, end };
+	};
+
+	useEffect(() => {
+		const handleVisibilityChange = () => setIsPageVisible(!document.hidden);
+		handleVisibilityChange();
+		document.addEventListener("visibilitychange", handleVisibilityChange);
+		return () =>
+			document.removeEventListener("visibilitychange", handleVisibilityChange);
+	}, []);
+
+	useEffect(() => {
+		const section = immersiveSectionRef.current;
+		if (!section) return;
+
+		const observer = new IntersectionObserver(
+			([entry]) => {
+				setIsImmersiveInView(
+					entry.isIntersecting && entry.intersectionRatio >= 0.35,
+				);
+			},
+			{ threshold: [0, 0.35, 0.6] },
+		);
+
+		observer.observe(section);
+		return () => observer.disconnect();
+	}, []);
+
+	useEffect(() => {
+		const video = immersiveVideoRef.current;
+		if (!video) return;
+		const shouldPlay = isImmersiveInView && isPageVisible;
+
+		if (!shouldPlay) {
+			video.pause();
+			return;
+		}
+
+		const seekAndPlaySegment = () => {
+			const segmentWindow = getValidSegmentWindow(video, activeSegment);
+			if (!segmentWindow) return;
+
+			if (
+				video.currentTime < segmentWindow.start ||
+				video.currentTime >= segmentWindow.end
+			) {
+				video.currentTime = segmentWindow.start;
+			}
+
+			if (video.paused) {
+				void video.play().catch(() => undefined);
+			}
+		};
+
+		if (video.readyState >= 1) {
+			seekAndPlaySegment();
+			return;
+		}
+
+		video.addEventListener("loadedmetadata", seekAndPlaySegment);
+		return () =>
+			video.removeEventListener("loadedmetadata", seekAndPlaySegment);
+	}, [
+		activeSegment,
+		activeImmersiveTab.videoSrc,
+		isImmersiveInView,
+		isPageVisible,
+	]);
+
+	// Loops the video within the active segment's window
+	const handleImmersiveTimeUpdate = () => {
+		const video = immersiveVideoRef.current;
+		if (!video || !isImmersiveInView || !isPageVisible) return;
+
+		const segmentWindow = getValidSegmentWindow(video, activeSegment);
+		if (!segmentWindow) return;
+
+		if (
+			video.currentTime >= segmentWindow.end ||
+			video.currentTime < segmentWindow.start
+		) {
+			video.currentTime = segmentWindow.start;
+		}
+	};
+
+	const handleImmersiveEnded = () => {
+		const video = immersiveVideoRef.current;
+		if (!video) return;
+
+		if (!isImmersiveInView || !isPageVisible) {
+			video.pause();
+			return;
+		}
+
+		const segmentWindow = getValidSegmentWindow(video, activeSegment);
+		if (!segmentWindow) return;
+
+		video.currentTime = segmentWindow.start;
+		void video.play().catch(() => undefined);
 	};
 
 	return (
@@ -312,8 +681,10 @@ const RealEstateMartech = () => {
 					</div>
 				</div>
 			</section>
+			
 
-			<section className="w-full bg-[#080032] pb-10 md:pb-12 px-10 md:px-16">
+			{/* ── Section 1: Areas of Expertise ─────────────────────────────── */}
+			<section className="w-full bg-[#080032] pt-16 pb-10 md:pt-20 md:pb-12 px-10 md:px-16">
 				<h2 className="font-display text-3xl md:text-4xl font-normal text-white/60 mb-6">
 					Real Estate Mar-Tech <span className="text-white/50">|</span>{" "}
 					<span className="font-bold text-white">Areas of expertise</span>
@@ -380,7 +751,6 @@ const RealEstateMartech = () => {
 											className="absolute inset-0 w-full h-full object-cover"
 										/>
 
-										{/* Play Button Overlay - Only for items with youtubeUrl */}
 										{item.youtubeUrl && (
 											<div className="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/50 transition-all duration-300">
 												<div className="w-16 h-16 rounded-full bg-sky-400/90 group-hover:bg-sky-400 flex items-center justify-center transform group-hover:scale-110 transition-all duration-300 shadow-2xl">
@@ -428,116 +798,99 @@ const RealEstateMartech = () => {
 						<ChevronRight className="w-6 h-6" />
 					</button>
 				</div>
-
-				<p className="mt-12 text-white/70 text-[24px] md:text-[30px] leading-[1.02] font-display max-w-6xl">
-					Lorem ipsum dolor sit amet, consectet uer adipi scing elit, Lorem ipsum
-					dolor sit am et, consectetuer adipiscing elit, Lor em ipsum do lor sit
-					amet, con sectetuer adipiscing elit,
-				</p>
 			</section>
 
-			<section className="w-full bg-[#100a44] pb-24 px-10 md:px-16">
-				<div className="max-w-6xl mx-auto">
-					<h2 className="font-display text-[36px] md:text-[50px] font-normal text-white/60 mb-10">
+			{/* ── Section 2: Immersive Technology Solutions ─────────────────── */}
+			<section
+				ref={immersiveSectionRef}
+				className="w-full bg-[#080032] py-14 md:py-16"
+			>
+				<div className="mx-auto w-full max-w-[1240px] px-6 sm:px-10 lg:px-0">
+					{/* Section header */}
+					<h2 className="font-display text-3xl sm:text-4xl md:text-[44px] font-normal text-white/60 mb-10">
 						Real Estate Mar-Tech <span className="text-white/50">|</span>{" "}
-						<span className="font-bold text-white">2D & 3D Isometrics</span>
+						<span className="font-bold text-white">Immersive Technology Solutions</span>
 					</h2>
 
-					<div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-						{isometricItems.map((item) => (
-							<div key={item.id} className="flex flex-col">
-								<motion.button
-									type="button"
-									onClick={() => setActiveIsometricId(item.id)}
-									className="w-full relative overflow-hidden border border-white/10 bg-[#0a2a3d]"
+					{/* Tab bar — 2×2 on mobile, 4 across on md+ */}
+					<div className="w-full grid grid-cols-2 md:grid-cols-4 mb-12">
+						{immersiveTabs.map((tab, idx) => {
+							const isActive = tab.id === activeImmersiveTabId;
+							const mobileRightBorder = idx % 2 === 0 ? "border-r" : "";
+							const desktopRightBorder =
+								idx < immersiveTabs.length - 1 ? "md:border-r" : "";
+							return (
+								<button
+									key={tab.id}
+									onClick={() => handleTabSwitch(tab)}
+									className={`py-[18px] px-4 text-center font-display font-bold text-[14px] sm:text-[15px] md:text-[17px] tracking-wide transition-all duration-200 border-[#d0cfc8] ${
+										idx < 2 ? "border-b md:border-b-0" : ""
+									} ${mobileRightBorder} ${desktopRightBorder} ${
+										isActive
+											? "bg-[#4ab6ff] text-white"
+											: "bg-[#f6f5ee] text-[#58595b] hover:bg-[#ebebdf]"
+									}`}
 								>
-									<motion.img
-										layoutId={item.id}
-										src={item.image}
-										alt={item.service}
-										className="w-full h-[240px] md:h-[280px] object-cover"
-									/>
-								</motion.button>
-								<p className="mt-3 text-white/45 text-[18px] md:text-[34px] leading-none font-display">
-									Client : {item.client} | Service : {item.service}
+									{tab.label}
+								</button>
+							);
+						})}
+					</div>
+
+					{/* Content: stacked on mobile, side-by-side on lg */}
+					<div className="flex flex-col lg:flex-row items-start gap-6 lg:gap-8">
+						{/* ── Left column: segment buttons + info ── */}
+						<div className="w-full lg:w-[26%] flex-shrink-0 flex flex-col">
+							{/* On mobile: buttons in a 2-col grid; on lg: vertical stack */}
+							<div className="w-full lg:max-w-[220px] grid grid-cols-2 lg:grid-cols-1 gap-[6px]">
+								{activeImmersiveTab.segments.map((seg) => {
+									const isActive = seg.label === activeSegment.label;
+									return (
+										<button
+											key={seg.label}
+											onClick={() => handleSegmentClick(seg)}
+											className={`w-full text-center px-4 py-3 font-display text-[15px] sm:text-[16px] font-semibold transition-all duration-150 ${
+												isActive
+													? "bg-[#f6f5ee]"
+													: "bg-[#58595b] hover:bg-[#66676a]"
+											}`}
+											style={{ color: isActive ? "#58595b" : "rgba(210,210,230,0.85)" }}
+										>
+											{seg.label}
+										</button>
+									);
+								})}
+							</div>
+
+							{/* Active segment info */}
+							<div className="mt-8 max-w-[360px]">
+								<p className="font-display font-extrabold text-white text-[17px] sm:text-[20px] mb-2 leading-tight">
+									{activeSegment.title}
+								</p>
+								<p className="font-medium text-white/50 text-[13px] sm:text-[14px] leading-snug">
+									{activeSegment.description}
 								</p>
 							</div>
-						))}
+						</div>
+
+						{/* ── Right column: 16:9 video ── */}
+						<div className="w-full lg:w-[74%] min-w-0">
+							<div className="relative w-full aspect-video bg-black overflow-hidden">
+								<video
+									ref={immersiveVideoRef}
+									src={activeImmersiveTab.videoSrc}
+									className="w-full h-full object-cover"
+									onTimeUpdate={handleImmersiveTimeUpdate}
+									onEnded={handleImmersiveEnded}
+									muted
+									preload="metadata"
+									playsInline
+								/>
+							</div>
+						</div>
 					</div>
 				</div>
 			</section>
-
-			<AnimatePresence>
-				{activeIsometric && (
-					<motion.div
-						className="fixed inset-0 z-50 bg-[#08354c]"
-						initial={{ opacity: 0 }}
-						animate={{ opacity: 1 }}
-						exit={{ opacity: 0 }}
-						onClick={() => setActiveIsometricId(null)}
-					>
-						<div className="relative w-full h-full flex items-center justify-center px-8 md:px-16 lg:px-24">
-							<button
-								type="button"
-								aria-label="Previous isometric"
-								onClick={(e) => {
-									e.stopPropagation();
-									handleActiveIsometricPrev();
-								}}
-								className="absolute left-6 md:left-10 top-1/2 -translate-y-1/2 text-white/65 hover:text-white transition-colors"
-							>
-								<ChevronLeft className="w-9 h-9" />
-							</button>
-
-							<div className="w-full max-w-[1200px] flex items-end justify-center gap-4 md:gap-8 lg:gap-12">
-								<div className="hidden md:block min-w-[190px] pb-4 self-end">
-									<div className="font-display text-[#8f969c] text-[20px] leading-[1.2] font-semibold">
-										<div className="py-1.5 border-b border-[#8f969c]/60">
-											Client : {activeIsometric.client}
-										</div>
-										<div className="py-1.5 border-b border-[#8f969c]/60">
-											Location: {activeIsometric.location}
-										</div>
-										<div className="py-1.5">Service : {activeIsometric.service}</div>
-									</div>
-								</div>
-
-								<motion.img
-									layoutId={activeIsometric.id}
-									src={activeIsometric.image}
-									alt={activeIsometric.service}
-									className="w-full max-w-[980px] max-h-[78vh] object-contain"
-									onClick={(e) => e.stopPropagation()}
-								/>
-							</div>
-
-							<button
-								type="button"
-								aria-label="Next isometric"
-								onClick={(e) => {
-									e.stopPropagation();
-									handleActiveIsometricNext();
-								}}
-								className="absolute right-6 md:right-10 top-1/2 -translate-y-1/2 text-white/65 hover:text-white transition-colors"
-							>
-								<ChevronRight className="w-9 h-9" />
-							</button>
-
-							<div className="md:hidden absolute left-6 bottom-8 right-6">
-								<div className="font-display text-[#8f969c] text-[18px] leading-[1.2] font-semibold">
-									<div className="py-1 border-b border-[#8f969c]/60">
-										Client : {activeIsometric.client}
-									</div>
-									<div className="py-1 border-b border-[#8f969c]/60">
-										Location: {activeIsometric.location}
-									</div>
-									<div className="py-1">Service : {activeIsometric.service}</div>
-								</div>
-							</div>
-						</div>
-					</motion.div>
-				)}
-			</AnimatePresence>
 
 			{/* Video Modal */}
 			<AnimatePresence>
@@ -579,7 +932,7 @@ const RealEstateMartech = () => {
 				)}
 			</AnimatePresence>
 
-			<Footer theme="dark" />
+			<Footer theme="light" />
 		</>
 	);
 };

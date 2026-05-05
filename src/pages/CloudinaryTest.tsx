@@ -82,11 +82,13 @@ const CloudinaryTest = () => {
           </p>
           
           <div className="bg-secondary/20 p-8">
-            <CloudinaryVideo
-              publicId="resonance-digital/test/sample-video"
-              controls
-              className="w-full"
-            />
+            <div className="w-full aspect-video">
+              <CloudinaryVideo
+                publicId="resonance-digital/test/sample-video"
+                controls
+                className="w-full h-full"
+              />
+            </div>
           </div>
           
           <p className="text-xs text-muted-foreground mt-4">

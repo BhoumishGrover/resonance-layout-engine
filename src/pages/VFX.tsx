@@ -5,17 +5,15 @@ import { Helmet } from "react-helmet-async";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
 import AnimatedColorText from "../components/AnimatedColorText";
 import gsap from "gsap";
 
 const VFX = () => {
   const [expandedSection, setExpandedSection] = useState<string | null>(null);
-  const [selectedMovieCategory, setSelectedMovieCategory] = useState<string>("Compositing");
+  const [selectedMovieCategory, setSelectedMovieCategory] = useState<string>("Action Reel");
   const [selectedAdCategory, setSelectedAdCategory] = useState<string>("Brand Commercials");
   const [currentMovieIndex, setCurrentMovieIndex] = useState<number>(0);
   const [currentAdIndex, setCurrentAdIndex] = useState<number>(0);
-  const [movieDirection, setMovieDirection] = useState<number>(0);
   const [adDirection, setAdDirection] = useState<number>(0);
   const expandedContentRef = useRef<HTMLDivElement>(null);
   const splitSectionRef = useRef<HTMLDivElement>(null);
@@ -24,14 +22,12 @@ const VFX = () => {
 
   const handleMovieNext = () => {
     if (currentMovieIndex + ITEMS_PER_PAGE < moviesShowcase.length) {
-      setMovieDirection(1);
       setCurrentMovieIndex(currentMovieIndex + ITEMS_PER_PAGE);
     }
   };
 
   const handleMoviePrev = () => {
     if (currentMovieIndex > 0) {
-      setMovieDirection(-1);
       setCurrentMovieIndex(Math.max(0, currentMovieIndex - ITEMS_PER_PAGE));
     }
   };
@@ -51,11 +47,12 @@ const VFX = () => {
   };
 
   const movieCategories = [
-    "Compositing",
-    "Mobile & Monitor Comps",
-    "FX & Simulations",
-    "Set Extensions",
-    "Environments & Creatures"
+    "Action Reel",
+    "Set Extension",
+    "Roto-Paint-Matchmove",
+    "PIP Reel",
+    "Creature Reel",
+    "Crowd Multiplication Reel"
   ];
 
   const adCategories = [
@@ -67,45 +64,55 @@ const VFX = () => {
     "Visual Effects"
   ];
 
+  const YOUTUBE_EMBED_PLACEHOLDER = "https://www.youtube.com/embed/dQw4w9WgXcQ";
+
   const movieShowreels = {
-    "Compositing": {
+    "Action Reel": {
       client: "WARNER BROS STUDIOS",
       service: "Compositing",
       year: "2024",
       description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat",
-      video: "/assets/videos/placeholder_video.mp4",
+      youtubeEmbedUrl: "https://www.youtube.com/embed/rLzbIqI1VrU",
       thumbnail: "/assets/images/movies/movies_02Witches.png"
     },
-    "Mobile & Monitor Comps": {
-      client: "NETFLIX ORIGINAL",
-      service: "Mobile & Monitor Compositing",
-      year: "2024",
-      description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat",
-      video: "/assets/videos/mobile-comps-showreel.mp4",
-      thumbnail: "/assets/images/movies/movies_01.png"
-    },
-    "FX & Simulations": {
+    "Roto-Paint-Matchmove": {
       client: "DISNEY+ HOTSTAR",
       service: "FX & Simulations",
       year: "2025",
       description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat",
-      video: "/assets/videos/fx-showreel.mp4",
+      youtubeEmbedUrl: "https://www.youtube.com/embed/mn7WMlnyWnQ",
       thumbnail: "/assets/images/movies/movies_03.png"
     },
-    "Set Extensions": {
+    "Set Extension": {
       client: "WARNER BROS PICTURES",
       service: "Set Extensions",
       year: "2026",
       description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat",
-      video: "/assets/videos/set-extensions-showreel.mp4",
+      youtubeEmbedUrl: "https://www.youtube.com/embed/KBwcwjQDjEE",
       thumbnail: "/assets/images/movies/dune.jpeg"
     },
-    "Environments & Creatures": {
+    "PIP Reel": {
       client: "20TH CENTURY STUDIOS",
       service: "Environments & Creatures",
       year: "2025",
       description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat",
-      video: "/assets/videos/environments-showreel.mp4",
+      youtubeEmbedUrl: "https://www.youtube.com/embed/8jUa_imL-DI",
+      thumbnail: "/assets/images/movies/avatar.jpeg"
+    },
+    "Creature Reel": {
+      client: "",
+      service: "Environments & Creatures",
+      year: "2025",
+      description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat",
+      youtubeEmbedUrl: "https://www.youtube.com/embed/RbtCvfX4n_I",
+      thumbnail: "/assets/images/movies/avatar.jpeg"
+    },
+    "Crowd Multiplication Reel": {
+      client: "",
+      service: "Environments & Creatures",
+      year: "2025",
+      description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat",
+      youtubeEmbedUrl: "https://www.youtube.com/embed/87CuOfwFpd0",
       thumbnail: "/assets/images/movies/avatar.jpeg"
     }
   };
@@ -162,62 +169,6 @@ const VFX = () => {
   };
 
   const moviesShowcase = [
-    {
-      title: "Chamkila",
-      image: "/assets/images/movies/movies_01.png",
-      platform: "Netflix Original",
-      year: "2024",
-      category: "Rotoscopy"
-    },
-    {
-      title: "Discovery of Witches",
-      image: "/assets/images/movies/movies_02Witches.png",
-      platform: "Sky Original",
-      year: "2023",
-      category: "Compositing"
-    },
-    {
-      title: "Empire",
-      image: "/assets/images/movies/movies_03.png",
-      platform: "Disney+ Hotstar",
-      year: "2025",
-      category: "FX & Simulations"
-    },
-    {
-      title: "The Batman",
-      image: "/assets/images/movies/batman.png",
-      platform: "Warner Bros",
-      year: "2022",
-      category: "Compositing"
-    },
-    {
-      title: "The Flash",
-      image: "/assets/images/movies/flash.jpg",
-      platform: "Warner Bros",
-      year: "2023",
-      category: "Rotoscopy"
-    },
-    {
-      title: "Stranger Things",
-      image: "/assets/images/movies/strangerThings.jpg",
-      platform: "Netflix",
-      year: "2024",
-      category: "Cleanup"
-    },
-    {
-      title: "Avatar 3",
-      image: "/assets/images/movies/avatar.jpeg",
-      platform: "20th Century Studios",
-      year: "2025",
-      category: "Environments & Creatures"
-    },
-    {
-      title: "Dune: Part Three",
-      image: "/assets/images/movies/dune.jpeg",
-      platform: "Warner Bros",
-      year: "2026",
-      category: "Set Extensions"
-    },
     {
       title: "12th-Fail",
       image: "https://resonancedigital.in/assets/images/VFX/movies/12th-Fail.jpg",
@@ -650,11 +601,11 @@ const VFX = () => {
 
   // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   // LAYOUT PATTERN — controls the visual rhythm. Modify the order to taste.
-  //   "full"       → 1 video  (edge-to-edge, 100vh)
-  //   "split"      → 2 videos (side by side, 100vh)
-  //   "T"          → 3 videos (1 wide on top, 2 below, 100vh)
-  //   "grid2x2"    → 4 videos (2×2 equal grid, 100vh)
-  //   "invertedT"  → 3 videos (2 above, 1 wide below, 100vh)
+  //   "full"       → 1 video  (single 16:9 card)
+  //   "split"      → 2 videos (two 16:9 cards side by side)
+  //   "T"          → 3 videos (one 16:9 row + two 16:9 cards)
+  //   "grid2x2"    → 4 videos (2×2 grid of 16:9 cards)
+  //   "invertedT"  → 3 videos (two 16:9 cards + one 16:9 row)
   // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   const LAYOUT_PATTERN = [
     "full", "split", "full", "T", "grid2x2", "full", "invertedT", "full",
@@ -668,7 +619,7 @@ const VFX = () => {
   };
 
   // Slice videos into blocks — walks through LAYOUT_PATTERN first, then
-  // appends any leftover videos as individual full-viewport blocks so every
+  // appends any leftover videos as individual single-card blocks so every
   // video in adsVideoFeed is always shown, no matter how many there are.
   const adBlocks: AdBlock[] = [];
   let _adCursor = 0;
@@ -680,7 +631,7 @@ const VFX = () => {
     _adCursor += count;
     adBlocks.push({ type, videos } as AdBlock);
   }
-  // Any remaining videos get their own full-viewport block
+  // Any remaining videos get their own single 16:9 block
   while (_adCursor < adsVideoFeed.length) {
     adBlocks.push({ type: "full", videos: [adsVideoFeed[_adCursor]] } as AdBlock);
     _adCursor++;
@@ -688,7 +639,7 @@ const VFX = () => {
 
   // Reusable floating video card
   const AdCard = ({ src, label, className = "" }: { src: string; label: string; className?: string }) => (
-    <div className={`relative overflow-hidden rounded-sm ${className}`}>
+    <div className={`relative w-full aspect-video overflow-hidden rounded-sm ${className}`}>
       <video src={src} autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover" />
       <div className="absolute inset-0 bg-black/15" />
       <p className="absolute bottom-6 left-6 text-white font-display text-xl font-bold">{label}</p>
@@ -759,6 +710,18 @@ const VFX = () => {
       setExpandedSection(null);
     }
   };
+
+  const selectedMovieShowreel =
+    movieShowreels[selectedMovieCategory as keyof typeof movieShowreels];
+  const movieShowcasePages = Array.from(
+    { length: Math.ceil(moviesShowcase.length / ITEMS_PER_PAGE) },
+    (_, page) =>
+      moviesShowcase.slice(
+        page * ITEMS_PER_PAGE,
+        page * ITEMS_PER_PAGE + ITEMS_PER_PAGE,
+      ),
+  );
+  const currentMoviePage = Math.floor(currentMovieIndex / ITEMS_PER_PAGE);
 
   return (
     <>
@@ -916,46 +879,47 @@ const VFX = () => {
                 </button>
                 
                 <div className="relative overflow-hidden">
-                  <AnimatePresence initial={false} custom={movieDirection}>
-                    <motion.div
-                      key={currentMovieIndex}
-                      custom={movieDirection}
-                      initial={{ x: movieDirection > 0 ? '100%' : '-100%' }}
-                      animate={{ x: 0 }}
-                      exit={{ x: movieDirection > 0 ? '-100%' : '100%' }}
-                      transition={{ duration: 0.5, ease: "easeInOut" }}
-                      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 absolute inset-0"
-                    >
-                      {moviesShowcase.slice(currentMovieIndex, currentMovieIndex + ITEMS_PER_PAGE).map((movie, index) => (
-                        <div
-                          key={currentMovieIndex + index}
-                          className="group relative aspect-[2/3] rounded-lg overflow-hidden cursor-pointer transform transition-all duration-500 hover:scale-105 hover:z-10"
-                        >
-                      {/* Movie Poster */}
-                      <img
-                        src={movie.image}
-                        alt={movie.title}
-                        className="absolute inset-0 w-full h-full object-cover"
-                      />
-                      
-                      {/* Hover Overlay */}
-                      <div className="absolute inset-0 bg-sky-400/0 group-hover:bg-sky-400/20 transition-all duration-500" />
-                      
-                      {/* Title overlay on hover */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-4">
-                        <div>
-                          <p className="text-white font-bold text-lg">{movie.title}</p>
-                          <p className="text-[#4ab6ff] text-sm">{movie.platform}</p>
-                        </div>
+                  <div
+                    className="flex transition-transform duration-300 ease-out will-change-transform"
+                    style={{
+                      transform: `translate3d(-${currentMoviePage * 100}%, 0, 0)`,
+                    }}
+                  >
+                    {movieShowcasePages.map((pageItems, pageIndex) => (
+                      <div
+                        key={pageIndex}
+                        className="shrink-0 min-w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+                      >
+                        {pageItems.map((movie, index) => (
+                          <div
+                            key={`${movie.title}-${pageIndex}-${index}`}
+                            className="group relative aspect-[2/3] rounded-lg overflow-hidden cursor-pointer transform transition-all duration-500 hover:scale-105 hover:z-10"
+                          >
+                            {/* Movie Poster */}
+                            <img
+                              src={movie.image}
+                              alt={movie.title}
+                              className="absolute inset-0 w-full h-full object-cover"
+                            />
+
+                            {/* Hover Overlay */}
+                            <div className="absolute inset-0 bg-sky-400/0 group-hover:bg-sky-400/20 transition-all duration-500" />
+
+                            {/* Title overlay on hover */}
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-4">
+                              <div>
+                                <p className="text-white font-bold text-lg">{movie.title}</p>
+                                <p className="text-[#4ab6ff] text-sm">{movie.platform}</p>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                        {Array.from({
+                          length: ITEMS_PER_PAGE - pageItems.length,
+                        }).map((_, i) => (
+                          <div key={`movie-placeholder-${pageIndex}-${i}`} className="aspect-[2/3]" />
+                        ))}
                       </div>
-                    </div>
-                      ))}
-                    </motion.div>
-                  </AnimatePresence>
-                  {/* Spacer to maintain height */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 invisible">
-                    {Array(ITEMS_PER_PAGE).fill(0).map((_, i) => (
-                      <div key={i} className="aspect-[2/3]"></div>
                     ))}
                   </div>
                 </div>
@@ -1030,7 +994,7 @@ const VFX = () => {
                 </div>
 
                 {/* Showreel Display */}
-                {movieShowreels[selectedMovieCategory as keyof typeof movieShowreels] && (
+                {selectedMovieShowreel && (
                   <div className="flex flex-col lg:flex-row gap-6 lg:items-end">
                     {/* Left Side - Details */}
                     <div className="w-full lg:w-[300px] lg:flex-shrink-0 flex flex-col">
@@ -1038,7 +1002,7 @@ const VFX = () => {
                       <div className="grid grid-cols-[70px_1fr] gap-3 items-start">
                         <p className="text-white/40 text-sm">Client</p>
                         <h3 className="text-white font-bold text-lg uppercase leading-tight">
-                          {movieShowreels[selectedMovieCategory as keyof typeof movieShowreels].client}
+                          {selectedMovieShowreel.client}
                         </h3>
                       </div>
 
@@ -1048,45 +1012,41 @@ const VFX = () => {
                       <div className="grid grid-cols-[70px_1fr] gap-x-3 gap-y-2">
                         <p className="text-white/40 text-sm">Service</p>
                         <p className="text-white font-semibold text-base">
-                          {movieShowreels[selectedMovieCategory as keyof typeof movieShowreels].service}
+                          {selectedMovieShowreel.service}
                         </p>
                         <p className="text-white/40 text-sm">Year</p>
                         <p className="text-white font-semibold text-base">
-                          {movieShowreels[selectedMovieCategory as keyof typeof movieShowreels].year}
+                          {selectedMovieShowreel.year}
                         </p>
                       </div>
 
                       {/* Description */}
                       <p className="text-white/50 text-sm leading-relaxed mt-6">
-                        {movieShowreels[selectedMovieCategory as keyof typeof movieShowreels].description}
+                        {selectedMovieShowreel.description}
                       </p>
 
                       {/* Thumbnail */}
                       <div className="mt-3">
                         <img
-                          src={movieShowreels[selectedMovieCategory as keyof typeof movieShowreels].thumbnail}
+                          src={selectedMovieShowreel.thumbnail}
                           alt={selectedMovieCategory}
                           className="w-full h-44 object-cover object-top rounded-lg shadow-xl"
                         />
                       </div>
                     </div>
 
-                    {/* Right Side - Video Player */}
+                    {/* Right Side - YouTube Player */}
                     <div className="flex-1 min-w-0">
-                      <div className="relative aspect-video bg-black rounded-lg overflow-hidden shadow-2xl">
-                        <video
+                      <div className="relative aspect-[16/9] bg-black rounded-lg overflow-hidden shadow-2xl">
+                        <iframe
                           key={selectedMovieCategory}
-                          autoPlay
-                          loop
-                          muted
-                          playsInline
-                          className="w-full h-full object-cover"
-                        >
-                          <source
-                            src={movieShowreels[selectedMovieCategory as keyof typeof movieShowreels].video}
-                            type="video/mp4"
-                          />
-                        </video>
+                          src={selectedMovieShowreel.youtubeEmbedUrl}
+                          title={`${selectedMovieCategory} showreel`}
+                          className="w-full h-full"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                          referrerPolicy="strict-origin-when-cross-origin"
+                          allowFullScreen
+                        />
                       </div>
                     </div>
                   </div>
@@ -1199,9 +1159,8 @@ const VFX = () => {
           </section>
 
           {/* ── Ads Video Feed ─────────────────────────────────────────────────── */}
-          {/* The section is a continuous edge-to-edge dark canvas.              */}
-          {/* Videos are separated by a 1 px divider and alternate between       */}
-          {/* full-viewport singles, 2-col splits, T-shapes, and 2×2 grids.     */}
+          {/* The section is a continuous dark canvas of 16:9 cards.             */}
+          {/* Layout alternates between full, split, T, 2×2, and inverted-T.     */}
         </div>
       )}
 
@@ -1214,7 +1173,7 @@ const VFX = () => {
 
               case "full":
                 return (
-                  <div key={blockIdx} className="relative w-full overflow-hidden rounded-sm" style={{ height: "100vh" }}>
+                  <div key={blockIdx} className="relative w-full aspect-video overflow-hidden rounded-sm">
                     <video src={v0.src} autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover" />
                     <div className="absolute inset-0 bg-black/20" />
                     <p className="absolute bottom-8 left-8 text-white font-display text-2xl font-bold tracking-wide">{v0.label}</p>
@@ -1223,26 +1182,26 @@ const VFX = () => {
 
               case "split":
                 return (
-                  <div key={blockIdx} className="flex gap-3 w-full" style={{ height: "100vh" }}>
-                    <AdCard src={v0.src} label={v0.label} className="flex-1" />
-                    <AdCard src={v1.src} label={v1.label} className="flex-1" />
+                  <div key={blockIdx} className="grid grid-cols-1 md:grid-cols-2 gap-3 w-full">
+                    <AdCard src={v0.src} label={v0.label} />
+                    <AdCard src={v1.src} label={v1.label} />
                   </div>
                 );
 
               case "T":
                 return (
-                  <div key={blockIdx} className="flex flex-col gap-3 w-full" style={{ height: "100vh" }}>
-                    <AdCard src={v0.src} label={v0.label} className="flex-1" />
-                    <div className="flex gap-3 flex-1">
-                      <AdCard src={v1.src} label={v1.label} className="flex-1" />
-                      <AdCard src={v2.src} label={v2.label} className="flex-1" />
+                  <div key={blockIdx} className="flex flex-col gap-3 w-full">
+                    <AdCard src={v0.src} label={v0.label} />
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                      <AdCard src={v1.src} label={v1.label} />
+                      <AdCard src={v2.src} label={v2.label} />
                     </div>
                   </div>
                 );
 
               case "grid2x2":
                 return (
-                  <div key={blockIdx} className="grid grid-cols-2 gap-3 w-full" style={{ height: "100vh" }}>
+                  <div key={blockIdx} className="grid grid-cols-1 md:grid-cols-2 gap-3 w-full">
                     <AdCard src={v0.src} label={v0.label} />
                     <AdCard src={v1.src} label={v1.label} />
                     <AdCard src={v2.src} label={v2.label} />
@@ -1252,12 +1211,12 @@ const VFX = () => {
 
               case "invertedT":
                 return (
-                  <div key={blockIdx} className="flex flex-col gap-3 w-full" style={{ height: "100vh" }}>
-                    <div className="flex gap-3 flex-1">
-                      <AdCard src={v0.src} label={v0.label} className="flex-1" />
-                      <AdCard src={v1.src} label={v1.label} className="flex-1" />
+                  <div key={blockIdx} className="flex flex-col gap-3 w-full">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                      <AdCard src={v0.src} label={v0.label} />
+                      <AdCard src={v1.src} label={v1.label} />
                     </div>
-                    <AdCard src={v2.src} label={v2.label} className="flex-1" />
+                    <AdCard src={v2.src} label={v2.label} />
                   </div>
                 );
 

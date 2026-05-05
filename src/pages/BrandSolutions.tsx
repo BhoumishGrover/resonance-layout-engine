@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import AnimatedColorText from "../components/AnimatedColorText";
-import { ChevronDown, ChevronLeft, ChevronRight, X } from "lucide-react";
+import { ChevronDown, ChevronLeft, ChevronRight, Play, X } from "lucide-react";
 
 type BrandShowcaseItem = {
   title: string;
@@ -13,10 +13,19 @@ type BrandShowcaseItem = {
   service: string;
   objective?: string;
   videoSrc?: string;
+  youtubeEmbedUrl?: string;
   videoTitle?: string;
   videoSubtitle?: string;
   videoHighlight?: string;
   videoFooter?: string;
+};
+
+type TVCShowcaseItem = {
+  title: string;
+  image: string;
+  client: string;
+  year: string;
+  youtubeEmbedUrl: string;
 };
 
 const brandShowcase: BrandShowcaseItem[] = [
@@ -151,6 +160,123 @@ const brandShowcase: BrandShowcaseItem[] = [
   },
 ];
 
+const tvcShowcaseVideoEmbeds = [
+  "https://www.youtube.com/embed/rLzbIqI1VrU",
+  "https://www.youtube.com/embed/mn7WMlnyWnQ",
+  "https://www.youtube.com/embed/KBwcwjQDjEE",
+  "https://www.youtube.com/embed/8jUa_imL-DI",
+  "https://www.youtube.com/embed/RbtCvfX4n_I",
+  "https://www.youtube.com/embed/87CuOfwFpd0",
+];
+
+const tvcShowcase: TVCShowcaseItem[] = [
+  {
+    title: "School Promise",
+    image: "/assets/images/BrandStatements/ICICI-Lombard.jpg",
+    client: "ICICI Lombard",
+    year: "2018",
+    youtubeEmbedUrl: tvcShowcaseVideoEmbeds[0],
+  },
+  {
+    title: "Neck Brace",
+    image: "/assets/images/BrandStatements/images.jpeg",
+    client: "ICICI Lombard",
+    year: "2018",
+    youtubeEmbedUrl: tvcShowcaseVideoEmbeds[1],
+  },
+  {
+    title: "Hum Kaise Maan Le",
+    image: "/assets/images/BrandStatements/bhartiAXA.jpg",
+    client: "BHARTI AXA",
+    year: "2024",
+    youtubeEmbedUrl: tvcShowcaseVideoEmbeds[2],
+  },
+  {
+    title: "GumOn Groove",
+    image: "/assets/images/movies/movies_03.png",
+    client: "GumOn Groove",
+    year: "2018",
+    youtubeEmbedUrl: tvcShowcaseVideoEmbeds[3],
+  },
+  {
+    title: "STPI Campaign",
+    image: "/assets/images/movies/movies_02Witches.png",
+    client: "STPI",
+    year: "2018",
+    youtubeEmbedUrl: tvcShowcaseVideoEmbeds[4],
+  },
+  {
+    title: "Future Tech Stories",
+    image: "/assets/images/BrandStatements/oppo.png",
+    client: "OPPO",
+    year: "2024",
+    youtubeEmbedUrl: tvcShowcaseVideoEmbeds[5],
+  },
+  {
+    title: "Ultrabike",
+    image: "/assets/images/movies/dune.jpeg",
+    client: "Calamus One - Ultrabike",
+    year: "2019",
+    youtubeEmbedUrl: tvcShowcaseVideoEmbeds[0],
+  },
+  {
+    title: "XUV 500",
+    image: "/assets/images/movies/flash.jpg",
+    client: "Mahindra XUV 500",
+    year: "2018",
+    youtubeEmbedUrl: tvcShowcaseVideoEmbeds[1],
+  },
+  {
+    title: "Playback",
+    image: "/assets/images/movies/strangerThings.jpg",
+    client: "Netflix India Playback",
+    year: "2021",
+    youtubeEmbedUrl: tvcShowcaseVideoEmbeds[2],
+  },
+  {
+    title: "Playback Mood",
+    image: "/assets/images/movies/avatar.jpeg",
+    client: "Netflix Playback",
+    year: "2022",
+    youtubeEmbedUrl: tvcShowcaseVideoEmbeds[3],
+  },
+  {
+    title: "Playback 2023",
+    image: "/assets/images/movies/batman.png",
+    client: "Netflix India Playback",
+    year: "2023",
+    youtubeEmbedUrl: tvcShowcaseVideoEmbeds[4],
+  },
+  {
+    title: "Break Time",
+    image: "/assets/images/movies/movies_01.png",
+    client: "KitKat",
+    year: "2024",
+    youtubeEmbedUrl: tvcShowcaseVideoEmbeds[5],
+  },
+  {
+    title: "TUV 300",
+    image: "/assets/images/movies/movies_03.png",
+    client: "Mahindra TUV 300",
+    year: "2018",
+    youtubeEmbedUrl: tvcShowcaseVideoEmbeds[0],
+  },
+  {
+    title: "Marazzo",
+    image: "/assets/images/movies/dune.jpeg",
+    client: "Mahindra Marazzo",
+    year: "2018",
+    youtubeEmbedUrl: tvcShowcaseVideoEmbeds[1],
+  },
+  {
+    title: "Alturas G4",
+    image: "/assets/images/movies/flash.jpg",
+    client: "Mahindra Alturas G4",
+    year: "2018",
+    youtubeEmbedUrl: tvcShowcaseVideoEmbeds[2],
+  },
+];
+
 const brandStatements = [
   {
     title: "Social Media Management",
@@ -186,26 +312,60 @@ const brandStatements = [
   },
 ];
 
+const caseStudyNameOverrides: Array<
+  Pick<BrandShowcaseItem, "title" | "client" | "year">
+> = [
+  { title: "Monte Carlo", client: "Monte Carlo", year: "2026" },
+  { title: "Mahindra XUV 500", client: "Mahindra XUV 500", year: "2018" },
+  {
+    title: "Netflix India Playback",
+    client: "Netflix India Playback",
+    year: "2021",
+  },
+  { title: "MORDE", client: "MORDE", year: "2025" },
+  { title: "TRAVEL + LEISURE", client: "TRAVEL + LEISURE", year: "2024" },
+  { title: "Vraj Group", client: "Vraj Group", year: "2024" },
+  { title: "Estuary", client: "Estuary", year: "2020" },
+  {
+    title: "Calamus One - Ultrabike",
+    client: "Calamus One - Ultrabike",
+    year: "2019",
+  },
+  { title: "Puravankara", client: "Puravankara", year: "2022" },
+  { title: "OPPO", client: "OPPO", year: "2024" },
+  {
+    title: "Elegant Builders & Developers",
+    client: "Elegant Builders & Developers",
+    year: "2024",
+  },
+  { title: "CONOSH", client: "CONOSH", year: "2025" },
+];
+
+const caseStudyShowcase: BrandShowcaseItem[] = brandShowcase
+  .slice(0, 12)
+  .map((item, index) => {
+    const override = caseStudyNameOverrides[index];
+    return override ? { ...item, ...override } : item;
+  });
+
+const mordeObjectiveText =
+  "Digital content to drive engagement and increase footfalls for the brand at Bakery Business South, Hyderabad with emailers, videos, e-brochures, Insta reels, posts, and carousels.";
+
 const BrandSolutions = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
-  const defaultVideoIndex = Math.max(
-    0,
-    brandShowcase.findIndex((item) => Boolean(item.videoSrc)),
-  );
-  const [activeVideoCardIndex, setActiveVideoCardIndex] =
-    useState(defaultVideoIndex);
   const [activeCaseStudyIndex, setActiveCaseStudyIndex] = useState<number | null>(null);
+  const [activeShowcaseVideoUrl, setActiveShowcaseVideoUrl] = useState<string | null>(null);
 
-  const activeVideoCard = brandShowcase[activeVideoCardIndex];
   const activeCaseStudy =
-    activeCaseStudyIndex !== null ? brandShowcase[activeCaseStudyIndex] : null;
+    activeCaseStudyIndex !== null ? caseStudyShowcase[activeCaseStudyIndex] : null;
+  const isMordeCaseStudy = Boolean(
+    activeCaseStudy &&
+    (activeCaseStudy.title.trim().toLowerCase() === "morde" ||
+      activeCaseStudy.client.trim().toLowerCase() === "morde"),
+  );
 
   const openCaseStudy = (index: number) => {
     setActiveCaseStudyIndex(index);
-    // Also update the video section if the card has a video
-    if (brandShowcase[index]?.videoSrc) {
-      setActiveVideoCardIndex(index);
-    }
   };
 
   const closeCaseStudy = () => setActiveCaseStudyIndex(null);
@@ -213,23 +373,39 @@ const BrandSolutions = () => {
   const prevCaseStudy = () => {
     if (activeCaseStudyIndex === null) return;
     setActiveCaseStudyIndex(
-      (activeCaseStudyIndex - 1 + brandShowcase.length) % brandShowcase.length,
+      (activeCaseStudyIndex - 1 + caseStudyShowcase.length) % caseStudyShowcase.length,
     );
   };
 
   const nextCaseStudy = () => {
     if (activeCaseStudyIndex === null) return;
     setActiveCaseStudyIndex(
-      (activeCaseStudyIndex + 1) % brandShowcase.length,
+      (activeCaseStudyIndex + 1) % caseStudyShowcase.length,
     );
   };
 
-  const toggle = (i: number) => setOpenIndex(openIndex === i ? null : i);
+  const openShowcaseVideoModal = (youtubeEmbedUrl: string) => {
+    setActiveShowcaseVideoUrl(youtubeEmbedUrl);
+  };
 
-  // Total cards and grid geometry
-  const SHOWCASE_COLS = 3;
-  const fullRows = Math.floor(brandShowcase.length / SHOWCASE_COLS); // 4
-  const remainder = brandShowcase.length % SHOWCASE_COLS; // 1
+  const closeShowcaseVideoModal = () => {
+    setActiveShowcaseVideoUrl(null);
+  };
+
+  useEffect(() => {
+    if (!activeShowcaseVideoUrl && !activeCaseStudy) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [activeShowcaseVideoUrl, activeCaseStudy]);
+
+  const toggle = (i: number) => setOpenIndex(openIndex === i ? null : i);
+  const showcaseVideoUrlWithAutoplay = activeShowcaseVideoUrl
+    ? `${activeShowcaseVideoUrl}${activeShowcaseVideoUrl.includes("?") ? "&" : "?"}autoplay=1&rel=0`
+    : "";
 
   return (
     <>
@@ -332,186 +508,113 @@ const BrandSolutions = () => {
         </div>
       </section>
 
-      {/* Brand Solutions Showcase — Vertical Scrollable Grid */}
+      {/* Brand Solutions — TVC Showcase */}
       <section className="w-full bg-[#f6f4ef] pb-24 px-10 md:px-16">
+        <h2 className="font-display text-3xl md:text-4xl font-normal text-gray-400 mb-12">
+          Brand Solutions <span className="text-gray-400">|</span>{" "}
+          <span className="text-gray-600">TVC</span>{" "}
+          <span className="text-gray-400">|</span>{" "}
+          <span className="font-bold text-gray-700">Showcase</span>
+        </h2>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {tvcShowcase.map((item, index) => (
+            <button
+              key={`${item.client}-${item.year}-${index}`}
+              type="button"
+              className="flex flex-col text-left cursor-pointer group"
+              onClick={() => openShowcaseVideoModal(item.youtubeEmbedUrl)}
+              aria-label={`Open ${item.title}`}
+            >
+              <div className="relative aspect-video overflow-hidden rounded-sm">
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-black/15 group-hover:bg-black/30 transition-colors duration-300" />
+                <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 inline-flex items-center justify-center px-4 py-2 rounded-[10px] bg-[#10b8f4] shadow-lg">
+                  <Play className="w-4 h-4 text-white fill-white" />
+                </span>
+              </div>
+              <p className="mt-3 text-sm text-gray-500 uppercase tracking-wide">
+                {item.client} <span className="text-gray-400">|</span> {item.year}
+              </p>
+            </button>
+          ))}
+        </div>
+      </section>
+
+      <AnimatePresence>
+        {activeShowcaseVideoUrl && (
+          <motion.div
+            className="fixed inset-0 z-[120] bg-black flex items-center justify-center p-4 md:p-8"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
+          >
+            <button
+              type="button"
+              aria-label="Close video"
+              onClick={closeShowcaseVideoModal}
+              className="fixed top-6 right-6 z-[130] w-12 h-12 rounded-full bg-white/15 hover:bg-white/25 flex items-center justify-center transition-colors duration-200"
+            >
+              <X className="w-6 h-6 text-white" />
+            </button>
+
+            <motion.div
+              className="w-[80vw] h-[80vh] max-w-[1600px]"
+              initial={{ scale: 0.98, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.98, opacity: 0 }}
+              transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
+            >
+              <iframe
+                src={showcaseVideoUrlWithAutoplay}
+                title="TVC showcase video"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+                allowFullScreen
+                className="w-full h-full"
+              />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Brand Solutions — Showcase */}
+      <section className="w-full bg-[#e7e5df] pb-24 px-10 md:px-16">
         <h2 className="font-display text-3xl md:text-4xl font-normal text-gray-400 mb-12">
           Brand Solutions <span className="text-gray-400">|</span>{" "}
           <span className="font-bold text-gray-700">Showcase</span>
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* Full rows (first 12 cards) */}
-            {brandShowcase.slice(0, fullRows * SHOWCASE_COLS).map((item, index) => (
-              <div
-                key={`${item.title}-${item.year}-${index}`}
-                className="flex flex-col cursor-pointer group"
-                onClick={() => openCaseStudy(index)}
-              >
-                <div className="relative aspect-video overflow-hidden rounded-sm">
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                  {/* Hover overlay */}
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
-                    <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white text-xs uppercase tracking-widest font-semibold border border-white/60 px-4 py-2">
-                      View Case Study
-                    </span>
-                  </div>
+          {caseStudyShowcase.map((item, index) => (
+            <button
+              key={`${item.title}-${item.year}-${index}`}
+              type="button"
+              className="flex flex-col text-left cursor-pointer group"
+              onClick={() => openCaseStudy(index)}
+              aria-label={`Open case study ${item.title}`}
+            >
+              <div className="relative aspect-video overflow-hidden rounded-sm bg-[#e7e5df] border border-[#d7d4cc]">
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
+                  <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white text-xs uppercase tracking-widest font-semibold border border-white/60 px-4 py-2">
+                    View Case Study
+                  </span>
                 </div>
-                <p className="mt-3 text-sm text-gray-500 uppercase tracking-wide">
-                  {item.client} <span className="text-gray-400">|</span>{" "}
-                  {item.year}
-                </p>
               </div>
-            ))}
-
-            {/* Remainder row — last card(s) centered in middle column */}
-            {remainder > 0 && (
-              <>
-                {/* Empty first column */}
-                <div className="hidden md:block" />
-
-                {brandShowcase
-                  .slice(fullRows * SHOWCASE_COLS)
-                  .map((item, index) => {
-                    const globalIndex = fullRows * SHOWCASE_COLS + index;
-                    return (
-                      <div
-                        key={`${item.title}-${item.year}-${globalIndex}`}
-                        className="flex flex-col cursor-pointer group"
-                        onClick={() => openCaseStudy(globalIndex)}
-                      >
-                        <div className="relative aspect-video overflow-hidden rounded-sm">
-                          <img
-                            src={item.image}
-                            alt={item.title}
-                            className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                          />
-                          {/* Hover overlay */}
-                          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
-                            <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white text-xs uppercase tracking-widest font-semibold border border-white/60 px-4 py-2">
-                              View Case Study
-                            </span>
-                          </div>
-                        </div>
-                        <p className="mt-3 text-sm text-gray-500 uppercase tracking-wide">
-                          {item.client}{" "}
-                          <span className="text-gray-400">|</span> {item.year}
-                        </p>
-                      </div>
-                    );
-                  })}
-              </>
-            )}
-        </div>
-      </section>
-
-      {activeVideoCard?.videoSrc && (
-        <section className="relative w-full h-screen overflow-hidden">
-          <div className="relative w-full h-full overflow-hidden">
-            <video
-              key={activeVideoCard.videoSrc}
-              src={activeVideoCard.videoSrc}
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="w-full h-full object-cover"
-            />
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
-
-            <div className="pointer-events-none absolute bottom-6 left-6 md:bottom-10 md:left-10 text-white">
-              <p className="font-display text-2xl md:text-3xl leading-tight">
-                {activeVideoCard.videoTitle ??
-                  activeVideoCard.client.toUpperCase()}
+              <p className="mt-3 text-sm text-gray-500 uppercase tracking-wide">
+                {item.client} <span className="text-gray-400">|</span> {item.year}
               </p>
-              <p className="text-2xl md:text-3xl leading-tight">
-                {activeVideoCard.videoSubtitle ?? activeVideoCard.title}
-              </p>
-              <p className="inline-block mt-2 bg-[#1498e1] px-2 py-0.5 text-2xl md:text-3xl leading-tight">
-                {activeVideoCard.videoHighlight ?? "Campaign Highlight"}
-              </p>
-              <p className="text-2xl md:text-3xl leading-tight">
-                {activeVideoCard.videoFooter ?? "Pre to Post Production"}
-              </p>
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* Case Studies Section */}
-      <section className="w-full bg-[#e7e5df] pt-24 pb-28 pl-20 pr-10 md:pl-28 md:pr-16">
-        <h2 className="font-display text-4xl md:text-5xl font-normal text-gray-400 mb-20">
-          Brand Solutions <span className="text-gray-400">|</span>{" "}
-          <span className="font-semibold text-gray-700">Case Studies</span>
-        </h2>
-
-        <div className="grid grid-cols-1 lg:grid-cols-[460px_1fr] gap-8 items-start">
-          {/* LEFT */}
-          <div className="relative">
-            <button className="absolute -left-8 top-1/2 -translate-y-1/2 text-gray-400 text-xl">
-              ‹
             </button>
-
-            <div className="bg-white p-5 pl-20">
-              <img
-                src="/assets/images/BrandStatements/morde.jpg"
-                className="w-full object-contain"
-              />
-            </div>
-
-            <div className="mt-2 bg-[#bdbdbd] text-gray-800 flex justify-between items-center px-4 py-2 text-[13px]">
-              <span>View Case</span>
-              <span>→</span>
-            </div>
-          </div>
-
-          {/* RIGHT */}
-          <div className="pt-[2px] max-w-lg">
-            <div className="space-y-1 text-[17px]">
-              <div className="grid grid-cols-[100px_1fr] items-center border-b border-gray-300 pb-[2px]">
-                <span className="text-gray-400">Client</span>
-                <span className="text-gray-700 font-bold">MORDE</span>
-              </div>
-
-              <div className="grid grid-cols-[100px_1fr] items-center border-b border-gray-300 pb-[2px]">
-                <span className="text-gray-400">Service</span>
-                <span className="text-gray-700 font-bold tracking-wide">
-                  LAUNCH NEW PACKAGING
-                </span>
-              </div>
-
-              <div className="grid grid-cols-[100px_1fr] items-center border-b border-gray-300 pb-[2px]">
-                <span className="text-gray-400">Year</span>
-                <span className="text-gray-700 font-bold">2025</span>
-              </div>
-            </div>
-
-            <p className="mt-3 text-[15px] leading-relaxed text-gray-500">
-              <span className="font-semibold text-gray-700">Objective:</span>{" "}
-              Digital content to drive engagement and increase footfalls for the
-              brand at Bakery Business South, Hyderabad with emailers, videos,
-              e-brochures, Insta reels, posts, and carousels.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Case Study Campaign Visual Section */}
-      <section className="w-full bg-[#e7e5df] pb-32 px-10 md:px-16">
-        <h2 className="font-display text-4xl md:text-5xl font-normal text-gray-400 mb-20">
-          Brand Solutions <span className="text-gray-400">|</span>{" "}
-          <span className="font-semibold text-gray-700">Case Studies</span>
-        </h2>
-
-        <div className="w-full max-w-[1500px] mx-auto">
-          <img
-            src="/assets/images/BrandStatements/ICICI-Lombard.jpg"
-            alt="Campaign Case Study Visual"
-            className="w-full h-[400px] object-contain"
-          />
+          ))}
         </div>
       </section>
 
@@ -535,106 +638,258 @@ const BrandSolutions = () => {
               <X className="w-5 h-5 text-gray-600" />
             </button>
 
-            {/* Prev */}
-            <button
-              type="button"
-              aria-label="Previous case study"
-              onClick={prevCaseStudy}
-              className="fixed left-4 top-1/2 -translate-y-1/2 z-[60] w-11 h-11 rounded-full bg-gray-200 hover:bg-gray-300 flex items-center justify-center transition-colors duration-200"
-            >
-              <ChevronLeft className="w-5 h-5 text-gray-600" />
-            </button>
+            {!isMordeCaseStudy && (
+              <>
+                {/* Prev */}
+                <button
+                  type="button"
+                  aria-label="Previous case study"
+                  onClick={prevCaseStudy}
+                  className="fixed left-4 top-1/2 -translate-y-1/2 z-[60] w-11 h-11 rounded-full bg-gray-200 hover:bg-gray-300 flex items-center justify-center transition-colors duration-200"
+                >
+                  <ChevronLeft className="w-5 h-5 text-gray-600" />
+                </button>
 
-            {/* Next */}
-            <button
-              type="button"
-              aria-label="Next case study"
-              onClick={nextCaseStudy}
-              className="fixed right-4 top-1/2 -translate-y-1/2 z-[60] w-11 h-11 rounded-full bg-gray-200 hover:bg-gray-300 flex items-center justify-center transition-colors duration-200"
-            >
-              <ChevronRight className="w-5 h-5 text-gray-600" />
-            </button>
+                {/* Next */}
+                <button
+                  type="button"
+                  aria-label="Next case study"
+                  onClick={nextCaseStudy}
+                  className="fixed right-4 top-1/2 -translate-y-1/2 z-[60] w-11 h-11 rounded-full bg-gray-200 hover:bg-gray-300 flex items-center justify-center transition-colors duration-200"
+                >
+                  <ChevronRight className="w-5 h-5 text-gray-600" />
+                </button>
+              </>
+            )}
 
             {/* Content */}
-            <div className="min-h-screen flex flex-col lg:flex-row">
-              {/* Left — full-height image */}
-              <motion.div
-                key={activeCaseStudy.image + activeCaseStudyIndex}
-                initial={{ opacity: 0, x: -24 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
-                className="w-full lg:w-[55%] relative min-h-[40vh] lg:min-h-screen"
-              >
-                <img
-                  src={activeCaseStudy.image}
-                  alt={activeCaseStudy.title}
-                  className="absolute inset-0 w-full h-full object-cover"
-                />
-                {/* Counter badge */}
-                <div className="absolute bottom-6 left-6 bg-white/80 backdrop-blur-sm px-3 py-1 text-xs text-gray-500 uppercase tracking-widest">
-                  {(activeCaseStudyIndex ?? 0) + 1} / {brandShowcase.length}
-                </div>
-              </motion.div>
+            {isMordeCaseStudy ? (
+              <div className="mx-auto w-full max-w-[1240px] px-6 md:px-10 lg:px-12 pt-24 pb-20 space-y-24">
+                <motion.section
+                  key={`morde-intro-${activeCaseStudyIndex}`}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
+                  className="min-h-[calc(100vh-140px)] flex items-center"
+                >
+                  <div className="w-full grid grid-cols-2 lg:grid-cols-[1fr_300px_1fr] gap-4 lg:gap-5 items-center">
+                    <div className="grid grid-cols-2 gap-4">
+                      {Array.from({ length: 2 }).map((_, index) => (
+                        <div
+                          key={`morde-left-asset-${index}`}
+                          className="h-[205px] border border-[#e0dbd0] bg-[#e8e3d8] overflow-hidden shadow-[0_16px_26px_-20px_rgba(0,0,0,0.45)]"
+                        >
+                          <img
+                            src={activeCaseStudy.image}
+                            alt={`${activeCaseStudy.title} visual ${index + 1}`}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                      ))}
+                    </div>
 
-              {/* Right — metadata */}
-              <motion.div
-                key={activeCaseStudyIndex}
-                initial={{ opacity: 0, x: 24 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
-                className="w-full lg:w-[45%] flex flex-col justify-center px-10 md:px-16 py-24 lg:py-32"
-              >
-                {/* Section label */}
-                <p className="text-xs uppercase tracking-widest text-gray-400 mb-8">
-                  Brand Solutions | Case Study
-                </p>
+                    <div className="col-span-2 lg:col-span-1 mx-auto h-[560px] w-[300px] rounded-[40px] border-[10px] border-[#8f1f2f] bg-[#f7f4ee] shadow-[0_24px_48px_-26px_rgba(0,0,0,0.55)] p-3">
+                      <div className="relative h-full w-full rounded-[28px] overflow-hidden border border-[#ddd7cc]">
+                        <img
+                          src={activeCaseStudy.image}
+                          alt={`${activeCaseStudy.title} phone visual`}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                    </div>
 
-                {/* Title */}
-                <h2 className="font-display text-[36px] md:text-[52px] font-bold text-gray-800 leading-none mb-10">
-                  {activeCaseStudy.title}
-                </h2>
+                    <div className="grid grid-cols-2 gap-4">
+                      {Array.from({ length: 2 }).map((_, index) => (
+                        <div
+                          key={`morde-right-asset-${index}`}
+                          className="h-[205px] border border-[#e0dbd0] bg-[#e8e3d8] overflow-hidden shadow-[0_16px_26px_-20px_rgba(0,0,0,0.45)]"
+                        >
+                          <img
+                            src={activeCaseStudy.image}
+                            alt={`${activeCaseStudy.title} visual ${index + 3}`}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </motion.section>
 
-                {/* Metadata rows */}
-                <div className="space-y-0 mb-8">
-                  <div className="grid grid-cols-[110px_1fr] items-baseline border-b border-gray-300 py-3">
-                    <span className="text-gray-400 text-sm uppercase tracking-wide">Client</span>
-                    <span className="text-gray-800 font-bold uppercase tracking-wide text-sm">{activeCaseStudy.client}</span>
+                <motion.section
+                  key={`morde-details-${activeCaseStudyIndex}`}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
+                  className="min-h-[calc(100vh-140px)] flex flex-col justify-center"
+                >
+                  <h2 className="font-display text-[42px] md:text-[56px] font-normal text-[#9ea1a8] leading-tight">
+                    Brand Solutions <span className="text-[#9ea1a8]">|</span>{" "}
+                    <span className="font-bold text-[#8a8d94]">Case Studies</span>
+                  </h2>
+
+                  <div className="mt-10 relative grid grid-cols-1 lg:grid-cols-[1.02fr_0.88fr] gap-8 lg:gap-10 items-start">
+                    <span className="hidden lg:flex absolute left-[-34px] top-[42%] -translate-y-1/2 text-[#b8b3aa]">
+                      <ChevronLeft className="w-8 h-8" />
+                    </span>
+                    <span className="hidden lg:flex absolute right-[-34px] top-[42%] -translate-y-1/2 text-[#b8b3aa]">
+                      <ChevronRight className="w-8 h-8" />
+                    </span>
+
+                    <div>
+                      <div className="w-full border border-[#d9d3c8] bg-[#dedad1] aspect-[4/3] overflow-hidden">
+                        <img
+                          src={activeCaseStudy.image}
+                          alt={`${activeCaseStudy.title} case visual`}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      <div className="mt-4 h-9 bg-[#b9bbc0] px-4 flex items-center justify-between text-[#23252a]">
+                        <span className="text-[20px] md:text-[24px] font-semibold">View Case</span>
+                        <span className="text-2xl">→</span>
+                      </div>
+                    </div>
+
+                    <div className="pt-1">
+                      <div className="space-y-0">
+                        <div className="grid grid-cols-[96px_1fr] items-baseline border-b border-[#c5c2bb] py-2">
+                          <span className="text-[20px] md:text-[32px] text-[#6f7177]">Client</span>
+                          <span className="text-[20px] md:text-[32px] font-bold text-[#5f6168] uppercase">MORDE</span>
+                        </div>
+                        <div className="grid grid-cols-[96px_1fr] items-baseline border-b border-[#c5c2bb] py-2">
+                          <span className="text-[20px] md:text-[32px] text-[#6f7177]">Service</span>
+                          <span className="text-[20px] md:text-[32px] font-bold text-[#5f6168] uppercase">LAUNCH NEW PACKAGING</span>
+                        </div>
+                        <div className="grid grid-cols-[96px_1fr] items-baseline border-b border-[#c5c2bb] py-2">
+                          <span className="text-[20px] md:text-[32px] text-[#6f7177]">Year</span>
+                          <span className="text-[20px] md:text-[32px] font-bold text-[#5f6168]">2025</span>
+                        </div>
+                      </div>
+
+                      <p className="mt-8 text-[22px] md:text-[30px] text-[#8a8d94] leading-[1.24]">
+                        <span className="font-bold text-[#666971]">Objective:</span> {mordeObjectiveText}
+                      </p>
+                    </div>
                   </div>
-                  <div className="grid grid-cols-[110px_1fr] items-baseline border-b border-gray-300 py-3">
-                    <span className="text-gray-400 text-sm uppercase tracking-wide">Service</span>
-                    <span className="text-gray-800 font-bold uppercase tracking-wide text-sm">{activeCaseStudy.service}</span>
+                </motion.section>
+
+                <motion.section
+                  key={`morde-posts-${activeCaseStudyIndex}`}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
+                  className="min-h-[calc(100vh-140px)] flex flex-col justify-center"
+                >
+                  <div className="grid grid-cols-1 lg:grid-cols-[1.55fr_1fr] gap-6 lg:gap-7 items-start">
+                    <div className="w-full aspect-[16/10] border border-[#d8d1c5] bg-[#ddd8ce] shadow-[0_22px_34px_-22px_rgba(0,0,0,0.45)] overflow-hidden">
+                      <img
+                        src={activeCaseStudy.image}
+                        alt={`${activeCaseStudy.title} key visual`}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+
+                    <div>
+                      <div className="grid grid-cols-2 gap-4">
+                        {Array.from({ length: 4 }).map((_, index) => (
+                          <div
+                            key={`morde-post-${index}`}
+                            className="aspect-[4/3] border border-[#d7d0c3] bg-[#e5e1d8] overflow-hidden"
+                          >
+                            <img
+                              src={activeCaseStudy.image}
+                              alt={`${activeCaseStudy.title} post ${index + 1}`}
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    </div>
                   </div>
-                  <div className="grid grid-cols-[110px_1fr] items-baseline border-b border-gray-300 py-3">
-                    <span className="text-gray-400 text-sm uppercase tracking-wide">Year</span>
-                    <span className="text-gray-800 font-bold text-sm">{activeCaseStudy.year}</span>
+
+                </motion.section>
+              </div>
+            ) : (
+              <div className="min-h-screen flex flex-col lg:flex-row">
+                {/* Left — full-height image */}
+                <motion.div
+                  key={activeCaseStudy.image + activeCaseStudyIndex}
+                  initial={{ opacity: 0, x: -24 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+                  className="w-full lg:w-[55%] relative min-h-[40vh] lg:min-h-screen"
+                >
+                  <div className="absolute inset-0 bg-[#f0ede6]" />
+                  <div className="absolute inset-0 flex items-center justify-center px-6">
+                    <span className="border border-gray-300 px-4 py-2 text-[11px] uppercase tracking-[0.2em] text-gray-400">
+                      Case Study Visual Placeholder
+                    </span>
                   </div>
-                  {activeCaseStudy.videoHighlight && (
+                  {/* Counter badge */}
+                  <div className="absolute bottom-6 left-6 bg-white/80 backdrop-blur-sm px-3 py-1 text-xs text-gray-500 uppercase tracking-widest">
+                    {(activeCaseStudyIndex ?? 0) + 1} / {caseStudyShowcase.length}
+                  </div>
+                </motion.div>
+
+                {/* Right — metadata */}
+                <motion.div
+                  key={activeCaseStudyIndex}
+                  initial={{ opacity: 0, x: 24 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+                  className="w-full lg:w-[45%] flex flex-col justify-center px-10 md:px-16 py-24 lg:py-32"
+                >
+                  {/* Section label */}
+                  <p className="text-xs uppercase tracking-widest text-gray-400 mb-8">
+                    Brand Solutions | Case Study
+                  </p>
+
+                  {/* Title */}
+                  <h2 className="font-display text-[36px] md:text-[52px] font-bold text-gray-800 leading-none mb-10">
+                    {activeCaseStudy.title}
+                  </h2>
+
+                  {/* Metadata rows */}
+                  <div className="space-y-0 mb-8">
                     <div className="grid grid-cols-[110px_1fr] items-baseline border-b border-gray-300 py-3">
-                      <span className="text-gray-400 text-sm uppercase tracking-wide">Reach</span>
-                      <span className="text-[#1498e1] font-bold text-sm">{activeCaseStudy.videoHighlight}</span>
+                      <span className="text-gray-400 text-sm uppercase tracking-wide">Client</span>
+                      <span className="text-gray-800 font-bold uppercase tracking-wide text-sm">{activeCaseStudy.client}</span>
+                    </div>
+                    <div className="grid grid-cols-[110px_1fr] items-baseline border-b border-gray-300 py-3">
+                      <span className="text-gray-400 text-sm uppercase tracking-wide">Service</span>
+                      <span className="text-gray-800 font-bold uppercase tracking-wide text-sm">{activeCaseStudy.service}</span>
+                    </div>
+                    <div className="grid grid-cols-[110px_1fr] items-baseline border-b border-gray-300 py-3">
+                      <span className="text-gray-400 text-sm uppercase tracking-wide">Year</span>
+                      <span className="text-gray-800 font-bold text-sm">{activeCaseStudy.year}</span>
+                    </div>
+                    {activeCaseStudy.videoHighlight && (
+                      <div className="grid grid-cols-[110px_1fr] items-baseline border-b border-gray-300 py-3">
+                        <span className="text-gray-400 text-sm uppercase tracking-wide">Reach</span>
+                        <span className="text-[#1498e1] font-bold text-sm">{activeCaseStudy.videoHighlight}</span>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Objective */}
+                  {activeCaseStudy.objective && (
+                    <div className="mb-10">
+                      <p className="text-gray-400 text-xs uppercase tracking-widest mb-2">Objective</p>
+                      <p className="text-gray-600 text-[15px] leading-relaxed">
+                        {activeCaseStudy.objective}
+                      </p>
                     </div>
                   )}
-                </div>
 
-                {/* Objective */}
-                {activeCaseStudy.objective && (
-                  <div className="mb-10">
-                    <p className="text-gray-400 text-xs uppercase tracking-widest mb-2">Objective</p>
-                    <p className="text-gray-600 text-[15px] leading-relaxed">
-                      {activeCaseStudy.objective}
-                    </p>
-                  </div>
-                )}
-
-                {/* Dismiss hint */}
-                <button
-                  onClick={closeCaseStudy}
-                  className="self-start text-xs uppercase tracking-widest text-gray-400 hover:text-gray-700 transition-colors duration-200 border-b border-gray-300 hover:border-gray-600 pb-0.5"
-                >
-                  ← Back to Showcase
-                </button>
-              </motion.div>
-            </div>
+                  {/* Dismiss hint */}
+                  <button
+                    onClick={closeCaseStudy}
+                    className="self-start text-xs uppercase tracking-widest text-gray-400 hover:text-gray-700 transition-colors duration-200 border-b border-gray-300 hover:border-gray-600 pb-0.5"
+                  >
+                    ← Back to Showcase
+                  </button>
+                </motion.div>
+              </div>
+            )}
           </motion.div>
         )}
       </AnimatePresence>
